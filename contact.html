@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Unbound3D</title>
+    <script type="module" src="/src/main.js"></script>
+    <style>
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            font-size: 1.25rem;
+            font-family: inherit;
+            color: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+
+            .form-input,
+            .form-textarea {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav injected -->
+
+    <main>
+        <!-- Title -->
+        <section class="reveal" style="padding-bottom: 0; padding-top: 8rem;">
+            <div class="container text-center">
+                <h1 class="hero-text" style="font-size: 4rem; margin: 0 auto;">Let’s build something reliable.</h1>
+            </div>
+        </section>
+
+        <!-- Form -->
+        <section class="reveal" style="padding-top: 2rem;">
+            <div class="container">
+                <!-- Contact Details Header -->
+                <div class="contact-header"
+                    style="text-align: center; margin-bottom: 3rem; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
+                    <p>
+                        <strong>Unbound3D Industries Pvt Ltd.</strong><br>
+                        Indiranagar, Bangalore, India.<br>
+                        Mobile: +91 7558150570 &bull; GST: 29AAECU0620P1Z1
+                    </p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" id="formName" class="form-input" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="formEmail" class="form-input" placeholder="info@unbound3d.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interest</label>
+                        <select id="formInterest" class="form-input" style="cursor:pointer;">
+                            <option>Hanzof Manufacturing Services</option>
+                            <option>Makura.world Partnership</option>
+                            <option>Lynx-320 Inquiry</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea id="formMessage" class="form-textarea"
+                            placeholder="Tell us about your project"></textarea>
+                    </div>
+                    <div class="text-center" style="margin-top: 4rem;">
+                        <button type="submit" class="btn"
+                            style="padding: 1rem 3rem; font-size: 1.1rem; cursor: pointer; border:none;">Send
+                            Message</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <script>
+            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('formName').value;
+                const email = document.getElementById('formEmail').value;
+                const interest = document.getElementById('formInterest').value;
+                const message = document.getElementById('formMessage').value;
+
+                const subject = `Unbound3D Inquiry: ${interest}`;
+                const body = `Name: ${name}\nEmail: ${email}\nInterest: ${interest}\n\nMessage:\n${message}`;
+
+                window.location.href = `mailto:info@unbound3d.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            });
+        </script>
+        Message</button>
+        </div>
+        </form>
+        </div>
+        </section>
+
+    </main>
+    <!-- Footer injected -->
+</body>
+
+</html>

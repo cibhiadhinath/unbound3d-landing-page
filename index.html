@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unbound3D — Manufacturing, executed.</title>
+    <script type="module" src="/src/main.js"></script>
+    <style>
+        /* Specific page styles can go here if needed, but keeping global mostly */
+        .hero-section {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
+        }
+
+        .platform-card {
+            padding: 3rem;
+            background: var(--surface-color);
+            border-radius: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .platform-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .platform-sub {
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .platform-desc {
+            margin-bottom: 2rem;
+            max-width: 40ch;
+        }
+
+        .feature-list {
+            list-style: none;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lynx-highlight {
+            background: #111;
+            color: #fff;
+            padding: 4rem;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            .lynx-highlight {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav injected by main.js -->
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section reveal">
+            <div class="container">
+                <div class="hero-logo-container" style="text-align: center; margin-bottom: 2rem;">
+                    <img src="/logo.png" alt="Unbound3D Bird Logo" class="hero-logo">
+                </div>
+                <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto;">Manufacturing, executed.</h1>
+                <p class="hero-sub text-center" style="margin: 1rem auto 3rem auto;">
+                    Unbound3D turns digital designs into reliable physical outcomes — powered by intelligent execution.
+                </p>
+                <div class="text-center">
+                    <a href="/hanzof.html" class="cta-link">Explore Hanzof →</a>
+                    <a href="/makura.html" class="cta-link">Explore Makura.world →</a>
+                    <a href="/lynx-320.html" class="cta-link">View Lynx-320 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Unbound3D Is -->
+        <section class="reveal">
+            <div class="container">
+                <div class="grid-2">
+                    <div>
+                        <h2 class="section-title">One execution engine.<br>Two focused platforms.</h2>
+                    </div>
+                    <div>
+                        <p style="margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.8;">
+                            Manufacturing is complex. Accountability is fragmented. Quality is inconsistent.
+                        </p>
+                        <p style="font-size: 1.1rem; font-weight: 500;">
+                            Unbound3D exists to change that.
+                        </p>
+                        <p style="margin-top: 1.5rem; opacity: 0.8;">
+                            We are a manufacturing and execution company built to own outcomes. Our intelligent systems
+                            optimize feasibility, production, and quality assurance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platforms -->
+        <section class="stagger-parent">
+            <div class="container">
+                <div class="grid-2">
+                    <!-- Hanzof -->
+                    <div class="platform-card reveal-child">
+                        <div>
+                            <h3 class="platform-title">Hanzof</h3>
+                            <div class="platform-sub">Manufacturing execution for industry.</div>
+                            <p class="platform-desc">
+                                Hanzof is built for businesses that need physical production to be dependable. We own
+                                execution across manufacturing, quality control, and delivery — so teams can focus on
+                                building products, not managing suppliers.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Single accountable partner</li>
+                                <li>Process-agnostic execution</li>
+                                <li>Integrated QA/QC</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="/hanzof.html" class="cta-link" style="margin:0;">Learn more →</a>
+                        </div>
+                    </div>
+
+                    <!-- Makura.world -->
+                    <div class="platform-card reveal-child">
+                        <div>
+                            <h3 class="platform-title">Makura.world</h3>
+                            <div class="platform-sub">Design. Customize. Made on demand.</div>
+                            <p class="platform-desc">
+                                Makura.world connects designers and consumers through on-demand manufacturing. Products
+                                are customized, produced only when ordered, and delivered with quality assurance built
+                                in.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Zero inventory</li>
+                                <li>Designer royalties</li>
+                                <li>Quality-assured fulfillment</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="/makura.html" class="cta-link" style="margin:0;">Visit Makura.world →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Highlight -->
+        <section class="reveal">
+            <div class="container">
+                <div class="lynx-highlight">
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Built for real work.</h2>
+                        <div style="font-size: 1.25rem; opacity: 0.8; margin-bottom: 1rem;">Introducing Lynx-320.</div>
+                        <p style="opacity: 0.7; max-width: 40ch;">
+                            An industrial 3D printer designed for reliable, repeatable production — not experimentation.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="/lynx-320.html" class="btn" style="background: white; color: black;">View Lynx-320</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="reveal" style="text-align: center; min-height: 40vh;">
+            <div class="container">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Manufacturing should feel dependable.</h2>
+                <p class="section-sub" style="margin: 0 auto;">
+                    Unbound3D brings structure, accountability, and execution discipline to physical production.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer injected by main.js -->
+</body>
+
+</html>
