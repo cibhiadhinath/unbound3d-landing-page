@@ -5,6 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unbound3D — Manufacturing, executed.</title>
+    <script>
+        // Redirect procure subdomain to procurement page
+        if (window.location.hostname === 'procure.unbound3d.com' && window.location.pathname === '/') {
+            window.location.replace('/procure.html');
+        }
+    </script>
     <script type="module" src="/src/main.js"></script>
     <style>
         /* Specific page styles can go here if needed, but keeping global mostly */
@@ -85,8 +91,8 @@
                     Unbound3D turns digital designs into reliable physical outcomes — powered by intelligent execution.
                 </p>
                 <div class="text-center">
-                    <a href="/hanzof.html" class="cta-link">Explore Hanzof →</a>
-                    <a href="/makura.html" class="cta-link">Explore Makura.world →</a>
+                    <!-- <a href="/hanzof.html" class="cta-link">Explore Hanzof →</a> -->
+                    <!-- <a href="/makura.html" class="cta-link">Explore Makura.world →</a> -->
                     <a href="/lynx-320.html" class="cta-link">View Lynx-320 →</a>
                 </div>
             </div>
@@ -116,10 +122,9 @@
         </section>
 
         <!-- Platforms -->
-        <section class="stagger-parent">
+        <!-- <section class="stagger-parent">
             <div class="container">
                 <div class="grid-2">
-                    <!-- Hanzof -->
                     <div class="platform-card reveal-child">
                         <div>
                             <h3 class="platform-title">Hanzof</h3>
@@ -140,7 +145,6 @@
                         </div>
                     </div>
 
-                    <!-- Makura.world -->
                     <div class="platform-card reveal-child">
                         <div>
                             <h3 class="platform-title">Makura.world</h3>
@@ -162,7 +166,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Product Highlight -->
         <section class="reveal">
