@@ -18,7 +18,7 @@ export const Nav = `
       <!-- <a href="/hanzof.html">Hanzof</a> -->
       <!-- <a href="/makura.html">Makura</a> -->
       <a href="/lynx-320.html">Lynx-320</a>
-      <a href="/procure.html">Procurement</a>
+      <!-- <a href="/procure.html">Procurement</a> -->
       <!-- Mobile Extra Options -->
       <a href="/story.html" class="mobile-only">Our Story</a>
       <a href="/careers.html" class="mobile-only">Careers</a>
@@ -29,9 +29,9 @@ export const Nav = `
 
 export const Footer = `
   <footer>
-    <div class="footer-content container" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem;">
+    <div class="footer-grid container">
       <!-- Column 1: Brand -->
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div class="footer-column">
         <div style="display: flex;">
             <img src="/logo.png" alt="Unbound3D Logo" style="height: 28px; width: auto; object-fit: contain;">
         </div>
@@ -51,44 +51,47 @@ export const Footer = `
       </div>
 
       <!-- Column 2: Platform -->
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="font-weight: 600; font-size: 1rem;">Platform</div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; opacity: 0.7;">
-            <!-- <a href="/hanzof.html" style="text-decoration: none;">Hanzof</a> -->
-            <!-- <a href="/makura.html" style="text-decoration: none;">Makura World</a> -->
-            <a href="/lynx-320.html" style="text-decoration: none;">Lynx-320</a>
-            <a href="/procure.html" style="text-decoration: none;">Procurement</a>
+      <div class="footer-column">
+        <h4>Platform</h4>
+        <div class="footer-links">
+            <a href="/lynx-320.html">Lynx-320</a>
+            <!-- <a href="/procure.html">Procurement</a> -->
         </div>
       </div>
 
       <!-- Column 3: Support/Resources -->
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="font-weight: 600; font-size: 1rem;">Support</div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; opacity: 0.7;">
-            <a href="/contact.html" style="text-decoration: none;">Contact us</a>
-            <a href="#" style="text-decoration: none;">Documentation</a>
-            <a href="#" style="text-decoration: none;">System Status</a>
+      <div class="footer-column">
+        <h4>Support</h4>
+        <div class="footer-links">
+            <a href="/contact.html">Contact us</a>
+            <a href="#">Documentation</a>
+            <a href="#">System Status</a>
         </div>
       </div>
 
       <!-- Column 4: Company -->
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="font-weight: 600; font-size: 1rem;">Company</div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; opacity: 0.7;">
-            <a href="/story.html" style="text-decoration: none;">Our Story</a>
-            <a href="/careers.html" style="text-decoration: none;">Careers</a>
-            <a href="#" style="text-decoration: none;">Press</a>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <div class="footer-links">
+            <a href="/story.html">Our Story</a>
+            <a href="/careers.html">Careers</a>
+            <a href="#">Press</a>
         </div>
       </div>
     </div>
 
+    <!-- Platform Note -->
+    <div class="container" style="text-align: center; opacity: 0.4; font-size: 0.8rem; padding-bottom: 2rem; max-width: 600px; margin: 0 auto;">
+        Unbound3D runs on a cloud-hosted platform that stores production records, machine telemetry, and inspection reports.
+    </div>
+
     <!-- Bottom Row -->
-    <div class="container" style="margin-top: 1rem; border-top: 1px solid rgba(128,128,128,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; opacity: 0.6;">
+    <div class="container footer-bottom">
       <div>&copy; ${new Date().getFullYear()} Unbound3D. All rights reserved.</div>
-      <div style="display: flex; gap: 2rem;">
-        <a href="#" style="text-decoration: none;">Privacy Policy</a>
-        <a href="#" style="text-decoration: none;">Terms & Conditions</a>
-        <a href="#" style="text-decoration: none;">Refund Policy</a>
+      <div class="footer-legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Refund Policy</a>
       </div>
     </div>
   </footer>

@@ -130,6 +130,98 @@ section {
   }
 }
 
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* How it Works Steps */
+.step-card {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.step-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  display: block;
+  opacity: 0.6;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+/* Tech Platform & Data QA */
+.tech-section {
+  background: var(--surface-color);
+  padding: 6rem 0;
+  border-radius: 32px;
+  margin: 2rem 0;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .tech-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.feature-list-modern {
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.feature-item::before {
+  content: "•";
+  color: var(--accent-color);
+  font-size: 1.2rem;
+}
+
+.feature-text {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
 .snap-section {
   min-height: 100vh;
   scroll-snap-align: start;
@@ -431,19 +523,81 @@ nav.scrolled {
 footer {
   padding: 4rem 0 2rem;
   border-top: 1px solid rgba(128, 128, 128, 0.1);
+  background: var(--bg-color);
+  /* Ensure background is set */
 }
 
-.footer-content {
+/* New Responsive Footer Grid */
+.footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-column h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  /* Gap is handled by flex gap, but good for safety */
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.footer-links a {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 2rem;
 }
 
 @media (max-width: 768px) {
-  .footer-content {
+  .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    /* Stack columns on mobile */
+    gap: 3rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column-reverse;
+    /* Copyright at bottom */
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .footer-legal-links {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }
 
@@ -613,7 +767,7 @@ footer {
     width: 56px;
     height: 56px;
   }
-  
+
   .whatsapp-float svg {
     width: 28px;
     height: 28px;
