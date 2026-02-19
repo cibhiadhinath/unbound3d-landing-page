@@ -47,7 +47,10 @@
 
   ::-webkit-scrollbar {
     width: 0px;
+    height: 0px;
     background: transparent;
+    display: none;
+    /* Make invisible */
   }
 }
 
@@ -55,6 +58,10 @@
 html {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) var(--bg-color);
+  background-color: var(--bg-color);
+  /* Ensure black background */
+  overscroll-behavior: none;
+  /* Prevent elastic bounce showing grey background */
 }
 
 @media (max-width: 768px) {
@@ -78,6 +85,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  /* Prevent elastic bounce */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
