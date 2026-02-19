@@ -11,6 +11,38 @@
 
 /* Removed media query - Dark is default */
 
+/* Dark Scrollbar for ALL devices that support it */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  /* Matches page background (black) */
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--bg-color);
+  /* Creates padding effect */
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.2) var(--bg-color);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
