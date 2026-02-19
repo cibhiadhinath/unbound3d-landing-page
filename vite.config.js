@@ -13,6 +13,8 @@ export default defineConfig({
         careers: resolve(__dirname, 'careers.html'),
         story: resolve(__dirname, 'story.html'),
         procure: resolve(__dirname, 'procure.html'),
+        platform: resolve(__dirname, 'platform.html'),
+        team: resolve(__dirname, 'team.html'),
       },
     },
   },

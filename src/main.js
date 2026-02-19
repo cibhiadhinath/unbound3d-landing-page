@@ -2,13 +2,13 @@ import './style.css'
 import { Nav, Footer } from './components.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject Nav
-    document.body.insertAdjacentHTML('afterbegin', Nav);
+    // Inject Nav - DISABLED (Using static HTML in files now)
+    // document.body.insertAdjacentHTML('afterbegin', Nav);
 
-    // Inject Footer (only if not a snap-container page which has its own snapped footer)
-    if (!document.querySelector('.snap-container')) {
-        document.body.insertAdjacentHTML('beforeend', Footer);
-    }
+    // Inject Footer - DISABLED (Using static HTML)
+    // if (!document.querySelector('.snap-container')) {
+    //    document.body.insertAdjacentHTML('beforeend', Footer);
+    // }
 
     // Add scroll effect for nav
     const nav = document.querySelector('nav');
