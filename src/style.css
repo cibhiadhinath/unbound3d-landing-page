@@ -17,6 +17,13 @@
   height: 10px;
 }
 
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    /* Thinner on mobile */
+  }
+}
+
 ::-webkit-scrollbar-track {
   background: var(--bg-color);
   /* Matches page background (black) */
@@ -31,6 +38,17 @@
   border: 2px solid var(--bg-color);
   /* Creates padding effect */
   border-radius: 99px;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar-thumb {
+    border: none;
+    /* Cleaner look on mobile */
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 ::-webkit-scrollbar-thumb:hover {
