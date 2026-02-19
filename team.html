@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Team — Unbound3D</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #333;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .member-bio {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .member-bio ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .member-bio li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll-wrapper">
+        <nav>
+            <div class="nav-logo">
+                <a href="/" class="nav-brand-text">
+                    <span class="brand-name">Unbound3D</span>
+                    <span class="brand-tagline">Power To Create</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/platform.html">Platform</a>
+                <a href="/hanzof.html">Hanzof</a>
+                <a href="/lynx-320.html">Lynx 320</a>
+                <a href="/team.html" class="active">Team</a>
+                <a href="/contact.html" class="cta-button">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <section class="hero-section" style="min-height: auto; padding-top: 8rem; padding-bottom: 4rem;">
+            <div class="hero-content">
+                <h1 class="hero-text" style="font-size: 3rem;">The Team</h1>
+                <p class="hero-subtext">
+                    Engineers, designers, and strategists building the future of manufacturing.
+                </p>
+            </div>
+        </section>
+
+        <section class="snap-section" style="height: auto; min-height: 100vh;">
+            <div class="section-content">
+                <div class="team-grid">
+                    <!-- Cibhi Adhinath P -->
+                    <div class="team-member">
+                        <div class="member-photo"
+                            style="background-image: url('assets/team/cibhi.jpg'); background-color: #222;"></div>
+                        <!-- Placeholder -->
+                        <h3 class="member-name">Cibhi Adhinath P</h3>
+                        <div class="member-role">Co-Founder | Business & Strategy</div>
+                        <div class="member-bio">
+                            <ul>
+                                <li>Partnerships, customers & go-to-market strategy.</li>
+                                <li>Commercialization & ecosystem development.</li>
+                                <li>5+ years in UAVs & defence-commercial partnerships.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Jeeva R -->
+                    <div class="team-member">
+                        <div class="member-photo"
+                            style="background-image: url('assets/team/jeeva.jpg'); background-color: #222;"></div>
+                        <!-- Placeholder -->
+                        <h3 class="member-name">Jeeva R</h3>
+                        <div class="member-role">Co-Founder | Product</div>
+                        <div class="member-bio">
+                            <ul>
+                                <li>Product architecture & system requirements.</li>
+                                <li>Platform performance & reliability ownership.</li>
+                                <li>5+ years in Additive Manufacturing & UAV systems.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mahima Swetha -->
+                    <div class="team-member">
+                        <div class="member-photo"
+                            style="background-image: url('assets/team/mahima.jpg'); background-color: #222;"></div>
+                        <!-- Placeholder -->
+                        <h3 class="member-name">Mahima Swetha</h3>
+                        <div class="member-role">R&D Lead</div>
+                        <div class="member-bio">
+                            <ul>
+                                <li>Prototyping, integration & testing.</li>
+                                <li>Experimental validation & iteration.</li>
+                                <li>4+ years in Design & Manufacturing.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Vijay Raj -->
+                    <div class="team-member">
+                        <div class="member-photo"
+                            style="background-image: url('assets/team/vijay.jpg'); background-color: #222;"></div>
+                        <!-- Placeholder -->
+                        <h3 class="member-name">Vijay Raj</h3>
+                        <div class="member-role">Design Lead</div>
+                        <div class="member-bio">
+                            <ul>
+                                <li>Industrial 3D printer design & development.</li>
+                                <li>Manufacturable structures & production tooling.</li>
+                                <li>5+ years in Design & 2+ years in Analysis.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Unbound3D</h4>
+                    <p>Building the digital infrastructure for physical production.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="/platform.html">Technology</a>
+                    <a href="/lynx-320.html">Hardware Node</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <a href="/hanzof.html">Hanzof Managed Service</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="/team.html" class="active">Team</a>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Unbound3D. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
