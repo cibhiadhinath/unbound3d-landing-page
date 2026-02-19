@@ -59,9 +59,21 @@
     -webkit-appearance: none !important;
   }
 
+  /* Target html and body specifically for mobile scrollbar */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0px !important;
+    background: transparent !important;
+  }
+
   body,
   html {
     scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    overflow-x: hidden !important;
+    /* Prevent side grey area */
+    background-color: var(--bg-color);
+    /* Ensure bg is black behind everything */
   }
 }
 
