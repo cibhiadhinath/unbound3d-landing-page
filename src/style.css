@@ -11,6 +11,27 @@
 
 /* Removed media query - Dark is default */
 
+html {
+  color-scheme: dark;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -365,6 +386,8 @@ nav.scrolled {
     scroll-snap-type: none;
     padding-top: 4rem;
     /* Less padding on mobile */
+    overflow-y: visible;
+    /* Reset overflow for native body scroll */
   }
 
   .snap-section {
