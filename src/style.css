@@ -1118,3 +1118,186 @@ footer {
     gap: 1.5rem;
   }
 }
+
+/* ===== Visibility Grid (Homepage) ===== */
+.visibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.vis-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.vis-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.vis-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vis-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.vis-card p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .visibility-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* ===== Stagger Reveal Animation ===== */
+.reveal .vis-card,
+.reveal .feature-card,
+.reveal .bento-item,
+.reveal .cap-card,
+.reveal .step-card,
+.reveal .sample-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.reveal.visible .vis-card,
+.reveal.visible .feature-card,
+.reveal.visible .bento-item,
+.reveal.visible .cap-card,
+.reveal.visible .step-card,
+.reveal.visible .sample-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for up to 6 children */
+.reveal.visible .vis-card:nth-child(1),
+.reveal.visible .feature-card:nth-child(1),
+.reveal.visible .bento-item:nth-child(1),
+.reveal.visible .cap-card:nth-child(1),
+.reveal.visible .step-card:nth-child(1),
+.reveal.visible .sample-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.reveal.visible .vis-card:nth-child(2),
+.reveal.visible .feature-card:nth-child(2),
+.reveal.visible .bento-item:nth-child(2),
+.reveal.visible .cap-card:nth-child(2),
+.reveal.visible .step-card:nth-child(2),
+.reveal.visible .sample-item:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+.reveal.visible .vis-card:nth-child(3),
+.reveal.visible .feature-card:nth-child(3),
+.reveal.visible .bento-item:nth-child(3),
+.reveal.visible .cap-card:nth-child(3),
+.reveal.visible .step-card:nth-child(3),
+.reveal.visible .sample-item:nth-child(3) {
+  transition-delay: 0.19s;
+}
+
+.reveal.visible .vis-card:nth-child(4),
+.reveal.visible .feature-card:nth-child(4),
+.reveal.visible .bento-item:nth-child(4),
+.reveal.visible .cap-card:nth-child(4),
+.reveal.visible .step-card:nth-child(4),
+.reveal.visible .sample-item:nth-child(4) {
+  transition-delay: 0.26s;
+}
+
+/* ===== CTA Button Styling ===== */
+.cta-button {
+  background: var(--accent-color);
+  color: var(--bg-color) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  font-weight: 600;
+  opacity: 1 !important;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Mobile Global Optimizations ===== */
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 2rem;
+    max-width: 16ch !important;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    max-width: 90% !important;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    padding: 0.9rem 2rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .grid-2 {
+    gap: 2rem;
+  }
+
+  .lynx-highlight {
+    padding: 2rem !important;
+  }
+
+  .lynx-highlight h2 {
+    font-size: 1.75rem !important;
+  }
+
+  /* Contact form mobile */
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* ===== Active nav link ===== */
+.nav-links a.active {
+  opacity: 1;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 2px;
+}
+
+/* ===== Feature card hover enhancement ===== */
+.feature-card {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+}

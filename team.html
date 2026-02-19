@@ -13,105 +13,133 @@
     <style>
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             width: 100%;
-            margin-top: 2rem;
+            max-width: 900px;
+            margin: 3rem auto 0;
         }
 
         .team-member {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .team-member:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .member-photo {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: #333;
             margin: 0 auto 1.5rem;
             object-fit: cover;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255, 255, 255, 0.08);
         }
 
         .member-name {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
         }
 
         .member-role {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.25rem;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .member-bio {
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
             text-align: left;
         }
 
         .member-bio ul {
             padding-left: 1.2rem;
             margin-top: 0.5rem;
+            list-style: none;
         }
 
         .member-bio li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            position: relative;
+            padding-left: 0.8rem;
+        }
+
+        .member-bio li::before {
+            content: "—";
+            position: absolute;
+            left: -0.8rem;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-member {
+                padding: 2rem 1.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="scroll-wrapper">
-        <nav>
-            <div class="nav-logo">
-                <a href="/" class="nav-brand-text">
-                    <span class="brand-name">Unbound3D</span>
-                    <span class="brand-tagline">Power To Create</span>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="/platform.html">Platform</a>
-                <a href="/hanzof.html">Hanzof</a>
-                <a href="/lynx-320.html">Lynx 320</a>
-                <a href="/team.html" class="active">Team</a>
-                <a href="/contact.html" class="cta-button">Contact</a>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+    <nav>
+        <div class="nav-logo">
+            <a href="/" class="nav-brand-text">
+                <span class="brand-name">Unbound3D</span>
+                <span class="brand-tagline">Power To Create</span>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/platform.html">Platform</a>
+            <a href="/hanzof.html">Hanzof</a>
+            <a href="/lynx-320.html">Lynx 320</a>
+            <a href="/team.html" class="active">Team</a>
+            <a href="/contact.html" class="cta-button">Contact</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 
-        <section class="hero-section" style="min-height: auto; padding-top: 8rem; padding-bottom: 4rem;">
-            <div class="hero-content">
-                <h1 class="hero-text" style="font-size: 3rem;">The Team</h1>
-                <p class="hero-subtext">
+    <main>
+        <!-- Hero -->
+        <section class="hero-section reveal" style="min-height: auto; padding-bottom: 2rem;">
+            <div class="container text-center">
+                <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: 3rem;">The Team
+                </h1>
+                <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.7; max-width: 40ch;">
                     Engineers, designers, and strategists building the future of manufacturing.
                 </p>
             </div>
         </section>
 
-        <section class="snap-section" style="height: auto; min-height: 100vh;">
-            <div class="section-content">
+        <!-- Team Grid -->
+        <section class="reveal" style="padding-top: 0;">
+            <div class="container">
                 <div class="team-grid">
-                    <!-- Cibhi Adhinath P -->
+                    <!-- Row 1 -->
                     <div class="team-member">
-                        <div class="member-photo"
-                            style="background-image: url('assets/team/cibhi.jpg'); background-color: #222;"></div>
-                        <!-- Placeholder -->
+                        <div class="member-photo" style="background-image: url('assets/team/cibhi.jpg');"></div>
                         <h3 class="member-name">Cibhi Adhinath P</h3>
                         <div class="member-role">Co-Founder | Business & Strategy</div>
                         <div class="member-bio">
@@ -123,11 +151,8 @@
                         </div>
                     </div>
 
-                    <!-- Jeeva R -->
                     <div class="team-member">
-                        <div class="member-photo"
-                            style="background-image: url('assets/team/jeeva.jpg'); background-color: #222;"></div>
-                        <!-- Placeholder -->
+                        <div class="member-photo" style="background-image: url('assets/team/jeeva.jpg');"></div>
                         <h3 class="member-name">Jeeva R</h3>
                         <div class="member-role">Co-Founder | Product</div>
                         <div class="member-bio">
@@ -139,11 +164,9 @@
                         </div>
                     </div>
 
-                    <!-- Mahima Swetha -->
+                    <!-- Row 2 -->
                     <div class="team-member">
-                        <div class="member-photo"
-                            style="background-image: url('assets/team/mahima.jpg'); background-color: #222;"></div>
-                        <!-- Placeholder -->
+                        <div class="member-photo" style="background-image: url('assets/team/mahima.jpg');"></div>
                         <h3 class="member-name">Mahima Swetha</h3>
                         <div class="member-role">R&D Lead</div>
                         <div class="member-bio">
@@ -155,11 +178,8 @@
                         </div>
                     </div>
 
-                    <!-- Vijay Raj -->
                     <div class="team-member">
-                        <div class="member-photo"
-                            style="background-image: url('assets/team/vijay.jpg'); background-color: #222;"></div>
-                        <!-- Placeholder -->
+                        <div class="member-photo" style="background-image: url('assets/team/vijay.jpg');"></div>
                         <h3 class="member-name">Vijay Raj</h3>
                         <div class="member-role">Design Lead</div>
                         <div class="member-bio">
@@ -174,40 +194,51 @@
             </div>
         </section>
 
-        <footer>
-            <div class="container footer-grid">
-                <div class="footer-column">
-                    <h4>Unbound3D</h4>
-                    <div class="footer-links">
-                        <p>Building the digital infrastructure for physical production.</p>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Platform</h4>
-                    <div class="footer-links">
-                        <a href="/platform.html">Technology</a>
-                        <a href="/lynx-320.html">Hardware Node</a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <div class="footer-links">
-                        <a href="/hanzof.html">Hanzof Managed Service</a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <div class="footer-links">
-                        <a href="/team.html" class="active">Team</a>
-                        <a href="/contact.html">Contact</a>
-                    </div>
+        <!-- CTA -->
+        <section class="reveal" style="text-align: center; padding: 4rem 0;">
+            <div class="container">
+                <h2 class="section-title">Want to join us?</h2>
+                <p style="opacity: 0.7; margin-bottom: 2rem; max-width: 35ch; margin-left: auto; margin-right: auto;">
+                    We're always looking for visionary engineers and designers.
+                </p>
+                <a href="/careers.html" class="btn-outline">View Careers</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>Unbound3D</h4>
+                <div class="footer-links">
+                    <p>Building the digital infrastructure for physical production.</p>
                 </div>
             </div>
-            <div class="container footer-bottom">
-                <p>&copy; 2026 Unbound3D. All rights reserved.</p>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <div class="footer-links">
+                    <a href="/platform.html">Technology</a>
+                    <a href="/lynx-320.html">Hardware Node</a>
+                </div>
             </div>
-        </footer>
-    </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <div class="footer-links">
+                    <a href="/hanzof.html">Hanzof Managed Service</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="/team.html">Team</a>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

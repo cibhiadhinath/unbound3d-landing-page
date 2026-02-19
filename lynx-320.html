@@ -3,37 +3,41 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lynx-320 — A compact industrial workhorse.</title>
+    <meta name="color-scheme" content="dark" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Lynx-320 — Industrial 3D Printer | Unbound3D</title>
+    <link rel="stylesheet" href="/src/style.css">
     <script type="module" src="/src/main.js"></script>
     <style>
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-top: 3rem;
         }
 
         .spec-item {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.25rem;
+            transition: transform 0.2s;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .spec-item {
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
+        .spec-item:hover {
+            transform: translateY(-2px);
         }
 
         .spec-label {
-            font-size: 0.9rem;
-            opacity: 0.6;
+            font-size: 0.85rem;
+            opacity: 0.5;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .spec-value {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
         }
 
@@ -47,26 +51,63 @@
 
         .app-item {
             font-size: 0.95rem;
-            opacity: 0.8;
-            padding: 1rem;
+            font-weight: 500;
+            opacity: 0.85;
+            padding: 1.25rem 1rem;
             background: var(--surface-color);
-            border-radius: 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .app-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .showcase-grid {
+            margin-top: 3rem;
+        }
+
+        .showcase-img {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 16px;
+            display: block;
+        }
+
+        .dark-showcase {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         @media (max-width: 768px) {
             .specs-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
             }
 
             .app-list {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
             }
         }
     </style>
 </head>
 
-<body class="dark-mode">
+<body>
     <!-- Nav -->
     <nav>
         <div class="nav-logo">
@@ -89,15 +130,19 @@
     </nav>
 
     <main>
-        <!-- Dark Hero Showcase -->
-        <section class="dark-showcase reveal" style="padding-top: 8rem; min-height: 90vh;">
+        <!-- Hero -->
+        <section class="dark-showcase reveal" style="padding-top: 8rem; min-height: 80vh;">
             <div class="container text-center">
+                <div
+                    style="margin-bottom: 1.5rem; opacity: 0.5; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem;">
+                    Lynx-320 — Industrial 3D Printer
+                </div>
                 <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; max-width: 20ch;">
                     Our Internal Rapid Production Engine.
                 </h1>
-                <p class="hero-sub text-center" style="margin: 1rem auto 3rem auto; opacity: 0.8; max-width: 50ch;">
-                    We use the Lynx-320 to manufacture high-strength functional parts for our customers. It enables us
-                    to deliver prototypes and end-use components in days, not weeks.
+                <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.8; max-width: 50ch;">
+                    We use the Lynx-320 to manufacture high-strength functional parts for our customers.
+                    It enables us to deliver prototypes and end-use components in days, not weeks.
                 </p>
                 <div class="showcase-grid">
                     <img src="/lynx-1.png" alt="Lynx-320 Node" class="showcase-img">
@@ -105,9 +150,10 @@
             </div>
         </section>
 
-        <!-- Features Grid -->
+        <!-- Features -->
         <section class="reveal">
             <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 3rem;">Key Capabilities</h2>
                 <div class="grid-3">
                     <div class="feature-card">
                         <h3>Cloud Native</h3>
@@ -128,14 +174,13 @@
             </div>
         </section>
 
-
-        <!-- Product Philosophy -->
+        <!-- Philosophy -->
         <section class="reveal">
             <div class="container">
-                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="max-width: 700px; margin: 0 auto; text-align: center;">
                     <h2 class="section-title">Designed to run every day.</h2>
-                    <p style="font-size: 1.25rem; opacity: 0.8; line-height: 1.6;">
-                        Lynx-320 is the mini workhorse for industrial printing farms.<br>
+                    <p style="font-size: 1.15rem; opacity: 0.8; line-height: 1.7;">
+                        Lynx-320 is the mini workhorse for industrial printing farms.
                         It combines consumer-like speeds with industrial reliability, ensuring warp-free production of
                         PA-CF and PA-GF parts.
                     </p>
@@ -143,48 +188,52 @@
             </div>
         </section>
 
-
-        <!-- Key Specs -->
-        <section class="stagger-parent">
+        <!-- Specs -->
+        <section class="reveal">
             <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 1rem;">Technical Specifications</h2>
                 <div class="specs-grid">
-                    <div class="spec-item reveal-child">
-                        <div class="spec-label">Build volume</div>
+                    <div class="spec-item">
+                        <div class="spec-label">Build Volume</div>
                         <div class="spec-value">320 × 320 × 300 mm</div>
                     </div>
-                    <div class="spec-item reveal-child">
-                        <div class="spec-label">Heated chamber</div>
+                    <div class="spec-item">
+                        <div class="spec-label">Heated Chamber</div>
                         <div class="spec-value">Up to 60°C</div>
                     </div>
-                    <div class="spec-item reveal-child">
-                        <div class="spec-label">Bed temperature</div>
+                    <div class="spec-item">
+                        <div class="spec-label">Bed Temperature</div>
                         <div class="spec-value">Up to 150°C</div>
                     </div>
-                    <div class="spec-item reveal-child">
+                    <div class="spec-item">
                         <div class="spec-label">Materials</div>
-                        <div class="spec-value">PA-CF, PA-GF, thermoplastics</div>
+                        <div class="spec-value">PA-CF, PA-GF, Thermoplastics</div>
                     </div>
-                    <div class="spec-item reveal-child">
-                        <div class="spec-label">Motion system</div>
+                    <div class="spec-item">
+                        <div class="spec-label">Motion System</div>
                         <div class="spec-value">High-speed CoreXY</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Connectivity</div>
+                        <div class="spec-value">Cloud + Local</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Lynx-Dry Feature -->
+        <!-- Lynx-Dry -->
         <section class="reveal">
             <div class="container">
-                <div class="grid-2">
+                <div class="grid-2" style="align-items: center;">
                     <div class="text-center">
                         <img src="/lynx-dry.png" alt="Lynx-Dry Filament Dryer"
-                            style="max-height: 400px; display: inline-block; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1)); animation: float 6s ease-in-out infinite;">
+                            style="max-height: 350px; display: inline-block; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); animation: float 6s ease-in-out infinite;">
                     </div>
                     <div>
                         <h2 class="section-title">Lynx-Dry</h2>
-                        <div class="section-sub" style="margin-bottom: 2rem; font-size: 1.5rem; opacity: 1;">Complete
+                        <div style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 1.5rem; font-weight: 500;">Complete
                             the ecosystem.</div>
-                        <p style="opacity: 0.8; line-height: 1.6; font-size: 1.1rem;">
+                        <p style="opacity: 0.75; line-height: 1.7; font-size: 1.05rem;">
                             Moisture is the enemy of engineering-grade materials. Lynx-Dry actively conditions your
                             filament during printing, ensuring valid mechanical properties and the best possible surface
                             finish.
@@ -195,44 +244,40 @@
         </section>
 
         <!-- Applications -->
-        <section class="stagger-parent">
+        <section class="reveal">
             <div class="container">
-                <h2 class="section-title">Where Lynx-320 fits.</h2>
+                <h2 class="section-title text-center">Where Lynx-320 fits.</h2>
                 <div class="app-list">
-                    <div class="app-item reveal-child">Prototypes</div>
-                    <div class="app-item reveal-child">Jigs & fixtures</div>
-                    <div class="app-item reveal-child">Architecture models</div>
-                    <div class="app-item reveal-child">Production tooling</div>
-                    <div class="app-item reveal-child">End-use parts</div>
+                    <div class="app-item">Prototypes</div>
+                    <div class="app-item">Jigs & Fixtures</div>
+                    <div class="app-item">Architecture Models</div>
+                    <div class="app-item">Production Tooling</div>
+                    <div class="app-item">End-use Parts</div>
                 </div>
             </div>
         </section>
 
-        <!-- Future-ready -->
+        <!-- Future -->
         <section class="reveal">
             <div class="container">
-                <h2 class="section-title">The Future Pipeline</h2>
+                <h2 class="section-title text-center" style="margin-bottom: 3rem;">The Future Pipeline</h2>
                 <div class="grid-2" style="align-items: start;">
-                    <div>
-                        <h3 class="platform-title" style="font-size: 1.5rem;">Unbound Workhorse</h3>
-                        <p style="opacity: 0.8; margin-bottom: 1rem;">
-                            500mm cubic volume for large-scale enterprise production. Features a 100°C heated chamber
-                            and 200°C bed for high-temperature thermoplastic compatibility.
-                        </p>
+                    <div class="feature-card">
+                        <h3>Unbound Workhorse</h3>
+                        <p>500mm cubic volume for large-scale enterprise production. Features a 100°C heated chamber
+                            and 200°C bed for high-temperature thermoplastic compatibility.</p>
                     </div>
-                    <div>
-                        <h3 class="platform-title" style="font-size: 1.5rem;">Next-Gen IDEX</h3>
-                        <p style="opacity: 0.8;">
-                            Focused on complex assemblies with soluble supports, mirror printing for doubled throughput,
-                            and reduced material waste via optimized support generation.
-                        </p>
+                    <div class="feature-card">
+                        <h3>Next-Gen IDEX</h3>
+                        <p>Focused on complex assemblies with soluble supports, mirror printing for doubled throughput,
+                            and reduced material waste via optimized support generation.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="reveal" style="text-align: center; min-height: 40vh;">
+        <section class="reveal" style="text-align: center; padding: 6rem 0;">
             <div class="container">
                 <h2 class="section-title">Interested in Lynx-320?</h2>
                 <p style="opacity: 0.7; margin-bottom: 2rem; max-width: 40ch; margin-left: auto; margin-right: auto;">
@@ -241,7 +286,6 @@
                 <a href="/contact.html" class="btn-primary">Contact Us</a>
             </div>
         </section>
-
     </main>
 
     <footer>
