@@ -49,10 +49,20 @@ html {
   }
 }
 
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  background-color: var(--bg-color);
+  /* Ensure html is black */
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 body {
@@ -62,7 +72,11 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  /* Prevent bounce exposing background */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
