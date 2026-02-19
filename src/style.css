@@ -79,8 +79,6 @@
 html {
   height: 100%;
   max-width: 100%;
-  /* 'clip' clips fixed descendants too, without creating a scroll container */
-  overflow-x: clip;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) var(--bg-color);
   background: #000;
