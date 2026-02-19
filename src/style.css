@@ -32,6 +32,23 @@ html {
   background: rgba(255, 255, 255, 0.4);
 }
 
+@media (max-width: 768px) {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  html,
+  body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
