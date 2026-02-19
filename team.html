@@ -13,88 +13,73 @@
     <style>
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 3rem auto 0;
         }
 
         .team-member {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .team-member:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .member-photo {
-            width: 100px;
-            height: 100px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: #333;
-            margin: 0 auto 1.5rem;
+            background: #d0d0d0;
+            margin: 0 auto 1.25rem;
             object-fit: cover;
             background-size: cover;
-            background-position: center;
-            border: 2px solid rgba(255, 255, 255, 0.08);
+            background-position: center top;
         }
 
         .member-name {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.3rem;
         }
 
         .member-role {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 1.25rem;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            line-height: 1.4;
         }
 
-        .member-bio {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.65);
-            line-height: 1.6;
-            text-align: left;
-        }
-
-        .member-bio ul {
-            padding-left: 1.2rem;
-            margin-top: 0.5rem;
-            list-style: none;
-        }
-
-        .member-bio li {
-            margin-bottom: 0.4rem;
-            position: relative;
-            padding-left: 0.8rem;
-        }
-
-        .member-bio li::before {
-            content: "—";
-            position: absolute;
-            left: -0.8rem;
-            opacity: 0.3;
+        .member-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 0.25rem;
         }
 
         @media (max-width: 768px) {
             .team-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .member-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .member-name {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
                 gap: 1.5rem;
             }
 
-            .team-member {
-                padding: 2rem 1.5rem;
+            .member-photo {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -123,7 +108,7 @@
 
     <main>
         <!-- Hero -->
-        <section class="hero-section reveal" style="min-height: auto; padding-bottom: 2rem;">
+        <section class="hero-section reveal" style="padding-bottom: 0;">
             <div class="container text-center">
                 <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: 3rem;">The Team
                 </h1>
@@ -134,61 +119,31 @@
         </section>
 
         <!-- Team Grid -->
-        <section class="reveal" style="padding-top: 0;">
+        <section class="reveal" style="padding-top: 1rem;">
             <div class="container">
                 <div class="team-grid">
-                    <!-- Row 1 -->
                     <div class="team-member">
                         <div class="member-photo" style="background-image: url('assets/team/cibhi.jpg');"></div>
                         <h3 class="member-name">Cibhi Adhinath P</h3>
-                        <div class="member-role">Co-Founder | Business & Strategy</div>
-                        <div class="member-bio">
-                            <ul>
-                                <li>Partnerships, customers & go-to-market strategy.</li>
-                                <li>Commercialization & ecosystem development.</li>
-                                <li>5+ years in UAVs & defence-commercial partnerships.</li>
-                            </ul>
-                        </div>
+                        <div class="member-role">Co-Founder |<br>Business & Strategy</div>
                     </div>
 
                     <div class="team-member">
                         <div class="member-photo" style="background-image: url('assets/team/jeeva.jpg');"></div>
                         <h3 class="member-name">Jeeva R</h3>
-                        <div class="member-role">Co-Founder | Product</div>
-                        <div class="member-bio">
-                            <ul>
-                                <li>Product architecture & system requirements.</li>
-                                <li>Platform performance & reliability ownership.</li>
-                                <li>5+ years in Additive Manufacturing & UAV systems.</li>
-                            </ul>
-                        </div>
+                        <div class="member-role">Co-Founder |<br>Product</div>
                     </div>
 
-                    <!-- Row 2 -->
                     <div class="team-member">
                         <div class="member-photo" style="background-image: url('assets/team/mahima.jpg');"></div>
                         <h3 class="member-name">Mahima Swetha</h3>
-                        <div class="member-role">R&D Lead</div>
-                        <div class="member-bio">
-                            <ul>
-                                <li>Prototyping, integration & testing.</li>
-                                <li>Experimental validation & iteration.</li>
-                                <li>4+ years in Design & Manufacturing.</li>
-                            </ul>
-                        </div>
+                        <div class="member-role">R&D Lead<br><span class="member-tag">( Founding Team)</span></div>
                     </div>
 
                     <div class="team-member">
                         <div class="member-photo" style="background-image: url('assets/team/vijay.jpg');"></div>
                         <h3 class="member-name">Vijay Raj</h3>
-                        <div class="member-role">Design Lead</div>
-                        <div class="member-bio">
-                            <ul>
-                                <li>Industrial 3D printer design & development.</li>
-                                <li>Manufacturable structures & production tooling.</li>
-                                <li>5+ years in Design & 2+ years in Analysis.</li>
-                            </ul>
-                        </div>
+                        <div class="member-role">Design Lead<br><span class="member-tag">(Founding Team)</span></div>
                     </div>
                 </div>
             </div>
