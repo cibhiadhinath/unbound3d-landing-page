@@ -39,6 +39,18 @@
   }
 }
 
+/* Explicitly hide track on mobile to prevent grey box */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
 /* Firefox - reduce width for mobile, but keep auto for desktop */
 html {
   scrollbar-width: thin;
