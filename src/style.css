@@ -70,21 +70,21 @@
   html {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
-    overflow-x: hidden !important;
-    /* Prevent side grey area */
-    background-color: var(--bg-color);
+    background-color: #000;
     /* Ensure bg is black behind everything */
   }
 }
 
 /* Firefox - reduce width for mobile, but keep auto for desktop */
 html {
+  height: 100%;
+  max-width: 100%;
+  /* 'clip' clips fixed descendants too, without creating a scroll container */
+  overflow-x: clip;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) var(--bg-color);
-  background-color: var(--bg-color);
-  /* Ensure black background */
+  background: #000;
   overscroll-behavior: none;
-  /* Prevent elastic bounce showing grey background */
 }
 
 @media (max-width: 768px) {
@@ -101,19 +101,27 @@ html {
 }
 
 body {
+  min-height: 100%;
+  max-width: 100%;
   font-family: var(--font-primary);
-  background-color: var(--bg-color);
+  background: #000;
   color: var(--text-color);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overscroll-behavior: none;
+  /* Clip anything that bleeds outside body bounds (e.g. off-screen fixed panels) */
+  clip-path: inset(0);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-html {
-  scrollbar-gutter: auto;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: -1;
 }
 
 a {
@@ -186,8 +194,8 @@ p {
 /* Layout */
 .container {
   max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 2rem;
+  margin-inline: auto;
+  padding-inline: 20px;
 }
 
 section {
@@ -196,7 +204,7 @@ section {
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 1.5rem;
+    padding-inline: 1.25rem;
   }
 
   section {
@@ -472,7 +480,7 @@ nav.scrolled {
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     width: 70%;
     max-width: 300px;
     background-color: var(--surface-color);
@@ -480,12 +488,17 @@ nav.scrolled {
     justify-content: center;
     gap: 2rem;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, visibility 0.3s;
     padding: 2rem;
+    /* Hidden when off-screen: prevents iOS Safari from counting it in scroll width */
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .nav-links.open {
     transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav-links a {
@@ -816,6 +829,8 @@ footer {
 /* Hero Section Padding Adjustment for Floating Nav */
 .hero-section {
   padding-top: 8rem !important;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -871,7 +886,7 @@ footer {
 .scroll-to-top {
   position: fixed;
   bottom: 2rem;
-  right: 6rem;
+  left: 2rem;
   width: 48px;
   height: 48px;
   background: rgba(255, 255, 255, 0.1);
@@ -911,7 +926,7 @@ footer {
 @media (max-width: 768px) {
   .scroll-to-top {
     bottom: 1.5rem;
-    right: 5rem;
+    left: 1.5rem;
     width: 44px;
     height: 44px;
   }
