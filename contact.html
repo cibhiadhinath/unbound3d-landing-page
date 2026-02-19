@@ -113,20 +113,43 @@
                     <div class="form-group">
                         <label class="form-label">Interest</label>
                         <select id="formInterest" class="form-input" style="cursor:pointer;">
-                            <option>Hanzof Manufacturing Services</option>
+                            <option>Manufacturing Quote (Upload Files)</option>
+                            <option>Hanzof Managed Service</option>
                             <option>Makura.world Partnership</option>
                             <option>Lynx-320 Inquiry</option>
                             <option>General Inquiry</option>
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Message</label>
                         <textarea id="formMessage" class="form-textarea"
-                            placeholder="Tell us about your project"></textarea>
+                            placeholder="Tell us about your project requirements..."></textarea>
                     </div>
-                    <div class="text-center" style="margin-top: 4rem;">
+
+                    <div class="file-upload-note"
+                        style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; opacity: 0.8; border: 1px dashed rgba(255,255,255,0.2);">
+                        <strong>Got CAD files?</strong><br>
+                        Please attach your drawings or 3D models to the email client that opens when you click Send.
+                    </div>
+
+                    <div class="text-center"
+                        style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
                         <button type="submit" class="btn"
-                            style="padding: 1rem 3rem; font-size: 1.1rem; cursor: pointer; border:none;">Send
-                            Message</button>
+                            style="padding: 1rem 3rem; font-size: 1.1rem; cursor: pointer; border:none; background: var(--accent-color); color: var(--bg-color); font-weight: 600; border-radius: 99px;">
+                            Draft Email Inquiry
+                        </button>
+
+                        <div style="opacity: 0.6; font-size: 0.9rem;">or</div>
+
+                        <a href="https://wa.me/917558150570" target="_blank" class="whatsapp-btn"
+                            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 99px; text-decoration: none; color: white;">
+                            <svg viewBox="0 0 32 32" style="width: 20px; height: 20px;">
+                                <path
+                                    d="M16 2C8.28 2 2 8.28 2 16c0 2.5.66 4.87 1.81 6.94l-1.92 7 7.16-1.88A13.94 13.94 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.33c-2.17 0-4.24-.59-6.07-1.61l-.43-.25-4.5 1.18 1.2-4.38-.28-.45A11.3 11.3 0 0 1 4.67 16c0-6.24 5.09-11.33 11.33-11.33S27.33 9.76 27.33 16 22.24 27.33 16 27.33z"
+                                    fill="#25D366"></path>
+                            </svg>
+                            Chat on WhatsApp
+                        </a>
                     </div>
                 </form>
             </div>

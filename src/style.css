@@ -834,71 +834,287 @@ footer {
     width: 28px;
     height: 28px;
   }
+}
 
-  /* Platform Page Specifics */
+/* ===== Platform Page Specifics ===== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.bento-item {
+  background: var(--surface-color);
+  padding: 2rem;
+  border-radius: 24px;
+  transition: transform 0.2s;
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+}
+
+.bento-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.bento-item h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.bento-item p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
   .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .bento-item {
-    background: var(--surface-color);
-    padding: 2rem;
-    border-radius: 24px;
-    transition: transform 0.2s;
-  }
-
-  .bento-item:hover {
-    transform: translateY(-4px);
-  }
-
-  .bento-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .bento-item h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  .bento-item p {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    line-height: 1.6;
-  }
-
-  @media (max-width: 768px) {
-    .bento-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-  }
-
-  .clean-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    font-size: 1.1rem;
   }
+}
 
-  .clean-list li {
-    padding: 1.5rem;
-    background: var(--surface-color);
-    border-radius: 12px;
-    border-left: 4px solid var(--accent-color);
+.clean-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-size: 1.1rem;
+}
+
+.clean-list li {
+  padding: 1.5rem;
+  background: var(--surface-color);
+  border-radius: 12px;
+  border-left: 4px solid var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .clean-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
+}
 
-  @media (min-width: 769px) {
-    .clean-list {
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
+/* ===== Capabilities Section ===== */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.cap-card {
+  background: var(--surface-color);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.cap-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cap-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.cap-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.cap-list li {
+  margin-bottom: 0.6rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.cap-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  opacity: 0.4;
+}
+
+@media (max-width: 900px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ===== Audience Section ===== */
+.audience-section {
+  padding: 4rem 0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.audience-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.audience-tag {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s;
+}
+
+.audience-tag:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Sample Work Grid ===== */
+.sample-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.sample-item {
+  aspect-ratio: 1;
+  background: var(--surface-color);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sample-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.sample-item:hover .sample-img {
+  transform: scale(1.05);
+}
+
+.sample-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .sample-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* ===== Hero CTA Group ===== */
+.hero-cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 1rem 2.5rem;
+  border-radius: 99px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.btn-outline {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--text-color);
+  padding: 1rem 2.5rem;
+  border-radius: 99px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-color);
+}
+
+/* ===== Grid-3 (Feature Cards) ===== */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--surface-color);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
