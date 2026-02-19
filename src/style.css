@@ -16,7 +16,8 @@ html {
 }
 
 @media (min-width: 769px) {
-  ::-webkit-scrollbar {
+  /* Temporarily disabled to debug mobile issue */
+  /* ::-webkit-scrollbar {
     width: 8px;
   }
 
@@ -31,26 +32,30 @@ html {
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.4);
-  }
+  } */
+}
+
+/* Global scrollbar hide to force removal of grey line */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @media (max-width: 768px) {
-
-  /* Aggressively hide all scrollbars on mobile */
-  ::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-    background: transparent;
-  }
 
   html,
   body,
   * {
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* IE/Edge */
   }
 }
 
@@ -58,16 +63,15 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   background-color: var(--bg-color);
-  /* Ensure html is black */
   width: 100%;
   height: 100%;
-  max-width: 100vw;
+  /* Removed max-width: 100vw */
   overflow-x: hidden;
-  /* Prevent horizontal scroll */
 }
 
 body {
@@ -79,11 +83,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100%;
-  max-width: 100vw;
+  /* Removed max-width: 100vw */
   position: relative;
   overflow-x: hidden;
   overscroll-behavior-y: none;
-  /* Prevent bounce exposing background vertically if needed, but mainly X */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
