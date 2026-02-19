@@ -1223,9 +1223,11 @@ footer {
 }
 
 /* ===== CTA Button Styling ===== */
-.cta-button {
-  background: var(--accent-color);
-  color: var(--bg-color) !important;
+.cta-button,
+.nav-links .cta-button,
+.nav-links a.cta-button {
+  background: #ffffff;
+  color: #000000 !important;
   padding: 0.5rem 1.25rem;
   border-radius: 99px;
   font-weight: 600;
@@ -1233,7 +1235,8 @@ footer {
   transition: transform 0.2s, opacity 0.2s;
 }
 
-.cta-button:hover {
+.cta-button:hover,
+.nav-links .cta-button:hover {
   transform: scale(1.05);
 }
 
