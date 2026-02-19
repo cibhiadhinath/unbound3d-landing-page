@@ -44,10 +44,7 @@ html {
 html {
   background-color: var(--bg-color);
   /* Ensure background is black */
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  /* Lock window scroll */
+  overflow-x: hidden;
 }
 
 body {
@@ -57,10 +54,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  /* Lock window scroll */
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -388,10 +382,9 @@ nav.scrolled {
 }
 
 /* Clear Nav */
+/* Clear Nav */
 .snap-container {
   height: 100vh;
-  height: 100dvh;
-  /* Better mobile support */
   width: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -400,17 +393,16 @@ nav.scrolled {
 
 @media (max-width: 768px) {
   .snap-container {
-    /* Keep 100dvh height to scroll internal div, NOT body */
-    /* This prevents the window scrollbar (grey line) from appearing */
+    height: auto;
+    /* Allow content to flow naturally */
+    overflow-y: visible;
+    /* Use window scroll, not div scroll */
     scroll-snap-type: none;
-    /* Disable snap as requested */
     padding-top: 4rem;
-    /* Less padding on mobile */
   }
 
   .snap-section {
     min-height: auto;
-    /* Allow natural height */
     padding: 4rem 0;
     scroll-snap-align: none;
   }
