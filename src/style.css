@@ -914,48 +914,50 @@ footer {
 }
 
 .cap-card {
-  background: var(--surface-color);
-  padding: 2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.2s, border-color 0.2s;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  padding: 2.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .cap-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .cap-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  color: var(--text-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.6;
+  letter-spacing: 0.12em;
 }
 
 .cap-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  opacity: 0.85;
   font-size: 0.95rem;
 }
 
 .cap-list li {
-  margin-bottom: 0.6rem;
-  padding-left: 1rem;
+  margin-bottom: 0.7rem;
+  padding-left: 1.2rem;
   position: relative;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
 }
 
 .cap-list li::before {
   content: "—";
   position: absolute;
   left: 0;
-  color: var(--accent-color);
-  opacity: 0.4;
+  color: rgba(255, 255, 255, 0.25);
 }
 
 @media (max-width: 900px) {
@@ -1096,22 +1098,32 @@ footer {
 }
 
 .feature-card {
-  background: var(--surface-color);
-  padding: 2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  padding: 2.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .feature-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
 .feature-card p {
-  font-size: 0.95rem;
-  opacity: 0.8;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  line-height: 1.7;
 }
 
 @media (max-width: 768px) {
