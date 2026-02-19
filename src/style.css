@@ -41,16 +41,15 @@
 
 /* Explicitly hide track on mobile to prevent grey box */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar-track {
-    background: transparent !important;
-  }
 
-  ::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-    background: transparent;
-    display: none;
-    /* Make invisible */
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-corner {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    display: none !important;
   }
 }
 
@@ -67,7 +66,7 @@ html {
 @media (max-width: 768px) {
   html {
     scrollbar-width: none;
-    /* Hide scrollbar on mobile FF if possible, or fall back to native */
+    scrollbar-color: transparent transparent;
   }
 }
 
@@ -86,8 +85,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overscroll-behavior: none;
-  /* Prevent elastic bounce */
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 a {
@@ -307,7 +309,8 @@ section {
 }
 
 .hero-section {
-  min-height: 55vh;
+  min-height: auto;
+  padding: 6rem 0 3rem;
   justify-content: center;
   text-align: center;
 }
