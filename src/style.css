@@ -1398,3 +1398,20 @@ footer {
   transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.15);
 }
+
+/* ===== Mobile: Force all cards to pure black ===== */
+@media (max-width: 768px) {
+
+  .cap-card,
+  .feature-card,
+  .vis-card,
+  .bento-item,
+  .sample-item,
+  .clean-list li,
+  .platform-card,
+  .lynx-highlight {
+    background: #000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
