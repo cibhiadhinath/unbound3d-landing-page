@@ -44,6 +44,10 @@
 /* Explicitly hide track on mobile to prevent grey box */
 @media (max-width: 768px) {
 
+  * {
+    -ms-overflow-style: none !important;
+  }
+
   ::-webkit-scrollbar,
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-thumb,
@@ -52,6 +56,12 @@
     height: 0 !important;
     background: transparent !important;
     display: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  body,
+  html {
+    scrollbar-width: none !important;
   }
 }
 
@@ -842,6 +852,61 @@ footer {
   .whatsapp-float svg {
     width: 28px;
     height: 28px;
+  }
+}
+
+/* ===== Scroll to Top Button ===== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 6rem;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.scroll-to-top svg {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 1.5rem;
+    right: 5rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .scroll-to-top svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
