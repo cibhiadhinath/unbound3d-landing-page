@@ -10,17 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.insertAdjacentHTML('beforeend', Footer);
     }
 
-    // Add scroll effect for nav
-    const nav = document.querySelector('nav');
-    if (nav) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-    }
+    // Initialize Nav Listeners (Hamburger, Scroll)
+    initNavListeners();
 
     // Add WhatsApp floating button
     const whatsappButton = `
@@ -35,28 +26,49 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.body.insertAdjacentHTML('beforeend', whatsappButton);
 
-    // Mobile Nav Toggle
+    // Initial Animations
+    initAnimations();
+});
+
+function initNavListeners() {
+    const nav = document.querySelector('nav');
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
+    // Scroll Effect
+    if (nav) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // Hamburger Toggle
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
+        // Clone to remove old listeners
+        const newHamburger = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(newHamburger, hamburger);
+
+        newHamburger.addEventListener('click', () => {
+            newHamburger.classList.toggle('open');
             navLinks.classList.toggle('open');
-            // Prevent body scroll when menu is open
             document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
 
-        // Close menu when a link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
+                newHamburger.classList.remove('open');
                 navLinks.classList.remove('open');
                 document.body.style.overflow = '';
             });
         });
     }
+}
 
+function initAnimations() {
     // Scroll Reveal (Reveal Once)
     const observerOptions = {
         threshold: 0.1,
@@ -67,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -97,30 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Specific Hanzof Snap Observer (Toggle Visibility)
     const snapObserverOptions = {
-        threshold: 0.3 // Trigger when 30% visible
+        threshold: 0.3
     };
 
     const snapObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Also trigger children if any
                 entry.target.querySelectorAll('.reveal-child').forEach(child => child.classList.add('visible'));
             } else {
                 entry.target.classList.remove('visible');
-                // Reset children for re-animation
                 entry.target.querySelectorAll('.reveal-child').forEach(child => child.classList.remove('visible'));
             }
         });
     }, snapObserverOptions);
 
     // Apply Observers
-    // 1. Standard reveal elements (exclude snap sections to avoid conflict)
     document.querySelectorAll('.reveal:not(.snap-section), .text-clip-reveal').forEach(el => observer.observe(el));
-
-    // 2. Snap sections (Hanzof)
     document.querySelectorAll('.snap-section').forEach(el => snapObserver.observe(el));
-
-    // 3. Stagger parents (could be in either, but usually associated with snap in current design)
     document.querySelectorAll('.stagger-parent').forEach(el => snapObserver.observe(el));
-});
+}

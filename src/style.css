@@ -351,6 +351,39 @@ nav.scrolled {
   opacity: 1;
 }
 
+/* Clear Nav */
+.snap-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  .snap-container {
+    height: auto;
+    scroll-snap-type: none;
+    padding-top: 4rem;
+    /* Less padding on mobile */
+  }
+
+  .snap-section {
+    min-height: auto;
+    /* Allow natural height */
+    padding: 4rem 0;
+    scroll-snap-align: none;
+  }
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  /* Full viewport for snap */
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+}
+
 /* Mobile Nav */
 .hamburger {
   display: none;
@@ -458,6 +491,32 @@ nav.scrolled {
   to {
     transform: translate(0, 0);
     opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+/* Hero Actions */
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2rem;
+  }
+
+  .hero-actions .cta-link {
+    width: 100%;
+    text-align: center;
   }
 }
 

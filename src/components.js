@@ -15,10 +15,10 @@ export const Nav = `
     </button>
 
     <div class="nav-links">
-      <!-- <a href="/hanzof.html">Hanzof</a> -->
+      <a href="/hanzof.html">Hanzof</a>
       <!-- <a href="/makura.html">Makura</a> -->
       <a href="/lynx-320.html">Lynx-320</a>
-      <!-- <a href="/procure.html">Procurement</a> -->
+      <a href="/procure.html">Procurement</a>
       <!-- Mobile Extra Options -->
       <a href="/story.html" class="mobile-only">Our Story</a>
       <a href="/careers.html" class="mobile-only">Careers</a>
@@ -54,8 +54,9 @@ export const Footer = `
       <div class="footer-column">
         <h4>Platform</h4>
         <div class="footer-links">
+            <a href="/hanzof.html">Hanzof</a>
             <a href="/lynx-320.html">Lynx-320</a>
-            <!-- <a href="/procure.html">Procurement</a> -->
+            <a href="/procure.html">Procurement</a>
         </div>
       </div>
 

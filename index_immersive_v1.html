@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unbound3D — Manufacturing, executed.</title>
+    <script>
+        // Redirect procure subdomain to procurement page
+        if (window.location.hostname === 'procure.unbound3d.com' && window.location.pathname === '/') {
+            window.location.replace('/procure.html');
+        }
+    </script>
+    <script type="module" src="/src/main.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- 
+        Immersive Container:
+        No scrolling on Desktop.
+        Everything absolute positioned.
+        Spotlight reveals content.
+    -->
+    <main class="immersive-container">
+
+        <!-- The Spotlight Overlay (Black with transparency hole) -->
+        <div class="spotlight-layer"></div>
+
+        <!-- Custom Cursor Ring -->
+        <div class="custom-cursor"></div>
+
+        <!-- Hero Content (Always somewhat visible but highlighted by spotlight) -->
+        <div class="hero-center">
+            <div class="hero-logo-container">
+                <img src="/logo.png" alt="Unbound3D Logo" class="hero-logo">
+            </div>
+            <h1 class="hero-title">Unbound3D</h1>
+            <p
+                style="opacity: 0.5; letter-spacing: 0.2em; margin-top: 1rem; text-transform: uppercase; font-size: 0.8rem;">
+                Advanced Manufacturing Infrastructure
+            </p>
+        </div>
+
+        <!-- Hidden Panels (Revealed by cursor proximity) -->
+
+        <!-- Hanzof Panel -->
+        <a href="/hanzof.html" id="panel-hanzof" class="floating-panel">
+            <div class="wireframe-box"></div>
+            <div class="panel-title">Service - 01</div>
+            <div class="panel-header">Hanzof</div>
+            <div class="panel-desc">
+                Applied engineering services. <br>
+                Full-cycle manufacturing execution.
+            </div>
+            <div class="enter-link">ENTER FACILITY →</div>
+        </a>
+
+        <!-- Lynx 320 Panel -->
+        <a href="/lynx-320.html" id="panel-lynx" class="floating-panel">
+            <div class="wireframe-box"></div>
+            <div class="panel-title">Product - 02</div>
+            <div class="panel-header">Lynx 320</div>
+            <div class="panel-desc">
+                Autonomous aerial platform. <br>
+                Industrial grade reliability.
+            </div>
+            <div class="enter-link">VIEW SCHEMATICS →</div>
+        </a>
+
+        <!-- Background Ambient Elements (Fog/Dust) -->
+        <div id="particles-js"
+            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; opacity: 0.2;">
+        </div>
+
+    </main>
+
+    <!-- Footer intentionally omitted on desktop for immersive feel, present for mobile fallback via CSS if needed, 
+         but for this specific immersive design, we keep it clean. 
+         (Note: Mobile fallback might want it, but let's stick to the "No buttons visible at start" requirement) 
+    -->
+
+</body>
+
+</html>
