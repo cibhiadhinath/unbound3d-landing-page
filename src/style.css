@@ -165,7 +165,7 @@ p {
 }
 
 section {
-  padding: 6rem 0;
+  padding: 5rem 0;
 }
 
 @media (max-width: 768px) {
@@ -285,13 +285,13 @@ section {
 }
 
 .snap-section {
-  min-height: 100vh;
+  min-height: auto;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  /* Ensure reveal logic works within this context */
+  padding: 4rem 0;
 }
 
 /* Bi-directional Reveal */
@@ -307,10 +307,9 @@ section {
 }
 
 .hero-section {
-  min-height: 80vh;
+  min-height: 55vh;
   justify-content: center;
   text-align: center;
-  /* Default center for hero, but some will be left */
 }
 
 /* Specific Utilities */
