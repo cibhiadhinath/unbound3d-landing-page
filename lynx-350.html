@@ -39,7 +39,7 @@
         }
 
         .hero-img {
-            max-width: 110%;
+            max-width: 100%;
             margin-right: -5%;
             filter: drop-shadow(0 0 40px var(--blue-glow));
             animation: floatSlow 8s ease-in-out infinite;
@@ -158,23 +158,11 @@
             position: relative;
         }
         
-        .feature-showcase:nth-child(even) {
-            background: radial-gradient(circle at right, rgba(0, 122, 255, 0.03) 0%, transparent 50%);
-        }
-
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-        }
-
-        .feature-grid.reverse .feature-text {
-            order: 2;
-        }
-
-        .feature-grid.reverse .feature-visual {
-            order: 1;
         }
 
         .feature-title {
@@ -217,6 +205,38 @@
             background: var(--blue-accent);
             border-radius: 50%;
             box-shadow: 0 0 8px var(--blue-glow);
+        }
+        
+        /* Text only features grid */
+        .text-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .text-feature-card {
+            background: var(--dark-surface);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .text-feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,122,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .text-feature-card h3 {
+            color: var(--blue-accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .text-feature-card p {
+            opacity: 0.8;
+            line-height: 1.6;
         }
 
         .materials-grid {
@@ -272,8 +292,10 @@
             border-radius: 16px;
             overflow: hidden;
             transition: transform 0.3s;
+            padding: 2.5rem;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .use-case-card:hover {
@@ -281,32 +303,18 @@
             border-color: rgba(255, 255, 255, 0.15);
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
-
-        .use-case-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .use-case-content {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
         
-        .use-case-content h3 {
+        .use-case-card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            color: #fff;
+            color: var(--blue-accent);
         }
         
-        .use-case-content p {
+        .use-case-card p {
             margin: 0;
-            opacity: 0.7;
-            font-size: 1.05rem;
+            opacity: 0.8;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         /* Specs Table */
@@ -373,11 +381,8 @@
             .feature-grid {
                 grid-template-columns: 1fr;
             }
-            .feature-grid.reverse .feature-text {
-                order: 1;
-            }
-            .feature-grid.reverse .feature-visual {
-                order: 2;
+            .text-features-grid {
+                grid-template-columns: 1fr;
             }
             .materials-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -448,7 +453,7 @@
                 </div>
             </div>
             <div class="hero-render">
-                <img src="/lynx-350-hero.png" alt="Lynx-350 Industrial 3D Printer" class="hero-img">
+                <img src="/lynx-350.png" alt="Lynx-350 Industrial 3D Printer" class="hero-img">
             </div>
         </section>
 
@@ -462,64 +467,38 @@
             </div>
         </section>
 
-        <!-- Feature 1: Thermal Control -->
+        <!-- Core Features (Text Grid) -->
         <section class="feature-showcase reveal">
-            <div class="container feature-grid">
-                <div class="feature-text">
-                    <h2 class="feature-title">Thermal Control System</h2>
-                    <ul class="feature-list">
-                        <li>350°C All-Metal Extruder</li>
-                        <li>150°C High-Density Silicone Heated Bed</li>
-                        <li>70°C Active Chamber via Forced Convection</li>
-                    </ul>
-                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
-                        Absolute thermal stability is critical for engineering polymers. Our active chamber heating eliminates warping and guarantees superior layer adhesion for materials like PA-CF and PPS, ensuring industrial reliability on every print.
-                    </p>
-                </div>
-                <div class="feature-visual">
-                    <img src="/lynx-350-chamber.png" alt="Lynx-350 Heated Chamber and Extruder">
+            <div class="container">
+                <div class="text-features-grid">
+                    <div class="text-feature-card">
+                        <h3>Thermal Control System</h3>
+                        <p><strong>350°C Extruder &amp; 150°C Bed</strong><br><br>Absolute thermal stability is critical for engineering polymers. Our 70°C active chamber heating eliminates warping and guarantees superior layer adhesion for materials like PA-CF and PPS.</p>
+                    </div>
+                    <div class="text-feature-card">
+                        <h3>Structural Rigidity &amp; Motion</h3>
+                        <p><strong>40,000 mm/s² Acceleration</strong><br><br>Built on a massive rigid frame, the LYNX-350 delivers blistering speeds up to 650 mm/s without compromising dimensional accuracy. The triple independent Z-axis ensures a perfectly trammed bed under heavy loads.</p>
+                    </div>
+                    <div class="text-feature-card">
+                        <h3>Precision Calibration</h3>
+                        <p><strong>Non-contact eddy current scanning</strong><br><br>Experience fast, repeatable calibration in under 60 seconds. No manual tuning, no paper tests. Just pure production readiness.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Feature 2: Structural Rigidity -->
-        <section class="feature-showcase reveal">
-            <div class="container feature-grid reverse">
-                <div class="feature-text">
-                    <h2 class="feature-title">Structural Rigidity & Motion</h2>
-                    <ul class="feature-list">
-                        <li>Heavy-Duty CoreXY Architecture</li>
-                        <li>Triple Independent Z-Axis</li>
-                        <li>40,000 mm/s² Acceleration</li>
-                        <li>650 mm/s Top Speed</li>
-                    </ul>
-                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
-                        Built on a massive rigid frame, the LYNX-350 delivers blistering speeds without compromising dimensional accuracy. The triple Z-axis ensures a perfectly trammed bed under heavy loads.
-                    </p>
-                </div>
-                <div class="feature-visual">
-                    <img src="/lynx-1.png" alt="Lynx-350 Motion System" style="filter: grayscale(80%) contrast(120%);">
-                </div>
-            </div>
-        </section>
-
-        <!-- Feature 3 & 4: Calibration & Conditioning -->
+        <!-- Material Conditioning with Twin Dry Image -->
         <section class="feature-showcase reveal">
             <div class="container feature-grid">
                 <div class="feature-text">
-                    <h2 class="feature-title">Precision Calibration</h2>
-                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
-                        <strong>Non-contact eddy current bed scanning (&lt;60 seconds).</strong><br>
-                        Experience fast, repeatable calibration. No manual tuning, no paper tests. Just pure production readiness.
-                    </p>
-                    <h2 class="feature-title">Material Conditioning</h2>
-                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
-                        <strong>Dual spool system with active heated drying (up to 110°C).</strong><br>
-                        Integrated moisture control for hydroscopic nylon and carbon fiber materials, creating a seamless and reliable workflow.
+                    <h2 class="feature-title">Twin Dry Material Conditioning</h2>
+                    <p style="opacity: 0.8; font-size: 1.15rem; line-height: 1.7; margin-bottom: 2rem;">
+                        <strong>Dual spool system with active heated drying (up to 110°C).</strong><br><br>
+                        Moisture is the enemy of engineering-grade materials. The Twin Dry system actively conditions your filament during printing, ensuring valid mechanical properties, seamless workflow integration, and the best possible surface finish.
                     </p>
                 </div>
                 <div class="feature-visual">
-                    <img src="/lynx-dry.png" alt="Lynx-Dry System" style="max-height: 400px; display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
+                    <img src="/twin-dry.png" alt="Twin Dry System" style="max-height: 500px; display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
                 </div>
             </div>
         </section>
@@ -542,42 +521,30 @@
             </div>
         </section>
 
-        <!-- Use Cases Section -->
+        <!-- Use Cases Section (Text Only) -->
         <section class="feature-showcase reveal">
             <div class="container">
                 <h2 class="section-title text-center">A Unified Production Workflow</h2>
                 <p class="text-center section-sub" style="margin: 0 auto 4rem;">
-                    Printer + material conditioning system = single ecosystem. Reduced variability. Increased repeatability.
+                    Printer + Twin Dry material conditioning system = single ecosystem. Reduced variability. Increased repeatability.
                 </p>
 
                 <div class="use-cases-grid">
                     <div class="use-case-card">
-                        <img src="/lynx-350-parts.png" alt="Aerospace Components" class="use-case-img">
-                        <div class="use-case-content">
-                            <h3>Aerospace Components</h3>
-                            <p>High-strength, low-weight PA-CF parts for critical structural applications.</p>
-                        </div>
+                        <h3>Aerospace Components</h3>
+                        <p>High-strength, low-weight PA-CF parts for critical structural applications.</p>
                     </div>
                     <div class="use-case-card">
-                        <img src="/work/assembly1.jpg" onerror="this.src='/lynx-2.png'" alt="Functional Prototyping" class="use-case-img">
-                        <div class="use-case-content">
-                            <h3>Functional Prototyping</h3>
-                            <p>Test form, fit, and mechanical function with end-use materials before tooling.</p>
-                        </div>
+                        <h3>Functional Prototyping</h3>
+                        <p>Test form, fit, and mechanical function with end-use materials before tooling.</p>
                     </div>
                     <div class="use-case-card">
-                        <img src="/work/bracket1.jpg" onerror="this.src='/lynx-1.png'" alt="Jigs & Fixtures" class="use-case-img">
-                        <div class="use-case-content">
-                            <h3>Jigs & Fixtures</h3>
-                            <p>Rapidly deploy custom manufacturing aids directly to the factory floor.</p>
-                        </div>
+                        <h3>Jigs & Fixtures</h3>
+                        <p>Rapidly deploy custom manufacturing aids directly to the factory floor.</p>
                     </div>
                     <div class="use-case-card">
-                        <img src="/work/case1.jpg" onerror="this.src='/lynx-2.png'" alt="Low-volume Production" class="use-case-img">
-                        <div class="use-case-content">
-                            <h3>Low-volume Production</h3>
-                            <p>Bridge the gap to injection molding with dimensionally accurate batch runs.</p>
-                        </div>
+                        <h3>Low-volume Production</h3>
+                        <p>Bridge the gap to injection molding with dimensionally accurate batch runs.</p>
                     </div>
                 </div>
             </div>
@@ -620,7 +587,7 @@
                         <h3>Ecosystem & Interface</h3>
                         <div class="specs-grid">
                             <div class="spec-name">Interface</div><div class="spec-val">5" touchscreen & HD camera</div>
-                            <div class="spec-name">Material System</div><div class="spec-val">Dual spool with heated drying up to 110°C</div>
+                            <div class="spec-name">Material System</div><div class="spec-val">Twin Dry dual spool with heated drying up to 110°C</div>
                         </div>
                     </div>
                 </div>
