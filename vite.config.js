@@ -9,6 +9,7 @@ export default defineConfig({
         hanzof: resolve(__dirname, 'hanzof.html'),
         makura: resolve(__dirname, 'makura.html'),
         lynx: resolve(__dirname, 'lynx-320.html'),
+        lynx350: resolve(__dirname, 'lynx-350.html'),
         contact: resolve(__dirname, 'contact.html'),
         careers: resolve(__dirname, 'careers.html'),
         story: resolve(__dirname, 'story.html'),

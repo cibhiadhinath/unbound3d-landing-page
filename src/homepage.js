@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 // ─── Configuration ───
 const CONFIG = {
-    bg: 0x0a0a0c,
+    bg: 0x000000,
     spotColor: 0xf0eee6,
     spotIntensity: 4.5,
     spotAngle: Math.PI / 5.5,
@@ -24,20 +24,24 @@ const CONFIG = {
     mobileIdleBreath: 4500,    // ms for one breathing cycle
     mobileTapHold: 5000,       // ms to hold tapped node before resuming
     mobileFpsLimit: 33,        // ~30fps cap on mobile
+    globeRadius: window.innerWidth <= 768 ? 3.0 : 4.5,
+    starCount: 8,
+    rotationSpeed: (Math.PI * 2) / 60, // 60 seconds per full rotation
+    hoverSlowdown: 0.2,       // 20% of normal speed during hover
+    mobileCycleTime: 3000,    // 3 seconds per node highlight
+    dampingFactor: 0.05,      // For smooth controls
+    idleResumeDelay: 3000,    // ms to wait before resuming auto-rotation
+    maxDPR: 1.8               // Performance cap
 };
 
-// ─── Tooltip descriptions ───
-const TOOLTIPS = {
-    milling: 'High precision machined metal components',
-    turning: 'Rotational parts with tight concentricity',
-    tolerance: 'Critical dimensions held to spec',
-    metal: 'Aerospace and industrial grade alloys',
-    printing: 'Complex geometries, rapid turnaround',
-    production: 'Consistent batch runs, 10–500 units',
-    reverse: 'We recreate parts from existing samples',
-    cad: 'Design optimization for manufacturability',
-    fitment: 'Verified assembly before delivery',
-};
+// ─── Globe Hotspots ───
+const GLOBE_HOTSPOTS = [
+    { title: 'Design & Engineering', desc: 'DFM, material selection, CAD improvement, tolerance planning.' },
+    { title: 'Prototyping', desc: 'Functional prototypes, fit checks, investor models, rapid iterations.' },
+    { title: 'Manufacturing', desc: 'CNC machining, sheet metal, injection moulding, industrial 3D printing, tooling.' },
+    { title: 'Quality & Validation', desc: 'Inspection reports, FAI, testing support, traceability, verification.' },
+    { title: 'Production Management', desc: 'Vendor coordination, sourcing, cost optimization, delivery tracking.' }
+];
 
 // ─── State ───
 let scene, camera, renderer, spotlight, spotTarget;
@@ -50,41 +54,31 @@ let canvas;
 let isMobile = window.innerWidth <= CONFIG.mobileBreak;
 let lastFrameTime = 0;
 
-// Mobile auto-inspection state
-let mobilePhase = 'idle';       // 'idle' | 'traveling' | 'dwelling' | 'tapped'
-let mobileActiveNodeIdx = -1;
-let mobileShuffleOrder = [];
-let mobileShufflePos = 0;
-let mobilePhaseTimer = null;
-let mobileTapTimer = null;
 let mobileBreathTime = 0;
-let tooltipEl = null;
 
-// ─── Capability nodes data ───
-const CAPABILITIES = [
-    { angle: -110, label: '5-Axis CNC Milling', group: 'Manufacturing', icon: 'milling' },
-    { angle: -70, label: 'CNC Turning', group: 'Manufacturing', icon: 'turning' },
-    { angle: -35, label: 'Tight Tolerance Machining', group: 'Manufacturing', icon: 'tolerance' },
-    { angle: 0, label: 'Aluminum & Stainless Steel', group: 'Manufacturing', icon: 'metal' },
-    { angle: 35, label: '3D Printing (SLA, SLS, MJF, FDM/FFF)', group: 'Manufacturing', icon: 'printing' },
-    { angle: 70, label: 'Low Volume Production', group: 'Manufacturing', icon: 'production' },
-    { angle: 110, label: 'Reverse Engineering', group: 'Engineering', icon: 'reverse' },
-    { angle: 145, label: 'CAD & DFM Optimization', group: 'Engineering', icon: 'cad' },
-    { angle: -145, label: 'Assembly Fitment Testing', group: 'Engineering', icon: 'fitment' },
-];
+// Globe & Service Stars state
+let globeGroup, stars = [], starLabels = [], starDots = [], beamsGroup;
+let raycaster, mouse = new THREE.Vector2();
+let hoveredNodeIndex = -1;
+let mobileCycleTimer = null;
+let currentRotationSpeed = CONFIG.rotationSpeed;
+let isUserInteracting = false;
+let lastInteractionTime = 0;
+let autoRotationEnabled = true;
 
-// ─── SVG icons for capabilities ───
-const ICONS = {
-    milling: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4m-3.5-7.5L16 6m-8 12l-1.5 1.5m13-1.5L18 18M6 6L4.5 4.5"/></svg>`,
-    turning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v3m0 10v3"/></svg>`,
-    tolerance: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg>`,
-    metal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>`,
-    printing: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9V2h12v7M6 18h12v4H6zM4 9h16v9H4z"/></svg>`,
-    production: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M5 20V8l5-4v16m4 0V8l5-4v16"/></svg>`,
-    reverse: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 14l-4 4 4 4"/><path d="M5 18h14a4 4 0 000-8h-1"/><path d="M15 10l4-4-4-4"/><path d="M19 6H5a4 4 0 000 8h1"/></svg>`,
-    cad: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 10l3 3 7-7"/></svg>`,
-    fitment: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>`,
-};
+// Custom pointer drag state
+let pointerDown = false;
+let pointerPrevX = 0;
+let pointerPrevY = 0;
+let dragVelocityX = 0;
+let dragVelocityY = 0;
+
+// Globe navigation state
+let isNavigating = false;
+let navTransitionRaf = null;
+let originalCameraZ = 12;
+let originalGlobeOpacity = 0.1;
+let activeNavSection = null;
 
 // ─── Shuffle helper ───
 function shuffleArray(arr) {
@@ -105,69 +99,55 @@ export function initSpotlightEngine() {
     scene.fog = new THREE.FogExp2(CONFIG.bg, isMobile ? CONFIG.mobileFogDensity : CONFIG.fogDensity);
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 6, 12);
+    originalCameraZ = isMobile ? 14 : 12;
+    camera.position.set(0, 0, originalCameraZ);
     camera.lookAt(0, 0, 0);
 
-    renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-    renderer.shadowMap.enabled = !isMobile;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.9;
-    canvas = renderer.domElement;
-    canvas.classList.add('hero-canvas');
-    container.appendChild(canvas);
+    try {
+        renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, CONFIG.maxDPR || 2));
+        renderer.shadowMap.enabled = !isMobile;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 0.9;
+        canvas = renderer.domElement;
+        canvas.classList.add('hero-canvas');
+        container.appendChild(canvas);
+    } catch (e) {
+        console.warn("WebGL failed, showing 2D fallback", e);
+        show2DFallback();
+        // Still build nodes for visibility
+        buildCapabilityNodes();
+        return;
+    }
 
-    // Ground plane
-    const groundGeo = new THREE.PlaneGeometry(40, 40);
-    const groundMat = new THREE.MeshStandardMaterial({ color: 0x080808, roughness: 0.92, metalness: 0.1 });
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.5;
-    ground.receiveShadow = true;
-    scene.add(ground);
+    // Ground plane removed to show full globe sphere
 
     // Ambient
     scene.add(new THREE.AmbientLight(0x1a1a2e, 0.15));
 
-    // Spot target
-    spotTarget = new THREE.Object3D();
-    spotTarget.position.set(0, -0.5, 0);
-    scene.add(spotTarget);
+    // Spotlight removed per design update
 
-    // Spotlight (lower intensity on mobile for subtler ground glow)
-    const mobileSpotIntensity = isMobile ? 2.5 : CONFIG.spotIntensity;
-    spotlight = new THREE.SpotLight(CONFIG.spotColor, mobileSpotIntensity, 30, CONFIG.spotAngle, CONFIG.spotPenumbra, CONFIG.spotDecay);
-    spotlight.position.set(0, CONFIG.spotHeight, 2);
-    spotlight.target = spotTarget;
-    spotlight.castShadow = !isMobile;
-    if (spotlight.shadow) {
-        spotlight.shadow.mapSize.width = 1024;
-        spotlight.shadow.mapSize.height = 1024;
-        spotlight.shadow.camera.near = 1;
-        spotlight.shadow.camera.far = 20;
-        spotlight.shadow.bias = -0.001;
-    }
-    scene.add(spotlight);
-
-    // Volumetric cone (desktop only — looks harsh on mobile)
-    if (!isMobile) {
-        const coneH = CONFIG.spotHeight + 1;
-        const coneR = Math.tan(CONFIG.spotAngle) * coneH * 0.7;
-        const coneGeo = new THREE.ConeGeometry(coneR, coneH, 32, 1, true);
-        const coneMat = new THREE.MeshBasicMaterial({
-            color: CONFIG.spotColor, transparent: true, opacity: 0.018,
-            side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending,
-        });
-        const cone = new THREE.Mesh(coneGeo, coneMat);
-        cone.position.copy(spotlight.position);
-        cone.position.y -= coneH / 2;
-        cone.renderOrder = 1;
-        scene.add(cone);
-    }
+    // Custom pointer drag: rotate globeGroup directly, camera stays fixed
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointerleave', onPointerUp);
+    canvas.style.touchAction = 'none'; // prevent scroll on touch drag
 
     createDustParticles();
+    createGlobeStructure();
+    buildCapabilityNodes();
+
+    raycaster = new THREE.Raycaster();
+
+    if (!document.getElementById('globe-tooltip')) {
+        const tt = document.createElement('div');
+        tt.id = 'globe-tooltip';
+        tt.className = 'glass-tooltip';
+        document.body.appendChild(tt);
+    }
 
     // Event listeners
     if (!isMobile) {
@@ -175,15 +155,7 @@ export function initSpotlightEngine() {
     }
     window.addEventListener('resize', onResize);
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Build capability DOM nodes + tooltip container
-    buildCapabilityNodes();
-    buildTooltip();
-
-    // Start mobile auto-inspection or desktop mode
-    if (isMobile) {
-        startMobileAutoInspection();
-    }
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     animate();
 }
@@ -233,18 +205,102 @@ function updateDustParticles() {
     pos.needsUpdate = true;
 }
 
-// ─── Event Handlers (Desktop only for mouse) ───
+// ─── Event Handlers ───
 function onMouseMove(e) {
     targetNorm.x = (e.clientX / window.innerWidth) * 2 - 1;
     targetNorm.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    mouse.x = targetNorm.x;
+    mouse.y = targetNorm.y;
+}
+
+function onPointerDown(e) {
+    pointerDown = true;
+    pointerPrevX = e.clientX;
+    pointerPrevY = e.clientY;
+    pointerStartX = e.clientX;
+    pointerStartY = e.clientY;
+    isUserInteracting = true;
+    autoRotationEnabled = false;
+    dragVelocityX = 0;
+    dragVelocityY = 0;
+}
+
+function onPointerMove(e) {
+    if (!pointerDown || !globeGroup) return;
+    const dx = e.clientX - pointerPrevX;
+    const dy = e.clientY - pointerPrevY;
+    // Rotate globe directly — slow sensitivity for premium feel
+    const sensitivity = 0.004;
+    globeGroup.rotation.y += dx * sensitivity;
+    globeGroup.rotation.x += dy * sensitivity * 0.5;
+    // Clamp X rotation so globe doesn't flip
+    globeGroup.rotation.x = Math.max(-0.6, Math.min(0.6, globeGroup.rotation.x));
+    dragVelocityX = dx * sensitivity;
+    dragVelocityY = dy * sensitivity * 0.5;
+    pointerPrevX = e.clientX;
+    pointerPrevY = e.clientY;
+}
+
+function onPointerUp(e) {
+    if (pointerDown && e && e.clientX !== undefined) {
+        // Check if it was a click (not a drag)
+        const totalDrag = Math.abs(e.clientX - pointerStartX) + Math.abs(e.clientY - pointerStartY);
+        if (totalDrag < 8 && !isNavigating) {
+            // It's a click — check if a 3D node was hit
+            const clickMouse = new THREE.Vector2();
+            clickMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            clickMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            const clickRaycaster = new THREE.Raycaster();
+            clickRaycaster.setFromCamera(clickMouse, camera);
+            const intersects = clickRaycaster.intersectObjects(stars);
+            if (intersects.length > 0) {
+                const idx = intersects[0].object.userData.index;
+                if (idx !== undefined) {
+                    navigateToSection(idx);
+                }
+            }
+        }
+    }
+    pointerDown = false;
+    isUserInteracting = false;
+    lastInteractionTime = performance.now();
+}
+
+function onVisibilityChange() {
+    animationActive = !document.hidden;
+    if (animationActive) {
+        lastFrameTime = performance.now();
+        animate(lastFrameTime);
+    } else {
+        if (rafId) cancelAnimationFrame(rafId);
+    }
 }
 
 function onResize() {
     isMobile = window.innerWidth <= CONFIG.mobileBreak;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
+
+    originalCameraZ = isMobile ? 14 : 12;
+    if (!isNavigating) {
+        camera.position.set(0, 0, originalCameraZ);
+    }
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+
+    // Update node layouts for new screen size
+    if (typeof updateNodePositions === 'function') {
+        updateNodePositions();
+    }
+
+    if (isMobile) {
+        if (typeof startMobileRandomReveal === 'function') startMobileRandomReveal();
+    } else if (typeof mobileRevealTimer !== 'undefined' && mobileRevealTimer) {
+        clearInterval(mobileRevealTimer);
+        const nodes = document.querySelectorAll('.cap-node');
+        nodes.forEach(n => n.classList.remove('revealed'));
+    }
 }
 
 function onScroll() {
@@ -254,82 +310,389 @@ function onScroll() {
     scrollProgress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight * 0.6)));
 }
 
-// ─── Capability Discovery Nodes ───
+// ─── Mobile Services Ticker (horizontal scrolling marquee) ───
+function buildMobileTicker() {
+    const heroSection = document.getElementById('hero-section');
+    if (!heroSection) return;
+
+    const ticker = document.createElement('div');
+    ticker.className = 'services-ticker';
+
+    const track = document.createElement('div');
+    track.className = 'services-ticker-track';
+
+    // Filter to just individual services (not headers) for the ticker
+    const tickerServices = SERVICE_TILES.filter(s => !s.isHeader);
+
+    // Create items twice for seamless loop
+    for (let loop = 0; loop < 2; loop++) {
+        tickerServices.forEach(cap => {
+            const item = document.createElement('div');
+            item.className = 'services-ticker-item';
+            // Simple text label since we removed icons
+            item.innerHTML = `
+                <span class="ticker-label">${cap.text}</span>
+            `;
+            // Ticker items can just scroll, navigation removed for simplicity as there are 80+ items
+            track.appendChild(item);
+        });
+    }
+
+    ticker.appendChild(track);
+    heroSection.appendChild(ticker);
+}
+
+// ═════════════════════════════════════════════════════
+//  GLOBE NAVIGATION SYSTEM
+// ═════════════════════════════════════════════════════
+
+function navigateToSection(sectionId, globeNodeIndex = -1) {
+    if (isNavigating) return;
+    isNavigating = true;
+
+    const targetSection = document.getElementById(sectionId);
+    if (!targetSection) { isNavigating = false; return; }
+
+    activeNavSection = sectionId;
+
+    // 1. Pause rotation
+    autoRotationEnabled = false;
+    currentRotationSpeed = 0;
+
+    // 2. Hide or isolate globe dots and labels
+    starLabels.forEach((l, idx) => {
+        if (l) {
+            l.style.opacity = (idx === globeNodeIndex) ? '1' : '0';
+            l.style.pointerEvents = 'none';
+        }
+    });
+
+    starDots.forEach((dot, idx) => {
+        if (dot) {
+            dot.style.opacity = '0'; // Hide dots when navigating
+            dot.style.pointerEvents = 'none';
+        }
+    });
+
+    // 3. Add body classes for hero fade + scroll lock
+    document.body.classList.add('globe-nav-active', 'globe-section-open');
+
+    // 4. Camera zoom + globe dissolve (600ms)
+    const startTime = performance.now();
+    const duration = 600;
+    const startZ = camera.position.z;
+    const targetZ = 2.5; // Deep zoom inside the globe
+
+    function animateTransition(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const ease = 1 - Math.pow(1 - t, 3);
+
+        camera.position.z = startZ + (targetZ - startZ) * ease;
+
+        // Dissolve globe
+        if (globeGroup) {
+            globeGroup.traverse((child) => {
+                if (child.material && child.material.transparent) {
+                    child.material.opacity *= (1 - ease * 0.9);
+                }
+            });
+        }
+
+        // Fade canvas
+        if (canvas) {
+            canvas.style.opacity = 1 - ease;
+        }
+
+        if (t < 1) {
+            navTransitionRaf = requestAnimationFrame(animateTransition);
+        } else {
+            // 5. Transition complete — show section as full-screen overlay
+            if (canvas) canvas.style.opacity = '0';
+
+            // Inject close button if not already present
+            if (!targetSection.querySelector('.section-close-btn')) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'section-close-btn';
+                closeBtn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+                closeBtn.addEventListener('click', returnToGlobe);
+                targetSection.prepend(closeBtn);
+            }
+
+            // Show section as fixed overlay
+            targetSection.classList.add('section-overlay-active');
+
+            // Show back button
+            const backBtn = document.getElementById('globe-back-btn');
+            if (backBtn) backBtn.classList.add('visible');
+        }
+    }
+
+    navTransitionRaf = requestAnimationFrame(animateTransition);
+}
+
+function returnToGlobe() {
+    if (!isNavigating) return;
+
+    // 1. Hide back button
+    const backBtn = document.getElementById('globe-back-btn');
+    if (backBtn) backBtn.classList.remove('visible');
+
+    // 2. Fade out the active section
+    if (activeNavSection) {
+        const section = document.getElementById(activeNavSection);
+        if (section) {
+            section.style.animation = 'sectionFadeOut 0.4s ease-in forwards';
+            setTimeout(() => {
+                section.classList.remove('section-overlay-active');
+                section.style.animation = '';
+            }, 400);
+        }
+    }
+
+    // 3. Restore globe (start after section begins fading)
+    setTimeout(() => {
+        // Show canvas
+        if (canvas) canvas.style.opacity = '1';
+
+        const startTime = performance.now();
+        const duration = 600;
+        const startZ = camera.position.z;
+
+        function animateReturn(now) {
+            const elapsed = now - startTime;
+            const t = Math.min(1, elapsed / duration);
+            const ease = 1 - Math.pow(1 - t, 3);
+
+            // Restore camera
+            camera.position.z = startZ + (originalCameraZ - startZ) * ease;
+
+            // Restore globe materials
+            if (globeGroup) {
+                globeGroup.traverse((child) => {
+                    if (child.material && child.material.transparent) {
+                        if (child.geometry && child.geometry.type === 'SphereGeometry' &&
+                            child.geometry.parameters.radius === CONFIG.globeRadius) {
+                            child.material.opacity = originalGlobeOpacity * ease;
+                        } else {
+                            child.material.opacity = 0.8 * ease;
+                        }
+                    }
+                });
+            }
+
+            // Restore star colors (if we were using them)
+            stars.forEach(s => {
+                s.material.color.setHex(0xf0eee6);
+            });
+
+            if (t < 1) {
+                navTransitionRaf = requestAnimationFrame(animateReturn);
+            } else {
+                // Fully restored
+                isNavigating = false;
+                activeNavSection = null;
+                autoRotationEnabled = true;
+                lastInteractionTime = performance.now();
+                document.body.classList.remove('globe-nav-active', 'globe-section-open');
+
+                starLabels.forEach((l, idx) => {
+                    if (l) l.style.pointerEvents = '';
+                });
+
+                starDots.forEach((dot, idx) => {
+                    if (dot) {
+                        dot.style.pointerEvents = 'auto';
+                        dot.style.opacity = '1';
+                    }
+                });
+            }
+        }
+
+        navTransitionRaf = requestAnimationFrame(animateReturn);
+    }, 200); // Start globe restore 200ms into section fade
+}
+
+// Export for external use (back button + Escape key)
+window.returnToGlobe = returnToGlobe;
+
+// Escape key to close section
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isNavigating) {
+        returnToGlobe();
+    }
+});
+
+
+function show2DFallback() {
+    const container = document.getElementById('hero-canvas-container');
+    if (!container) return;
+
+    const fallback = document.createElement('div');
+    fallback.className = 'sphere-fallback';
+    fallback.innerHTML = '<div class="fallback-grid"></div>';
+    container.appendChild(fallback);
+}
+
+// ─── Minimal Globe & Hotspots ───
+
+function createGlobeStructure() {
+    globeGroup = new THREE.Group();
+    globeGroup.position.set(0, 0, 0); // Globe centered at origin
+
+    // Tilt the globe for a dynamic 3D look
+    globeGroup.rotation.x = 0.2;
+    globeGroup.rotation.z = 0.1;
+    scene.add(globeGroup);
+
+    // 1. Wireframe Globe
+    const globeGeo = new THREE.SphereGeometry(CONFIG.globeRadius, 40, 30);
+    const globeMat = new THREE.MeshBasicMaterial({
+        color: 0xf0eee6,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.1,
+        blending: THREE.AdditiveBlending
+    });
+    const globe = new THREE.Mesh(globeGeo, globeMat);
+    globeGroup.add(globe);
+}
+
+// ─── Capability Discovery Nodes (Static Overlay) ───
 function buildCapabilityNodes() {
     const container = document.getElementById('capability-nodes');
     if (!container) return;
 
-    CAPABILITIES.forEach((cap, i) => {
+    container.innerHTML = '';
+
+    GLOBE_HOTSPOTS.forEach((cap, i) => {
         const node = document.createElement('div');
         node.className = 'cap-node';
         node.dataset.index = i;
-        node.dataset.icon = cap.icon;
-
-        const rad = (cap.angle * Math.PI) / 180;
-        let cx, cy;
-
-        if (isMobile) {
-            // Upper arc: tight band at top 18–22% of hero, clear of title
-            const semiAngle = -180 + (i / (CAPABILITIES.length - 1)) * 180;
-            const semiRad = (semiAngle * Math.PI) / 180;
-            const radius = 36;
-            cx = 50 + Math.cos(semiRad) * radius;
-            cy = 20 + Math.sin(semiRad) * (radius * 0.08);
-            cx = Math.max(12, Math.min(88, cx));
-        } else {
-            const radius = 44;
-            cx = 50 + Math.cos(rad) * radius;
-            cy = 50 + Math.sin(rad) * (radius * 0.55);
-        }
-
-        node.style.left = `${cx}%`;
-        node.style.top = `${cy}%`;
 
         node.innerHTML = `
-      <div class="cap-node-line"></div>
-      <div class="cap-node-content">
-        <div class="cap-node-icon">${ICONS[cap.icon] || ''}</div>
-        <span class="cap-node-group">${cap.group}</span>
-        <span class="cap-node-label">${cap.label}</span>
-      </div>
-      <div class="cap-node-glow"></div>
-    `;
-
-        // Mobile: tap to pause and show tooltip
-        if (isMobile) {
-            node.style.pointerEvents = 'auto';
-            node.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleMobileTap(i);
-            }, { passive: false });
-        }
+            <div class="cap-node-line"></div>
+            <div class="cap-node-content" style="background:transparent; padding:0;">
+                <span class="cap-node-label" style="font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:#f0eee6; white-space:nowrap;">${cap.title}</span>
+                <div style="font-size:0.75rem; color:#f0eee6; opacity:0.7; margin-top:0.4rem; max-width:200px; line-height:1.4; white-space:normal;">${cap.desc}</div>
+            </div>
+            <div class="cap-node-glow"></div>
+        `;
 
         container.appendChild(node);
     });
+
+    updateNodePositions();
+
+    // Start mobile random reveal interval
+    startMobileRandomReveal();
 }
 
-// ─── Tooltip ───
-function buildTooltip() {
-    tooltipEl = document.createElement('div');
-    tooltipEl.className = 'cap-tooltip';
-    tooltipEl.innerHTML = '<span class="cap-tooltip-text"></span>';
-    const hero = document.getElementById('hero-section');
-    if (hero) hero.appendChild(tooltipEl);
+// ─── Responsive Node Positioning ───
+function updateNodePositions() {
+    const nodes = document.querySelectorAll('.cap-node');
+    if (!nodes.length) return;
+
+    // Update Globe Radius dynamically
+    CONFIG.globeRadius = window.innerWidth <= 768 ? 3.0 : 4.5;
+
+    const totalNodes = GLOBE_HOTSPOTS.length;
+
+    nodes.forEach((node, i) => {
+        let cx, cy;
+
+        if (isMobile) {
+            // For mobile, distribute evenly around a larger radius so they don't cover the small globe
+            const mobileRad = (i * (360 / totalNodes) * Math.PI) / 180;
+            const radius = 38;
+            cx = 50 + Math.cos(mobileRad) * radius;
+            cy = 50 + Math.sin(mobileRad) * (radius * 0.9);
+            // Keep clamping so it doesn't go off-screen
+            cx = Math.max(10, Math.min(90, cx));
+            cy = Math.max(12, Math.min(88, cy));
+
+            node.style.left = `${cx}%`;
+            node.style.top = `${cy}%`;
+            node.style.transform = 'translate(-50%, -50%)';
+            node.style.alignItems = 'center';
+            node.style.textAlign = 'center';
+
+            // Reset opacity and revealed class for mobile handling
+            node.style.opacity = '';
+        } else {
+            // Desktop: distribute symmetrically on left and right sides to perfectly avoid the center globe
+            const half = Math.ceil(totalNodes / 2);
+            const isLeft = i < half;
+
+            const sideCount = isLeft ? half : (totalNodes - half);
+            const sideIndex = isLeft ? i : (i - half);
+
+            if (sideCount === 1) {
+                cy = 50;
+                cx = isLeft ? 15 : 85;
+            } else {
+                const startY = 20;
+                const endY = 80;
+                cy = startY + (sideIndex / (sideCount - 1)) * (endY - startY);
+
+                // Arc offset: push text further outwards near the center of the screen
+                const normalizedY = (cy - 50) / 30; // ranges from -1 to 1
+                const arcOffset = (1 - (normalizedY * normalizedY)) * 8; // max bulge 8%
+
+                cx = isLeft ? (18 - arcOffset) : (82 + arcOffset);
+            }
+
+            node.style.left = `${cx}%`;
+            node.style.top = `${cy}%`;
+
+            // Critical alignment: ensure text expands away from the globe
+            if (isLeft) {
+                node.style.transform = 'translate(-100%, -50%)';
+                node.style.alignItems = 'flex-end';
+                node.style.textAlign = 'right';
+            } else {
+                node.style.transform = 'translate(0, -50%)';
+                node.style.alignItems = 'flex-start';
+                node.style.textAlign = 'left';
+            }
+
+            // Remove mobile-specific reveals
+            node.classList.remove('revealed');
+        }
+    });
 }
 
-function showTooltip(capIndex) {
-    if (!tooltipEl) return;
-    const cap = CAPABILITIES[capIndex];
-    const text = TOOLTIPS[cap.icon] || cap.label;
-    tooltipEl.querySelector('.cap-tooltip-text').textContent = text;
-    tooltipEl.classList.add('visible');
+// ─── Mobile Random Auto-Inspection ───
+let mobileRevealTimer = null;
+function startMobileRandomReveal() {
+    if (mobileRevealTimer) clearInterval(mobileRevealTimer);
+
+    // Pick an initial random node immediately
+    const nodes = document.querySelectorAll('.cap-node');
+    if (!nodes.length) return;
+
+    let currentIndex = Math.floor(Math.random() * nodes.length);
+    nodes[currentIndex].classList.add('revealed');
+
+    // Change every 3 seconds
+    mobileRevealTimer = setInterval(() => {
+        if (!isMobile) return;
+        if (scrollProgress > 0.3) return; // Don't highlight if scrolled past hero
+
+        // Hide all
+        nodes.forEach(n => n.classList.remove('revealed'));
+
+        // Pick next random (guaranteed different)
+        let nextIndex = Math.floor(Math.random() * nodes.length);
+        if (nextIndex === currentIndex) {
+            nextIndex = (nextIndex + 1) % nodes.length;
+        }
+        currentIndex = nextIndex;
+
+        nodes[currentIndex].classList.add('revealed');
+    }, 3000);
 }
 
-function hideTooltip() {
-    if (tooltipEl) tooltipEl.classList.remove('visible');
-}
-
-// ─── Desktop: proximity-based reveal ───
 function updateCapabilityNodesDesktop() {
     const nodes = document.querySelectorAll('.cap-node');
     if (!nodes.length) return;
@@ -337,125 +700,43 @@ function updateCapabilityNodesDesktop() {
     const spotX = (mouseNorm.x + 1) / 2;
     const spotY = (-mouseNorm.y + 1) / 2;
 
-    nodes.forEach(node => {
-        const nodeX = parseFloat(node.style.left) / 100;
-        const nodeY = parseFloat(node.style.top) / 100;
+    nodes.forEach((node, i) => {
+        // Find center mathematically regardless of alignment offsets
+        let nodeX, nodeY;
+
+        const totalNodes = GLOBE_HOTSPOTS.length;
+        const half = Math.ceil(totalNodes / 2);
+        const isLeft = i < half;
+
+        // Parse percentages from style string directly
+        const startX = parseFloat(node.style.left) / 100;
+        const startY = parseFloat(node.style.top) / 100;
+
+        nodeX = startX;
+        nodeY = startY;
+
         const dist = Math.sqrt((spotX - nodeX) ** 2 + (spotY - nodeY) ** 2);
 
-        if (dist < CONFIG.capRevealRadius && scrollProgress < 0.4) {
+        // Original logic used 0.22 distance for reveal
+        if (dist < 0.25 && scrollProgress < 0.4) {
             node.classList.add('revealed');
+            node.style.pointerEvents = 'auto'; // allow text selection if hovered
         } else {
             node.classList.remove('revealed');
+            node.style.pointerEvents = 'none';
         }
     });
 }
 
-// ═════════════════════════════════════════════════════
-//  MOBILE AUTO-INSPECTION ENGINE
-// ═════════════════════════════════════════════════════
+// Tooltip functions removed per design update
 
-function startMobileAutoInspection() {
-    // Build shuffled order
-    mobileShuffleOrder = shuffleArray(CAPABILITIES.map((_, i) => i));
-    mobileShufflePos = 0;
-    mobilePhase = 'idle';
 
-    // Start first cycle after short delay
-    mobilePhaseTimer = setTimeout(() => { mobileNextNode(); }, 1500);
-}
 
-function mobileNextNode() {
-    if (scrollProgress > 0.3 || mobilePhase === 'tapped') return;
+// Mobile auto-highlight removed as labels are now always visible
 
-    // Deactivate current node
-    deactivateMobileNode();
+// (Legacy mobile auto-inspection functions removed — replaced by startMobileServiceCycle)
 
-    // Pick next from shuffled order
-    const nextIdx = mobileShuffleOrder[mobileShufflePos % mobileShuffleOrder.length];
-    mobileShufflePos++;
-
-    // Re-shuffle when all have been visited
-    if (mobileShufflePos >= mobileShuffleOrder.length) {
-        mobileShuffleOrder = shuffleArray(CAPABILITIES.map((_, i) => i));
-        mobileShufflePos = 0;
-    }
-
-    // Move spotlight toward the node
-    mobilePhase = 'traveling';
-    mobileActiveNodeIdx = nextIdx;
-
-    const nodes = document.querySelectorAll('.cap-node');
-    const node = nodes[nextIdx];
-    if (!node) return;
-
-    const nodeX = parseFloat(node.style.left) / 100;
-    const nodeY = parseFloat(node.style.top) / 100;
-    targetNorm.x = nodeX * 2 - 1;
-    targetNorm.y = -(nodeY * 2 - 1);
-
-    // After travel time, activate the node
-    mobilePhaseTimer = setTimeout(() => {
-        mobilePhase = 'dwelling';
-        activateMobileNode(nextIdx);
-
-        // After dwell time, deactivate and move on
-        mobilePhaseTimer = setTimeout(() => {
-            deactivateMobileNode();
-            mobilePhase = 'idle';
-
-            // Brief idle gap, then next node
-            mobilePhaseTimer = setTimeout(() => { mobileNextNode(); },
-                400 + Math.random() * 400);
-        }, CONFIG.mobileNodeDwell);
-    }, CONFIG.mobileNodeTravel);
-}
-
-function activateMobileNode(idx) {
-    const nodes = document.querySelectorAll('.cap-node');
-    // Clear all first
-    nodes.forEach(n => n.classList.remove('revealed'));
-    if (nodes[idx]) {
-        nodes[idx].classList.add('revealed');
-    }
-}
-
-function deactivateMobileNode() {
-    document.querySelectorAll('.cap-node.revealed').forEach(n => n.classList.remove('revealed'));
-    mobileActiveNodeIdx = -1;
-    hideTooltip();
-}
-
-function handleMobileTap(nodeIdx) {
-    // Cancel current auto-cycle
-    if (mobilePhaseTimer) clearTimeout(mobilePhaseTimer);
-    if (mobileTapTimer) clearTimeout(mobileTapTimer);
-
-    mobilePhase = 'tapped';
-
-    // Activate the tapped node
-    const nodes = document.querySelectorAll('.cap-node');
-    nodes.forEach(n => n.classList.remove('revealed'));
-    if (nodes[nodeIdx]) nodes[nodeIdx].classList.add('revealed');
-
-    // Move spotlight to tapped node
-    const node = nodes[nodeIdx];
-    if (node) {
-        const nodeX = parseFloat(node.style.left) / 100;
-        const nodeY = parseFloat(node.style.top) / 100;
-        targetNorm.x = nodeX * 2 - 1;
-        targetNorm.y = -(nodeY * 2 - 1);
-    }
-
-    // Show tooltip
-    showTooltip(nodeIdx);
-
-    // Resume after 5s
-    mobileTapTimer = setTimeout(() => {
-        mobilePhase = 'idle';
-        deactivateMobileNode();
-        mobilePhaseTimer = setTimeout(() => { mobileNextNode(); }, 600);
-    }, CONFIG.mobileTapHold);
-}
+// ─── Desktop: proximity-based reveal ───
 
 // ─── Text Illumination ───
 function updateTextIllumination() {
@@ -473,28 +754,22 @@ function updateTextIllumination() {
 
     // Mobile idle breathing glow
     let breathGlow = 0;
-    if (isMobile && mobilePhase === 'idle') {
-        mobileBreathTime += 16; // approx per frame at 30fps
-        breathGlow = 0.15 * (0.5 + 0.5 * Math.sin(mobileBreathTime * 2 * Math.PI / CONFIG.mobileIdleBreath));
-    } else if (isMobile && mobilePhase === 'traveling') {
-        breathGlow = 0.08;
+    if (isMobile) {
+        mobileBreathTime += 16;
+        breathGlow = 0.12 * (0.5 + 0.5 * Math.sin(mobileBreathTime * 2 * Math.PI / CONFIG.mobileIdleBreath));
     }
 
-    const titleBright = Math.min(1, 0.15 + proximity * 0.85 + scrollProgress * 0.8 + breathGlow);
+    // Minimalistic constant glow for the central text
+    const titleBright = Math.min(1, 0.85 + proximity * 0.15 + scrollProgress * 0.5 + breathGlow);
     titleEl.style.opacity = titleBright;
-    titleEl.style.textShadow = `0 0 ${(proximity + breathGlow) * 30}px rgba(240,238,230,${(proximity + breathGlow) * 0.3})`;
+    titleEl.style.textShadow = `0 0 ${15 + (proximity + breathGlow) * 15}px rgba(240,238,230,${0.2 + (proximity + breathGlow) * 0.2})`;
 
     const lightAngle = Math.atan2(spotY, spotX) * (180 / Math.PI);
     titleEl.style.setProperty('--light-angle', `${135 + lightAngle * 0.3}deg`);
 
     // Mobile: intensify glow when node is active
-    if (isMobile && (mobilePhase === 'dwelling' || mobilePhase === 'tapped')) {
-        titleEl.style.opacity = Math.min(1, titleBright + 0.15);
-        titleEl.style.textShadow = `0 0 25px rgba(240,238,230,0.25)`;
-    }
-
-    if (subEl) subEl.style.opacity = Math.min(1, 0.1 + proximity * 0.6 + scrollProgress * 0.8 + breathGlow * 0.5);
-    if (trustEl) trustEl.style.opacity = Math.min(1, 0.05 + proximity * 0.4 + scrollProgress * 0.7 + breathGlow * 0.3);
+    if (subEl) subEl.style.opacity = Math.min(1, 0.7 + proximity * 0.3 + scrollProgress * 0.5);
+    if (trustEl) trustEl.style.opacity = Math.min(1, 0.4 + proximity * 0.3 + scrollProgress * 0.5);
 
     // CTA button illumination (desktop only)
     if (ctaGroup && !isMobile) {
@@ -544,27 +819,40 @@ function animate(timestamp) {
     mouseNorm.x += (targetNorm.x - mouseNorm.x) * lerp;
     mouseNorm.y += (targetNorm.y - mouseNorm.y) * lerp;
 
+    // Rotate Globe: auto-rotate when idle, pause when user drags
+    if (globeGroup) {
+        if (!isUserInteracting) {
+            const now = performance.now();
+            const timeSinceInteraction = now - lastInteractionTime;
+
+            if (timeSinceInteraction > CONFIG.idleResumeDelay) {
+                // Ease back to full auto-rotation
+                const resumeFactor = Math.min(1, (timeSinceInteraction - CONFIG.idleResumeDelay) / 2000);
+                autoRotationEnabled = true;
+                currentRotationSpeed = THREE.MathUtils.lerp(0, CONFIG.rotationSpeed, resumeFactor);
+            }
+
+            // Apply inertia from drag
+            if (Math.abs(dragVelocityX) > 0.0001) {
+                globeGroup.rotation.y += dragVelocityX;
+                dragVelocityX *= 0.95; // Damping
+            }
+            if (Math.abs(dragVelocityY) > 0.0001) {
+                globeGroup.rotation.x += dragVelocityY;
+                globeGroup.rotation.x = Math.max(-0.6, Math.min(0.6, globeGroup.rotation.x));
+                dragVelocityY *= 0.95;
+            }
+
+            if (autoRotationEnabled && globeGroup) {
+                globeGroup.rotation.y += currentRotationSpeed / 60;
+            }
+        }
+    }
+
+    // handleRaycasting(); // Removed as per instruction
     updateScrollTransition();
-
-    // Move spotlight target (smaller range on mobile to prevent clipping)
-    const targetRangeX = isMobile ? 3 : 6;
-    const targetRangeZ = isMobile ? 1.5 : 3;
-    const spotParallaxX = isMobile ? 0.6 : 1.5;
-    const spotParallaxZ = isMobile ? 0.3 : 0.8;
-
-    if (spotTarget) {
-        spotTarget.position.x = mouseNorm.x * targetRangeX;
-        spotTarget.position.z = -mouseNorm.y * targetRangeZ + 1;
-    }
-    if (spotlight) {
-        spotlight.position.x = mouseNorm.x * spotParallaxX;
-        spotlight.position.z = -mouseNorm.y * spotParallaxZ + 2;
-    }
-
     updateDustParticles();
     updateTextIllumination();
-
-    // Desktop: proximity-based. Mobile: managed by auto-inspection engine
     if (!isMobile) {
         updateCapabilityNodesDesktop();
     }
@@ -575,11 +863,18 @@ function animate(timestamp) {
 // ─── Cleanup ───
 export function destroySpotlightEngine() {
     if (rafId) cancelAnimationFrame(rafId);
-    if (mobilePhaseTimer) clearTimeout(mobilePhaseTimer);
-    if (mobileTapTimer) clearTimeout(mobileTapTimer);
+    if (mobileCycleTimer) clearInterval(mobileCycleTimer);
+    if (mobileRevealTimer) clearInterval(mobileRevealTimer);
     window.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('resize', onResize);
     window.removeEventListener('scroll', onScroll);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+    if (canvas) {
+        canvas.removeEventListener('pointerdown', onPointerDown);
+        canvas.removeEventListener('pointermove', onPointerMove);
+        canvas.removeEventListener('pointerup', onPointerUp);
+        canvas.removeEventListener('pointerleave', onPointerUp);
+    }
     if (renderer) {
         renderer.dispose();
         if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);

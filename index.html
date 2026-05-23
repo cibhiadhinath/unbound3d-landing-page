@@ -39,6 +39,14 @@
     </nav>
 
     <main>
+        <!-- Globe Navigation: Back Button -->
+        <button id="globe-back-btn" onclick="returnToGlobe()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Back to Globe
+        </button>
+
         <!-- ═══ HERO SECTION ═══ -->
         <section id="hero-section">
             <div id="hero-canvas-container"></div>
@@ -46,259 +54,152 @@
             <div id="capability-nodes"></div>
 
             <div class="hero-content">
-                <h1 id="hero-title">UNBOUND3D</h1>
-                <p id="hero-subtitle">Manufacturing, executed.</p>
-                <p id="hero-trust">Production-ready parts. Verified. Delivered.</p>
+                <a href="/contact.html" id="hero-logo-link">
+                    <h1 id="hero-title">UNBOUND3D</h1>
+                </a>
+                <p id="hero-subtitle">From concept to reliable production.</p>
+                <p id="hero-trust">Your outsourced manufacturing team.</p>
 
                 <div id="hero-cta">
-                    <a href="https://hanzof.com" class="hero-btn hero-btn-primary">Start Production ›</a>
+                    <!-- Button removed, logo is the CTA -->
                 </div>
             </div>
 
-            <div class="scroll-indicator">
-                <span>Scroll</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="7 13 12 18 17 13"></polyline>
-                    <line x1="12" y1="6" x2="12" y2="18"></line>
-                </svg>
+
+        </section>
+
+        <!-- ═══ HOW IT WORKS ═══ -->
+        <section class="hp-section reveal" id="how-it-works-section">
+            <div class="container">
+                <div class="hp-section-header">
+                    <span class="hp-section-tag">How It Works</span>
+                    <h2 class="hp-section-title">A streamlined path to production</h2>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                            </svg>
+                        </div>
+                        <h3>1. Design & Review</h3>
+                        <p>We analyze CAD, improve manufacturability, and reduce risk.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                        <h3>2. Prototype & Iterate</h3>
+                        <p>Rapid prototypes and engineering feedback.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <h3>3. Reliable Production</h3>
+                        <p>Managed suppliers, QA verification, predictable delivery.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- ═══ INDUSTRIES SERVED ═══ -->
+        <!-- ═══ INDUSTRIES ═══ -->
         <section class="hp-section reveal" id="industries-section">
             <div class="container">
                 <div class="hp-section-header">
-                    <span class="hp-section-tag">Industries Served</span>
-                    <h2 class="hp-section-title">Engineering-grade parts for critical applications</h2>
+                    <span class="hp-section-tag">Industries</span>
+                    <h2 class="hp-section-title">Engineered for critical applications</h2>
                 </div>
-                <div class="industries-grid">
-                    <div class="industry-pill">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        Aerospace
-                    </div>
-                    <div class="industry-pill">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="8" r="5" />
-                            <path d="M12 13v8m-4-4h8m-8-8V4m8 5V4" />
-                        </svg>
-                        Robotics
-                    </div>
-                    <div class="industry-pill">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="2" y="6" width="20" height="12" rx="2" />
-                            <path d="M6 6V4m12 2V4M6 18v2m12-2v2" />
-                        </svg>
-                        Industrial Equipment
-                    </div>
-                    <div class="industry-pill">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 17h14M5 17a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v9a2 2 0 01-2 2M7 21h10" />
-                        </svg>
-                        Automotive
-                    </div>
-                    <div class="industry-pill">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2l4 6h-8l4-6zm0 8v12m-6-6h12" />
-                        </svg>
-                        Drone Systems
-                    </div>
+                <div class="industries-minimal-grid">
+                    <div class="industry-tile">Robotics</div>
+                    <div class="industry-tile">Drones & Aerospace</div>
+                    <div class="industry-tile">Industrial Equipment</div>
+                    <div class="industry-tile">EV & Mobility</div>
+                    <div class="industry-tile">Consumer Hardware</div>
+                    <div class="industry-tile">Research Labs</div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══ MATERIALS ═══ -->
-        <section class="hp-section reveal" id="materials-section">
+        <!-- ═══ WHY CHOOSE UNBOUND3D ═══ -->
+        <section class="hp-section reveal" id="why-us-section">
             <div class="container">
                 <div class="hp-section-header">
-                    <span class="hp-section-tag">Materials</span>
-                    <h2 class="hp-section-title">Production-grade metals and engineering polymers</h2>
+                    <span class="hp-section-tag">Why Choose Us</span>
+                    <h2 class="hp-section-title">Built on execution and trust</h2>
                 </div>
-                <div class="materials-grid">
-                    <div class="material-card">
-                        <div class="material-card-name">Aluminum</div>
-                        <div class="material-card-grades">6061 · 7075</div>
+                <div class="trust-grid">
+                    <div class="trust-point">
+                        <h4>Engineering feedback before manufacturing</h4>
                     </div>
-                    <div class="material-card">
-                        <div class="material-card-name">Stainless Steel</div>
-                        <div class="material-card-grades">304 · 316</div>
+                    <div class="trust-point">
+                        <h4>Verified quality & documentation</h4>
                     </div>
-                    <div class="material-card">
-                        <div class="material-card-name">Tool Steel</div>
-                        <div class="material-card-grades">D2 · A2 · H13</div>
+                    <div class="trust-point">
+                        <h4>Managed supplier network</h4>
                     </div>
-                    <div class="material-card">
-                        <div class="material-card-name">Engineering Plastics</div>
-                        <div class="material-card-grades">Nylon · Delrin · PEEK</div>
+                    <div class="trust-point">
+                        <h4>Predictable timelines</h4>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══ MANAGED MANUFACTURING ═══ -->
-        <section class="hp-section reveal" id="solutions-section">
+        <!-- ═══ CASE STUDIES ═══ -->
+        <section class="hp-section reveal" id="case-studies-section">
             <div class="container">
                 <div class="hp-section-header">
-                    <span class="hp-section-tag">What We Do</span>
-                    <h2 class="hp-section-title">Manufacturing, coordinated and quality-assured.</h2>
-                    <p class="hp-section-desc">From prototype to production, we select the right manufacturing process,
-                        coordinate vendors, inspect quality, and deliver finished parts — without you managing multiple
-                        suppliers.</p>
+                    <span class="hp-section-tag">Case Studies</span>
+                    <h2 class="hp-section-title">Proven in the field</h2>
                 </div>
-                <div class="solutions-grid">
-
-                    <div class="solution-card">
-                        <span class="solution-num">01</span>
-                        <h3 class="solution-title">Product Development & Prototyping</h3>
-                        <ul class="solution-list">
-                            <li>Functional prototypes</li>
-                            <li>Fit-check and concept models</li>
-                            <li>Rapid iteration parts</li>
-                            <li>Architecture & visual models</li>
-                        </ul>
-                    </div>
-
-                    <div class="solution-card">
-                        <span class="solution-num">02</span>
-                        <h3 class="solution-title">Functional & Engineering Parts</h3>
-                        <ul class="solution-list">
-                            <li>CNC machined components</li>
-                            <li>High-strength polymer parts</li>
-                            <li>Composite printing (PA-CF, PA-GF, Nylon)</li>
-                            <li>Low-volume production</li>
-                        </ul>
-                    </div>
-
-                    <div class="solution-card">
-                        <span class="solution-num">03</span>
-                        <h3 class="solution-title">Tooling & Manufacturing Support</h3>
-                        <ul class="solution-list">
-                            <li>Jigs & fixtures</li>
-                            <li>Assembly aids</li>
-                            <li>Pre-production validation</li>
-                            <li>Mould development support</li>
-                        </ul>
-                    </div>
-
-                    <div class="solution-card">
-                        <span class="solution-num">04</span>
-                        <h3 class="solution-title">Production & Scaling</h3>
-                        <ul class="solution-list">
-                            <li>Injection moulding</li>
-                            <li>Sheet metal fabrication</li>
-                            <li>Batch manufacturing</li>
-                            <li>Vendor coordination & logistics</li>
-                        </ul>
-                    </div>
-
-                    <div class="solution-card solution-card--highlight">
-                        <span class="solution-num">05</span>
-                        <h3 class="solution-title">Execution & Quality Control</h3>
-                        <ul class="solution-list">
-                            <li>Inspection & measurement</li>
-                            <li>Part verification</li>
-                            <li>Documentation</li>
-                            <li>Rework & replacement handling</li>
-                            <li>Single point accountability</li>
-                        </ul>
-                    </div>
-
-                </div>
-                <p class="solutions-emphasis">Unlike typical vendors, we own execution. If a part fails, we fix it — you
-                    don't chase suppliers.</p>
-            </div>
-        </section>
-
-        <!-- ═══ QUALITY ASSURANCE ═══ -->
-        <section class="hp-section reveal" id="qa-section">
-            <div class="container">
-                <div class="hp-section-header">
-                    <span class="hp-section-tag">Quality Assurance</span>
-                    <h2 class="hp-section-title">Aerospace-grade quality documentation</h2>
-                    <p class="hp-section-desc">Every part ships with full traceability — from raw material to final
-                        inspection. Our QA process meets the standards expected by aerospace and defense clients.</p>
-                </div>
-                <div class="qa-grid">
-                    <div class="qa-card">
-                        <div class="qa-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <div class="case-study-card">
+                    <div class="cs-image">
+                        <!-- Placeholder graphic, can be replaced with real image later -->
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(45deg, #111, #222); display: flex; align-items: center; justify-content: center; opacity: 0.8;">
+                            <svg viewBox="0 0 24 24" stroke="rgba(255,255,255,0.1)" fill="none" width="48" height="48"
+                                stroke-width="1">
                                 <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
                             </svg>
-                        </div>
-                        <div class="qa-card-title">Dimensional Inspection Reports</div>
-                        <div class="qa-card-desc">CMM-verified measurements with full GD&T compliance for every critical
-                            dimension.</div>
-                    </div>
-                    <div class="qa-card">
-                        <div class="qa-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path
-                                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M12 18v-6 M9 15h6" />
-                            </svg>
-                        </div>
-                        <div class="qa-card-title">Material Certificates</div>
-                        <div class="qa-card-desc">Mill test reports and material certifications traceable to source
-                            suppliers.</div>
-                    </div>
-                    <div class="qa-card">
-                        <div class="qa-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <path d="M3 9h18M9 3v18" />
-                            </svg>
-                        </div>
-                        <div class="qa-card-title">Batch Traceability</div>
-                        <div class="qa-card-desc">Complete batch records with serialized tracking from material receipt
-                            to delivery.</div>
-                    </div>
-                    <div class="qa-card">
-                        <div class="qa-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path
-                                    d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
-                            </svg>
-                        </div>
-                        <div class="qa-card-title">Fitment Verification</div>
-                        <div class="qa-card-desc">Assembly fitment testing and functional verification before shipment.
                         </div>
                     </div>
-                    <div class="qa-card">
-                        <div class="qa-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
-                                <circle cx="12" cy="13" r="4" />
-                            </svg>
+                    <div class="cs-content">
+                        <div class="cs-block">
+                            <span class="cs-label">Problem</span>
+                            <p>A robotics startup needed a lightweight, high-strength chassis designed for 5-axis CNC
+                                within 2 weeks.</p>
                         </div>
-                        <div class="qa-card-title">Visual Documentation</div>
-                        <div class="qa-card-desc">High-resolution photographic documentation of every delivered part.
+                        <div class="cs-block">
+                            <span class="cs-label">Solution</span>
+                            <p>We ran a DFM analysis, optimized the topology to reduce weight by 15%, and managed the
+                                CNC production and anodizing.</p>
+                        </div>
+                        <div class="cs-block">
+                            <span class="cs-label">Result</span>
+                            <p>Delivered fully inspected, ready-to-assemble chassis 3 days ahead of schedule.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
 
         <!-- ═══ FINAL CTA ═══ -->
         <section class="final-cta reveal" id="final-cta-section">
             <div class="container">
-                <h2>Send a drawing. Receive a manufacturable part.</h2>
-                <p class="final-cta-desc">
-                    Upload a CAD model or technical drawing.
-                    We review manufacturability, select process, verify tolerances, and deliver production-grade
-                    components.
-                </p>
+                <h2>Ready to build your product?</h2>
                 <div class="final-cta-buttons">
-                    <a href="/contact.html" class="final-btn final-btn-primary">Upload Files</a>
+                    <a href="/contact.html" class="final-btn final-btn-primary">Upload CAD File</a>
                     <a href="/contact.html" class="final-btn final-btn-secondary">Talk to an Engineer</a>
                 </div>
-                <p class="final-cta-note">
-                    or email <a href="mailto:info@unbound3d.com"
-                        style="color: rgba(240,238,230,0.5); text-decoration: underline;">info@unbound3d.com</a>
-                </p>
             </div>
         </section>
 

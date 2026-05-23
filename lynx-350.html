@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LYNX-350 — Industrial 3D Printer | Unbound3D</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/main.js"></script>
+    <style>
+        /* Specific Lynx-350 Styles */
+        :root {
+            --blue-accent: #007aff;
+            --blue-glow: rgba(0, 122, 255, 0.4);
+            --dark-surface: #0a0a0c;
+        }
+
+        .hero-350 {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            padding-top: var(--nav-height);
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            padding-right: 2rem;
+        }
+
+        .hero-render {
+            flex: 1.2;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .hero-img {
+            max-width: 110%;
+            margin-right: -5%;
+            filter: drop-shadow(0 0 40px var(--blue-glow));
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--blue-accent);
+            color: var(--blue-accent);
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.75rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-blue {
+            background-color: var(--blue-accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 99px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-blue:hover {
+            background-color: #005fcc;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+        }
+
+        .hero-highlights {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .highlight-val {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--blue-accent);
+        }
+
+        .highlight-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .positioning-section {
+            padding: 8rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, #000 0%, #050505 100%);
+        }
+
+        .positioning-title {
+            font-size: 3.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        /* Feature Sections */
+        .feature-showcase {
+            padding: 6rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        
+        .feature-showcase:nth-child(even) {
+            background: radial-gradient(circle at right, rgba(0, 122, 255, 0.03) 0%, transparent 50%);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feature-grid.reverse .feature-text {
+            order: 2;
+        }
+
+        .feature-grid.reverse .feature-visual {
+            order: 1;
+        }
+
+        .feature-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-visual img {
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-visual:hover img {
+            transform: scale(1.02);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 6px;
+            height: 6px;
+            background: var(--blue-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--blue-glow);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .material-pill {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            background: var(--dark-surface);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .material-pill::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 122, 255, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .material-pill:hover::before {
+            opacity: 1;
+        }
+
+        .material-pill:hover {
+            border-color: var(--blue-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .use-case-card {
+            background: var(--dark-surface);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .use-case-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .use-case-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .use-case-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .use-case-content p {
+            margin: 0;
+            opacity: 0.7;
+            font-size: 1.05rem;
+        }
+
+        /* Specs Table */
+        .specs-container {
+            background: var(--dark-surface);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+
+        .specs-category {
+            margin-bottom: 3rem;
+        }
+        
+        .specs-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .specs-category h3 {
+            font-size: 1.5rem;
+            color: var(--blue-accent);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem 2rem;
+        }
+
+        .spec-name {
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .spec-val {
+            font-weight: 600;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-350 {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+                padding-bottom: 4rem;
+            }
+            .hero-content {
+                padding-right: 0;
+            }
+            .hero-cta-group {
+                justify-content: center;
+            }
+            .hero-highlights {
+                justify-content: center;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-grid.reverse .feature-text {
+                order: 1;
+            }
+            .feature-grid.reverse .feature-visual {
+                order: 2;
+            }
+            .materials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+            .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .spec-name {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-logo">
+            <a href="/" class="nav-brand-text">
+                <span class="brand-name">Unbound3D</span>
+                <span class="brand-tagline">Power To Create</span>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/platform.html">Platform</a>
+            <a href="/hanzof.html">Hanzof</a>
+            <a href="/lynx-350.html" class="active" style="color: var(--blue-accent);">Lynx 350</a>
+            <a href="/team.html">Team</a>
+            <a href="/contact.html" class="cta-button btn-secondary btn" style="padding: 0.5rem 1.5rem;">Contact</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-350 container reveal">
+            <div class="hero-content">
+                <span class="hero-badge">ENGINEERING SERIES</span>
+                <h1 class="hero-title">LYNX-350</h1>
+                <div class="hero-subtitle">Purpose-built for engineering thermoplastics.</div>
+                <p class="hero-desc">
+                    Reliable thermal control, structural rigidity, and repeatable precision for engineering-grade production workflows. Not a gadget. A manufacturing platform.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="/contact.html" class="btn-blue">Request Quote</a>
+                    <a href="#specs" class="btn-secondary btn">View Specs</a>
+                </div>
+                
+                <div class="hero-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-val">350°C</span>
+                        <span class="highlight-label">Hotend</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">70°C</span>
+                        <span class="highlight-label">Chamber</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">350mm</span>
+                        <span class="highlight-label">Volume</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-render">
+                <img src="/lynx-350-hero.png" alt="Lynx-350 Industrial 3D Printer" class="hero-img">
+            </div>
+        </section>
+
+        <!-- Positioning Section -->
+        <section class="positioning-section reveal">
+            <div class="container">
+                <h2 class="positioning-title">A Production Platform, Not Just a Printer</h2>
+                <p class="section-sub" style="margin: 0 auto; font-size: 1.25rem;">
+                    The LYNX-350 is a production-grade system engineered for high-performance thermoplastics and reinforced composites. It features an integrated material conditioning workflow, a highly controlled thermal environment, and guaranteed dimensional accuracy for batch-to-batch consistency.
+                </p>
+            </div>
+        </section>
+
+        <!-- Feature 1: Thermal Control -->
+        <section class="feature-showcase reveal">
+            <div class="container feature-grid">
+                <div class="feature-text">
+                    <h2 class="feature-title">Thermal Control System</h2>
+                    <ul class="feature-list">
+                        <li>350°C All-Metal Extruder</li>
+                        <li>150°C High-Density Silicone Heated Bed</li>
+                        <li>70°C Active Chamber via Forced Convection</li>
+                    </ul>
+                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
+                        Absolute thermal stability is critical for engineering polymers. Our active chamber heating eliminates warping and guarantees superior layer adhesion for materials like PA-CF and PPS, ensuring industrial reliability on every print.
+                    </p>
+                </div>
+                <div class="feature-visual">
+                    <img src="/lynx-350-chamber.png" alt="Lynx-350 Heated Chamber and Extruder">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 2: Structural Rigidity -->
+        <section class="feature-showcase reveal">
+            <div class="container feature-grid reverse">
+                <div class="feature-text">
+                    <h2 class="feature-title">Structural Rigidity & Motion</h2>
+                    <ul class="feature-list">
+                        <li>Heavy-Duty CoreXY Architecture</li>
+                        <li>Triple Independent Z-Axis</li>
+                        <li>40,000 mm/s² Acceleration</li>
+                        <li>650 mm/s Top Speed</li>
+                    </ul>
+                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
+                        Built on a massive rigid frame, the LYNX-350 delivers blistering speeds without compromising dimensional accuracy. The triple Z-axis ensures a perfectly trammed bed under heavy loads.
+                    </p>
+                </div>
+                <div class="feature-visual">
+                    <img src="/lynx-1.png" alt="Lynx-350 Motion System" style="filter: grayscale(80%) contrast(120%);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 3 & 4: Calibration & Conditioning -->
+        <section class="feature-showcase reveal">
+            <div class="container feature-grid">
+                <div class="feature-text">
+                    <h2 class="feature-title">Precision Calibration</h2>
+                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+                        <strong>Non-contact eddy current bed scanning (&lt;60 seconds).</strong><br>
+                        Experience fast, repeatable calibration. No manual tuning, no paper tests. Just pure production readiness.
+                    </p>
+                    <h2 class="feature-title">Material Conditioning</h2>
+                    <p style="opacity: 0.8; font-size: 1.1rem; line-height: 1.6;">
+                        <strong>Dual spool system with active heated drying (up to 110°C).</strong><br>
+                        Integrated moisture control for hydroscopic nylon and carbon fiber materials, creating a seamless and reliable workflow.
+                    </p>
+                </div>
+                <div class="feature-visual">
+                    <img src="/lynx-dry.png" alt="Lynx-Dry System" style="max-height: 400px; display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section class="reveal" style="padding: 6rem 0; background: var(--dark-surface);">
+            <div class="container">
+                <h2 class="section-title text-center">Engineered for Advanced Materials</h2>
+                <p class="text-center" style="opacity: 0.7; max-width: 600px; margin: 0 auto;">
+                    Extended thermal headroom enables exploration of high-performance polymers such as PEEK and ULTEM under controlled conditions.
+                </p>
+                
+                <div class="materials-grid">
+                    <div class="material-pill">ASA</div>
+                    <div class="material-pill">PA-CF</div>
+                    <div class="material-pill">PA-GF</div>
+                    <div class="material-pill">PPS-CF</div>
+                    <div class="material-pill">PPA-CF</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="feature-showcase reveal">
+            <div class="container">
+                <h2 class="section-title text-center">A Unified Production Workflow</h2>
+                <p class="text-center section-sub" style="margin: 0 auto 4rem;">
+                    Printer + material conditioning system = single ecosystem. Reduced variability. Increased repeatability.
+                </p>
+
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <img src="/lynx-350-parts.png" alt="Aerospace Components" class="use-case-img">
+                        <div class="use-case-content">
+                            <h3>Aerospace Components</h3>
+                            <p>High-strength, low-weight PA-CF parts for critical structural applications.</p>
+                        </div>
+                    </div>
+                    <div class="use-case-card">
+                        <img src="/work/assembly1.jpg" onerror="this.src='/lynx-2.png'" alt="Functional Prototyping" class="use-case-img">
+                        <div class="use-case-content">
+                            <h3>Functional Prototyping</h3>
+                            <p>Test form, fit, and mechanical function with end-use materials before tooling.</p>
+                        </div>
+                    </div>
+                    <div class="use-case-card">
+                        <img src="/work/bracket1.jpg" onerror="this.src='/lynx-1.png'" alt="Jigs & Fixtures" class="use-case-img">
+                        <div class="use-case-content">
+                            <h3>Jigs & Fixtures</h3>
+                            <p>Rapidly deploy custom manufacturing aids directly to the factory floor.</p>
+                        </div>
+                    </div>
+                    <div class="use-case-card">
+                        <img src="/work/case1.jpg" onerror="this.src='/lynx-2.png'" alt="Low-volume Production" class="use-case-img">
+                        <div class="use-case-content">
+                            <h3>Low-volume Production</h3>
+                            <p>Bridge the gap to injection molding with dimensionally accurate batch runs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specs Table -->
+        <section id="specs" class="reveal" style="padding: 6rem 0;">
+            <div class="container">
+                <h2 class="section-title text-center">Technical Specifications</h2>
+                
+                <div class="specs-container">
+                    <div class="specs-category">
+                        <h3>Thermal System</h3>
+                        <div class="specs-grid">
+                            <div class="spec-name">Max Extruder Temp</div><div class="spec-val">350°C</div>
+                            <div class="spec-name">Bed Temp</div><div class="spec-val">150°C</div>
+                            <div class="spec-name">Chamber Temp</div><div class="spec-val">70°C (Active Forced Convection)</div>
+                        </div>
+                    </div>
+
+                    <div class="specs-category">
+                        <h3>Build</h3>
+                        <div class="specs-grid">
+                            <div class="spec-name">Volume</div><div class="spec-val">350 × 350 × 350 mm</div>
+                            <div class="spec-name">Architecture</div><div class="spec-val">CoreXY</div>
+                            <div class="spec-name">Z System</div><div class="spec-val">Triple independent Z</div>
+                        </div>
+                    </div>
+
+                    <div class="specs-category">
+                        <h3>Motion & Calibration</h3>
+                        <div class="specs-grid">
+                            <div class="spec-name">Speed</div><div class="spec-val">650 mm/s</div>
+                            <div class="spec-name">Acceleration</div><div class="spec-val">40,000 mm/s²</div>
+                            <div class="spec-name">Calibration</div><div class="spec-val">Non-contact eddy current scanning (&lt;60s)</div>
+                        </div>
+                    </div>
+
+                    <div class="specs-category">
+                        <h3>Ecosystem & Interface</h3>
+                        <div class="specs-grid">
+                            <div class="spec-name">Interface</div><div class="spec-val">5" touchscreen & HD camera</div>
+                            <div class="spec-name">Material System</div><div class="spec-val">Dual spool with heated drying up to 110°C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="reveal" style="text-align: center; padding: 8rem 0; background: linear-gradient(0deg, #000 0%, #050505 100%);">
+            <div class="container">
+                <h2 class="section-title" style="font-size: 3.5rem; letter-spacing: -0.02em;">Built for engineers. <br><span style="color: var(--blue-accent);">Ready for production.</span></h2>
+                <div class="hero-cta-group" style="justify-content: center; margin-top: 3rem;">
+                    <a href="/contact.html" class="btn-blue" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Request Quote</a>
+                    <a href="/contact.html" class="btn-secondary btn" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Talk to an Engineer</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>Unbound3D</h4>
+                <div class="footer-links">
+                    <p>Building the digital infrastructure for physical production.</p>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <div class="footer-links">
+                    <a href="/platform.html">Technology</a>
+                    <a href="/lynx-350.html">LYNX-350</a>
+                    <a href="/lynx-320.html">Lynx-320</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <div class="footer-links">
+                    <a href="/hanzof.html">Hanzof Managed Service</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="/team.html">Team</a>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
