@@ -6,196 +6,285 @@
     <meta name="color-scheme" content="dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Team — Unbound3D</title>
+    <meta name="description" content="Meet the engineering and leadership team building Unbound3D Industries in Bengaluru, India." />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://unbound3d.com/team.html" />
+    <meta property="og:title" content="Team — Unbound3D" />
+    <meta property="og:description" content="Meet the engineering and leadership team at Unbound3D Industries Pvt Ltd, Bengaluru." />
+    <meta property="og:image" content="https://unbound3d.com/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="stylesheet" href="/src/style.css" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <script type="module" src="/src/main.js"></script>
+
     <style>
         .team-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2.5rem;
+            gap: 2rem;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 3rem auto 0;
         }
 
-        .team-member {
+        .team-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .member-photo {
-            width: 160px;
-            height: 160px;
+        .team-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .member-photo-placeholder {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: #d0d0d0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
             margin: 0 auto 1.25rem;
-            object-fit: cover;
-            background-size: cover;
-            background-position: center top;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: rgba(240, 238, 230, 0.5);
+            text-align: center;
+            padding: 0.5rem;
+            font-family: 'Space Grotesk', monospace;
         }
 
         .member-name {
             font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            color: #fff;
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
         }
 
         .member-role {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            color: rgba(240, 238, 230, 0.6);
             font-weight: 500;
             line-height: 1.4;
+            margin-bottom: 1rem;
         }
 
-        .member-tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 0.25rem;
+        .member-bio-slot {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: rgba(240, 238, 230, 0.5);
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', monospace;
         }
 
-        @media (max-width: 768px) {
+        .member-link-slot {
+            margin-top: auto;
+            font-size: 0.8rem;
+            color: rgba(240, 238, 230, 0.5);
+            font-family: 'Space Grotesk', monospace;
+        }
+
+        @media (max-width: 900px) {
             .team-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
-            .member-photo {
-                width: 120px;
-                height: 120px;
-            }
-
-            .member-name {
-                font-size: 1rem;
+                gap: 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 540px) {
             .team-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
-            }
-
-            .member-photo {
-                width: 100px;
-                height: 100px;
             }
         }
     </style>
 </head>
 
 <body>
-    <nav>
-        <div class="nav-logo">
-            <a href="/" class="nav-brand-text">
-                <span class="brand-name">Unbound3D</span>
-                <span class="brand-tagline">Power To Create</span>
+    <!-- Shared Site Navigation -->
+    <div id="site-header">
+        <nav class="site-nav">
+            <a href="/" class="nav-logo" aria-label="Unbound3D Homepage">
+                <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="32" height="32" />
+                <div class="nav-brand-text">
+                    <span class="brand-name">Unbound3D</span>
+                </div>
             </a>
-        </div>
-        <div class="nav-links">
-            <a href="/platform.html">Platform</a>
-            <a href="/hanzof.html">Hanzof</a>
-            <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx-320.html">Lynx 320</a>
-            <a href="/team.html" class="active">Team</a>
-            <a href="/contact.html" class="cta-button">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="/manufacturing.html">Manufacturing</a>
+                <a href="/lynx-350.html">Lynx-350</a>
+                <a href="/how-we-work.html">How we work</a>
+                <a href="/team.html" class="active">Team</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/contact.html#quote" class="cta-button">Get a quote</a>
+            </div>
+        </nav>
+    </div>
 
     <main>
         <!-- Hero -->
-        <section class="hero-section reveal" style="padding-bottom: 0;">
-            <div class="container text-center">
-                <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: 3rem;">The Team
-                </h1>
-                <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.7; max-width: 40ch;">
-                    Engineers, designers, and strategists building the future of manufacturing.
-                </p>
-            </div>
+        <section class="hero-section reveal container text-center" style="padding-bottom: 1rem;">
+            <span class="step-number" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; margin-bottom: 0.75rem;">Leadership &amp; Engineering</span>
+            <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: 3rem;">The Team</h1>
+            <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.75; max-width: 48ch;">
+                The core team leading business, product development, R&amp;D, and industrial design at Unbound3D in Bengaluru.
+            </p>
         </section>
 
         <!-- Team Grid -->
-        <section class="reveal" style="padding-top: 1rem;">
-            <div class="container">
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-photo" style="background-image: url('assets/team/cibhi.jpg');"></div>
-                        <h3 class="member-name">Cibhi Adhinath</h3>
-                        <div class="member-role">Co-Founder |<br>Business & Strategy</div>
+        <section class="reveal container" style="padding-top: 1rem; padding-bottom: 5rem;">
+            <div class="team-grid">
+                <!-- Cibhi -->
+                <div class="team-card">
+                    <div class="member-photo-placeholder">
+                        [[TODO: photo — Cibhi Adhinath Padmanaban]]
                     </div>
-
-                    <div class="team-member">
-                        <div class="member-photo" style="background-image: url('assets/team/jeeva.jpg');"></div>
-                        <h3 class="member-name">Jeeva</h3>
-                        <div class="member-role">Co-Founder |<br>Product</div>
+                    <h3 class="member-name">Cibhi Adhinath Padmanaban</h3>
+                    <div class="member-role">Co-Founder, Business &amp; Strategy</div>
+                    <div class="member-bio-slot">
+                        [[TODO: 1–2 line bio]]
                     </div>
-
-                    <div class="team-member">
-                        <div class="member-photo" style="background-image: url('assets/team/mahima.jpg');"></div>
-                        <h3 class="member-name">Mahima Swetha</h3>
-                        <div class="member-role">R&D Lead<br><span class="member-tag">( Founding Team)</span></div>
+                    <div class="member-link-slot">
+                        [[TODO: LinkedIn profile link]]
                     </div>
+                </div>
 
-                    <div class="team-member">
-                        <div class="member-photo" style="background-image: url('assets/team/vijay.jpg');"></div>
-                        <h3 class="member-name">Vijay Raj</h3>
-                        <div class="member-role">Design Lead<br><span class="member-tag">(Founding Team)</span></div>
+                <!-- Jeeva -->
+                <div class="team-card">
+                    <div class="member-photo-placeholder">
+                        [[TODO: photo — Jeeva]]
+                    </div>
+                    <h3 class="member-name">Jeeva</h3>
+                    <div class="member-role">Co-Founder &amp; CEO, Product</div>
+                    <div class="member-bio-slot">
+                        [[TODO: 1–2 line bio]]
+                    </div>
+                    <div class="member-link-slot">
+                        [[TODO: LinkedIn profile link]]
+                    </div>
+                </div>
+
+                <!-- Mahima Swetha -->
+                <div class="team-card">
+                    <div class="member-photo-placeholder">
+                        [[TODO: photo — Mahima Swetha]]
+                    </div>
+                    <h3 class="member-name">Mahima Swetha</h3>
+                    <div class="member-role">R&amp;D Lead</div>
+                    <div class="member-bio-slot">
+                        [[TODO: 1–2 line bio]]
+                    </div>
+                    <div class="member-link-slot">
+                        [[TODO: LinkedIn profile link]]
+                    </div>
+                </div>
+
+                <!-- Vijay Raj -->
+                <div class="team-card">
+                    <div class="member-photo-placeholder">
+                        [[TODO: photo — Vijay Raj]]
+                    </div>
+                    <h3 class="member-name">Vijay Raj</h3>
+                    <div class="member-role">Design Lead</div>
+                    <div class="member-bio-slot">
+                        [[TODO: 1–2 line bio]]
+                    </div>
+                    <div class="member-link-slot">
+                        [[TODO: LinkedIn profile link]]
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="reveal" style="text-align: center; padding: 4rem 0;">
+        <section class="reveal" style="text-align: center; padding: 4rem 0; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.06);">
             <div class="container">
-                <h2 class="section-title">Want to join us?</h2>
-                <p style="opacity: 0.7; margin-bottom: 2rem; max-width: 35ch; margin-left: auto; margin-right: auto;">
-                    We're always looking for visionary engineers and designers.
+                <h2 class="section-title">Want to build with us?</h2>
+                <p style="opacity: 0.75; margin: 0 auto 2rem; max-width: 45ch; line-height: 1.6;">
+                    We are hiring mechanical designers, firmware engineers, and manufacturing specialists in Bengaluru.
                 </p>
-                <a href="/careers.html" class="btn-outline">View Careers</a>
+                <a href="/careers.html" class="btn btn-primary">View open roles</a>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-column">
-                <h4>Unbound3D</h4>
-                <div class="footer-links">
-                    <p>Building the digital infrastructure for physical production.</p>
+    <!-- Shared Site Footer -->
+    <div id="site-footer">
+        <footer class="site-footer">
+            <div class="footer-grid container">
+                <div class="footer-column">
+                    <a href="/" class="nav-logo" style="margin-bottom: 0.5rem;" aria-label="Unbound3D Homepage">
+                        <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="28" height="28">
+                        <div class="nav-brand-text">
+                            <span class="brand-name">Unbound3D</span>
+                        </div>
+                    </a>
+                    <p style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-bottom: 1rem;">
+                        From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner.
+                    </p>
+                    <div style="opacity: 0.7; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
+                        <strong>Unbound3D Industries Pvt Ltd</strong><br>
+                        Indiranagar, Bengaluru, Karnataka, India<br>
+                        Phone / WhatsApp: <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+91 75581 50570</a><br>
+                        Email: <a href="mailto:info@unbound3d.com" style="color: inherit; text-decoration: underline;">info@unbound3d.com</a><br>
+                        GST: 29AAECU0620P1Z1<br>
+                        <span style="display: inline-block; margin-top: 0.4rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.08); border-radius: 4px; font-weight: 500;">ISO 9001:2015 certified</span>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Offerings</h4>
+                    <div class="footer-links">
+                        <a href="/manufacturing.html">Manufacturing</a>
+                        <a href="/lynx-350.html">Lynx-350</a>
+                        <a href="/how-we-work.html">How we work</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <div class="footer-links">
+                        <a href="/team.html">Team</a>
+                        <a href="/careers.html">Careers</a>
+                        <a href="/contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Started</h4>
+                    <div class="footer-links">
+                        <a href="/contact.html#quote" style="font-weight: 600; color: #fff;">Get a quote &rarr;</a>
+                        <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                        <a href="mailto:info@unbound3d.com">Email Drawings</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Platform</h4>
-                <div class="footer-links">
-                    <a href="/platform.html">Technology</a>
-                    <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx350.html">Lynx-350</a>
-                    <a href="/lynx-320.html">Lynx-320</a>
+            <div class="container footer-bottom">
+                <div>&copy; 2026 Unbound3D Industries Pvt Ltd. All rights reserved.</div>
+                <div class="footer-legal-links">
+                    <span>ISO 9001:2015 certified</span>
+                    <a href="/contact.html">Terms &amp; Enquiries</a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <div class="footer-links">
-                    <a href="/hanzof.html">Hanzof Managed Service</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Company</h4>
-                <div class="footer-links">
-                    <a href="/team.html">Team</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
 </body>
 
 </html>

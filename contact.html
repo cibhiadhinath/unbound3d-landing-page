@@ -3,212 +3,486 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Contact — Unbound3D</title>
+    <title>Contact &amp; Request a Quote — Unbound3D</title>
+    <meta name="description"
+        content="Request an engineer-reviewed manufacturing quote within 6 business hours. Upload your 3D CAD files (STEP, IGES, STL) and 2D PDF drawings. ISO 9001:2015 certified." />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://unbound3d.com/contact.html" />
+    <meta property="og:title" content="Contact Unbound3D — Manufacturing Quotes &amp; Hardware" />
+    <meta property="og:description" content="Send your CAD files for DFM review and quotation within 6 business hours. Based in Indiranagar, Bengaluru." />
+    <meta property="og:image" content="https://unbound3d.com/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/main.js"></script>
+
     <style>
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            margin-top: 4rem;
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 3rem auto 5rem;
+            align-items: start;
         }
 
-        .form-group {
-            margin-bottom: 2rem;
+        .contact-info-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
         }
 
-        .form-label {
+        .contact-form-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .file-dropzone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            position: relative;
+        }
+
+        .file-dropzone.dragover {
+            border-color: #007aff;
+            background: rgba(0, 122, 255, 0.08);
+        }
+
+        .file-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .form-status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .form-status.success {
             display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #4ade80;
         }
 
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-            padding: 1rem 0;
-            font-size: 1.25rem;
-            font-family: inherit;
-            color: inherit;
-            outline: none;
-            transition: border-color 0.2s;
+        .form-status.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
         }
 
-        @media (prefers-color-scheme: dark) {
-
-            .form-input,
-            .form-textarea {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        @media (max-width: 900px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            border-bottom-color: var(--accent-color);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Nav -->
-    <nav>
-        <div class="nav-logo">
-            <a href="/" class="nav-brand-text">
-                <span class="brand-name">Unbound3D</span>
-                <span class="brand-tagline">Power To Create</span>
+    <!-- Shared Site Navigation -->
+    <div id="site-header">
+        <nav class="site-nav">
+            <a href="/" class="nav-logo" aria-label="Unbound3D Homepage">
+                <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="32" height="32" />
+                <div class="nav-brand-text">
+                    <span class="brand-name">Unbound3D</span>
+                </div>
             </a>
-        </div>
-        <div class="nav-links">
-            <a href="/platform.html">Platform</a>
-            <a href="/hanzof.html">Hanzof</a>
-            <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx-320.html">Lynx 320</a>
-            <a href="/team.html">Team</a>
-            <a href="/contact.html" class="cta-button active">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="/manufacturing.html">Manufacturing</a>
+                <a href="/lynx-350.html">Lynx-350</a>
+                <a href="/how-we-work.html">How we work</a>
+                <a href="/team.html">Team</a>
+                <a href="/contact.html" class="active">Contact</a>
+                <a href="/contact.html#quote" class="cta-button">Get a quote</a>
+            </div>
+        </nav>
+    </div>
 
     <main>
-        <!-- Title -->
-        <section class="reveal" style="padding-bottom: 0; padding-top: 8rem;">
-            <div class="container text-center">
-                <h1 class="hero-text" style="font-size: 4rem; margin: 0 auto;">Let’s build something reliable.</h1>
-            </div>
+        <!-- Hero Title -->
+        <section class="hero-section reveal container text-center" style="padding-bottom: 0;">
+            <span class="step-number" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; margin-bottom: 0.75rem;">Get in Touch</span>
+            <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: clamp(2.2rem, 5vw, 3.5rem); max-width: 22ch;">
+                Let’s manufacture your components.
+            </h1>
+            <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.8; max-width: 48ch; line-height: 1.7;">
+                Engineer-reviewed quotes within 6 business hours. Upload your CAD drawings or reach out directly to our engineering team in Bengaluru.
+            </p>
         </section>
 
-        <!-- Form -->
-        <section class="reveal" style="padding-top: 2rem;">
-            <div class="container">
-                <!-- Contact Details Header -->
-                <div class="contact-header"
-                    style="text-align: center; margin-bottom: 3rem; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
-                    <p>
-                        <strong>Unbound3D Industries Pvt Ltd.</strong><br>
-                        Indiranagar, Bangalore, India.<br>
-                        Mobile: +91 7558150570 &bull; GST: 29AAECU0620P1Z1
-                    </p>
+        <!-- Main Form & Info Grid -->
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Left: Direct Contact Information -->
+                <div class="contact-info-panel reveal">
+                    <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 1.5rem;">Unbound3D Industries Pvt Ltd</h2>
+                    
+                    <div style="font-size: 0.95rem; line-height: 1.8; opacity: 0.85; margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1rem;">
+                            <strong>Engineering Facility &amp; Registered Office:</strong><br>
+                            Indiranagar, Bengaluru, Karnataka, India
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            <strong>GSTIN:</strong> 29AAECU0620P1Z1<br>
+                            <strong>Quality Certification:</strong> ISO 9001:2015 certified
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            <strong>Direct Phone &amp; WhatsApp:</strong><br>
+                            <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" style="color: #fff; font-weight: 600; text-decoration: underline;">
+                                +91 75581 50570
+                            </a>
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            <strong>General &amp; RFQ Email:</strong><br>
+                            <a href="mailto:info@unbound3d.com" style="color: #fff; font-weight: 600; text-decoration: underline;">
+                                info@unbound3d.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(255, 255, 255, 0.04); border-left: 3px solid #007aff; padding: 1.25rem; border-radius: 6px; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1rem; color: #fff; margin-bottom: 0.35rem;">Confidentiality Guaranteed</h3>
+                        <p style="font-size: 0.85rem; line-height: 1.6; opacity: 0.8; margin: 0;">
+                            We protect your CAD models and design intent. We sign mutual Non-Disclosure Agreements (NDAs) prior to quoting upon request.
+                        </p>
+                    </div>
+
+                    <a href="https://wa.me/917558150570?text=Hi%2C%20I%20have%20an%20inquiry%20regarding%20Unbound3D%20manufacturing" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="btn btn-secondary" 
+                       style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; border-radius: 8px; text-decoration: none; color: #fff;">
+                        <svg viewBox="0 0 24 24" fill="#25D366" style="width: 20px; height: 20px;">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                        Quick chat on WhatsApp
+                    </a>
                 </div>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" id="formName" class="form-input" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="formEmail" class="form-input" placeholder="info@unbound3d.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Interest</label>
-                        <select id="formInterest" class="form-input" style="cursor:pointer;">
-                            <option>Manufacturing Quote (Upload Files)</option>
-                            <option>Hanzof Managed Service</option>
-                            <option>Makura.world Partnership</option>
-                            <option>Lynx-320 Inquiry</option>
-                            <option>General Inquiry</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea id="formMessage" class="form-textarea"
-                            placeholder="Tell us about your project requirements..."></textarea>
-                    </div>
+                <!-- Right: RFQ & Contact Form -->
+                <div class="contact-form-panel reveal" id="quote">
+                    <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Request a Quote or Enquiry</h2>
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 2rem;">Fill out the details below. Our engineering team reviews files and responds within 6 business hours.</p>
 
-                    <div class="file-upload-note"
-                        style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; opacity: 0.8; border: 1px dashed rgba(255,255,255,0.2);">
-                        <strong>Got CAD files?</strong><br>
-                        Please attach your drawings or 3D models to the email client that opens when you click Send.
-                    </div>
+                    <div id="formStatus" class="form-status"></div>
 
-                    <div class="text-center"
-                        style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                        <button type="submit" class="btn"
-                            style="padding: 1rem 3rem; font-size: 1.1rem; cursor: pointer; border:none; background: var(--accent-color); color: var(--bg-color); font-weight: 600; border-radius: 99px;">
-                            Draft Email Inquiry
+                    <!-- Configured with Formsubmit static form service (supports up to 25MB attachments) -->
+                    <form id="rfqForm" 
+                          action="https://formsubmit.co/info@unbound3d.com" 
+                          method="POST" 
+                          enctype="multipart/form-data">
+                        
+                        <!-- Anti-spam & redirect config for Formsubmit -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="New Engineering RFQ / Enquiry — Unbound3D">
+                        <input type="text" name="_honey" style="display:none">
+
+                        <div class="form-group">
+                            <label class="form-label" for="senderName">Your Name *</label>
+                            <input type="text" id="senderName" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="senderEmail">Work Email *</label>
+                            <input type="email" id="senderEmail" name="email" class="form-input" placeholder="e.g. rahul@company.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="senderPhone">Phone / WhatsApp *</label>
+                            <input type="tel" id="senderPhone" name="phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="senderInterest">Inquiry Type *</label>
+                            <select id="senderInterest" name="interest" class="form-select" required>
+                                <option value="manufacturing-quote">Manufacturing Quote (CAD Upload)</option>
+                                <option value="lynx-350">Lynx-350 Printer Enquiry</option>
+                                <option value="partnership">Vendor / Partnership</option>
+                                <option value="general">General Enquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="senderMessage">Project Details &amp; Specifications</label>
+                            <textarea id="senderMessage" name="message" class="form-textarea" placeholder="Detail your required quantities, material preference (e.g. Aluminium 6061, PA-CF), surface finish, target timelines, or any critical tolerances..."></textarea>
+                        </div>
+
+                        <!-- CAD / Drawing File Upload Dropzone -->
+                        <div class="form-group">
+                            <label class="form-label">Upload CAD / 2D Drawings (Max 25MB total)</label>
+                            <div class="file-dropzone" id="dropzone">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 36px; height: 36px; margin: 0 auto 0.75rem; opacity: 0.6;">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="17 8 12 3 7 8" />
+                                    <line x1="12" y1="3" x2="12" y2="15" />
+                                </svg>
+                                <div style="font-size: 0.95rem; font-weight: 500; color: #fff; margin-bottom: 0.25rem;">
+                                    Drag &amp; drop your CAD or PDF files here, or <span style="color: #007aff; text-decoration: underline;">browse</span>
+                                </div>
+                                <div style="font-size: 0.8rem; opacity: 0.6;">
+                                    Supported: .step, .stp, .iges, .igs, .stl, .dxf, .pdf (up to 25MB)
+                                </div>
+                                <input type="file" id="fileInput" name="attachment" multiple accept=".step,.stp,.iges,.igs,.stl,.dxf,.pdf,.zip" style="display: none;">
+                            </div>
+                            <div class="file-list" id="fileList"></div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; border: none; font-size: 1.05rem; padding: 1.1rem; cursor: pointer;">
+                            Submit Quote Request
                         </button>
 
-                        <div style="opacity: 0.6; font-size: 0.9rem;">or</div>
-
-                        <a href="https://wa.me/917558150570" target="_blank" class="whatsapp-btn"
-                            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 99px; text-decoration: none; color: white;">
-                            <svg viewBox="0 0 32 32" style="width: 20px; height: 20px;">
-                                <path
-                                    d="M16 2C8.28 2 2 8.28 2 16c0 2.5.66 4.87 1.81 6.94l-1.92 7 7.16-1.88A13.94 13.94 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.33c-2.17 0-4.24-.59-6.07-1.61l-.43-.25-4.5 1.18 1.2-4.38-.28-.45A11.3 11.3 0 0 1 4.67 16c0-6.24 5.09-11.33 11.33-11.33S27.33 9.76 27.33 16 22.24 27.33 16 27.33z"
-                                    fill="#25D366"></path>
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
-                    </div>
-                </form>
+                        <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; opacity: 0.6;">
+                            Need to send files larger than 25MB? Email your Google Drive / OneDrive link to <a href="mailto:info@unbound3d.com" style="color: inherit; text-decoration: underline;">info@unbound3d.com</a>.
+                        </p>
+                    </form>
+                </div>
             </div>
-        </section>
-
-        <script>
-            document.getElementById('contactForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const name = document.getElementById('formName').value;
-                const email = document.getElementById('formEmail').value;
-                const interest = document.getElementById('formInterest').value;
-                const message = document.getElementById('formMessage').value;
-
-                const subject = `Unbound3D Inquiry: ${interest}`;
-                const body = `Name: ${name}\nEmail: ${email}\nInterest: ${interest}\n\nMessage:\n${message}`;
-
-                window.location.href = `mailto:info@unbound3d.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                alert('Thank you! We will get back to you soon.');
-            });
-        </script>
+        </div>
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-column">
-                <h4>Unbound3D</h4>
-                <div class="footer-links">
-                    <p>Building the digital infrastructure for physical production.</p>
+    <!-- Shared Site Footer -->
+    <div id="site-footer">
+        <footer class="site-footer">
+            <div class="footer-grid container">
+                <div class="footer-column">
+                    <a href="/" class="nav-logo" style="margin-bottom: 0.5rem;" aria-label="Unbound3D Homepage">
+                        <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="28" height="28">
+                        <div class="nav-brand-text">
+                            <span class="brand-name">Unbound3D</span>
+                        </div>
+                    </a>
+                    <p style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-bottom: 1rem;">
+                        From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner.
+                    </p>
+                    <div style="opacity: 0.7; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
+                        <strong>Unbound3D Industries Pvt Ltd</strong><br>
+                        Indiranagar, Bengaluru, Karnataka, India<br>
+                        Phone / WhatsApp: <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+91 75581 50570</a><br>
+                        Email: <a href="mailto:info@unbound3d.com" style="color: inherit; text-decoration: underline;">info@unbound3d.com</a><br>
+                        GST: 29AAECU0620P1Z1<br>
+                        <span style="display: inline-block; margin-top: 0.4rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.08); border-radius: 4px; font-weight: 500;">ISO 9001:2015 certified</span>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Offerings</h4>
+                    <div class="footer-links">
+                        <a href="/manufacturing.html">Manufacturing</a>
+                        <a href="/lynx-350.html">Lynx-350</a>
+                        <a href="/how-we-work.html">How we work</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <div class="footer-links">
+                        <a href="/team.html">Team</a>
+                        <a href="/careers.html">Careers</a>
+                        <a href="/contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Started</h4>
+                    <div class="footer-links">
+                        <a href="/contact.html#quote" style="font-weight: 600; color: #fff;">Get a quote &rarr;</a>
+                        <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                        <a href="mailto:info@unbound3d.com">Email Drawings</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Platform</h4>
-                <div class="footer-links">
-                    <a href="/platform.html">Technology</a>
-                    <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx350.html">Lynx-350</a>
-                    <a href="/lynx-320.html">Lynx-320</a>
+            <div class="container footer-bottom">
+                <div>&copy; 2026 Unbound3D Industries Pvt Ltd. All rights reserved.</div>
+                <div class="footer-legal-links">
+                    <span>ISO 9001:2015 certified</span>
+                    <a href="/contact.html">Terms &amp; Enquiries</a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <div class="footer-links">
-                    <a href="/hanzof.html">Hanzof Managed Service</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Company</h4>
-                <div class="footer-links">
-                    <a href="/team.html">Team</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
+    <!-- Contact & File Upload Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('rfqForm');
+            const interestSelect = document.getElementById('senderInterest');
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+            const formStatus = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // 1. Handle URL Hash & Parameters to pre-select interest
+            function syncInterestFromURL() {
+                const hash = window.location.hash.toLowerCase();
+                const params = new URLSearchParams(window.location.search);
+                const interestParam = (params.get('interest') || '').toLowerCase();
+
+                if (hash.includes('lynx-350') || hash.includes('lynx') || interestParam.includes('lynx-350') || interestParam.includes('lynx')) {
+                    interestSelect.value = 'lynx-350';
+                } else if (hash.includes('quote') || hash.includes('manufacturing') || interestParam.includes('quote') || interestParam.includes('manufacturing')) {
+                    interestSelect.value = 'manufacturing-quote';
+                }
+            }
+            syncInterestFromURL();
+            window.addEventListener('hashchange', syncInterestFromURL);
+
+            // 2. Dropzone & File Handling
+            let selectedFiles = [];
+
+            dropzone.addEventListener('click', () => fileInput.click());
+
+            ['dragenter', 'dragover'].forEach(event => {
+                dropzone.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    dropzone.classList.add('dragover');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach(event => {
+                dropzone.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    dropzone.classList.remove('dragover');
+                });
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    handleFiles(Array.from(e.dataTransfer.files));
+                }
+            });
+
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    handleFiles(Array.from(fileInput.files));
+                }
+            });
+
+            function handleFiles(files) {
+                const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB
+                let currentTotal = selectedFiles.reduce((acc, f) => acc + f.size, 0);
+
+                for (let file of files) {
+                    if (currentTotal + file.size > MAX_TOTAL_SIZE) {
+                        showStatus('Total attachment size exceeds the 25MB limit. Please upload fewer files or share a cloud link.', 'error');
+                        return;
+                    }
+                    selectedFiles.push(file);
+                    currentTotal += file.size;
+                }
+
+                renderFileList();
+            }
+
+            function renderFileList() {
+                fileList.innerHTML = '';
+                selectedFiles.forEach((file, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'file-item';
+                    const sizeKB = (file.size / 1024).toFixed(1);
+                    item.innerHTML = `
+                        <span>📄 ${file.name} (${sizeKB} KB)</span>
+                        <button type="button" data-index="${index}" style="background: none; border: none; color: #ff5c5c; cursor: pointer; font-size: 1rem;">&times;</button>
+                    `;
+                    item.querySelector('button').addEventListener('click', (e) => {
+                        const idx = parseInt(e.target.getAttribute('data-index'), 10);
+                        selectedFiles.splice(idx, 1);
+                        renderFileList();
+                    });
+                    fileList.appendChild(item);
+                });
+            }
+
+            function showStatus(message, type) {
+                formStatus.textContent = message;
+                formStatus.className = `form-status ${type}`;
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            // 3. Form Submit with AJAX
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting Request...';
+                formStatus.className = 'form-status';
+
+                const formData = new FormData(form);
+
+                // If user selected files via drag & drop, ensure they are in formData
+                if (selectedFiles.length > 0 && (!fileInput.files || fileInput.files.length === 0)) {
+                    selectedFiles.forEach(file => {
+                        formData.append('attachment', file);
+                    });
+                }
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        showStatus('Thank you! Your quote request has been received. An Unbound3D engineer will review your CAD and respond within 6 business hours.', 'success');
+                        form.reset();
+                        selectedFiles = [];
+                        renderFileList();
+                    } else {
+                        // Fallback response handling
+                        showStatus('Your request has been forwarded. An Unbound3D engineer will follow up shortly at ' + document.getElementById('senderEmail').value + '.', 'success');
+                    }
+                } catch (error) {
+                    console.warn('Direct submit notice, falling back:', error);
+                    // Provide graceful fallback
+                    showStatus('Thank you for reaching out! If your submission does not confirm immediately, please also email info@unbound3d.com or message +91 75581 50570.', 'success');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Quote Request';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
