@@ -3,269 +3,93 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="color-scheme" content="dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Careers — Engineering &amp; Hardware Roles | Unbound3D</title>
-    <meta name="description" content="Join Unbound3D in Bengaluru. We build industrial 3D printers and manage precision manufacturing for defence, robotics, and aerospace teams." />
-    
-    <!-- Open Graph / Social -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://unbound3d.com/careers.html" />
-    <meta property="og:title" content="Careers at Unbound3D — Hardware &amp; Manufacturing Engineering" />
-    <meta property="og:description" content="Build industrial 3D printers and manage precision manufacturing for India's leading hardware teams. Roles in Bengaluru." />
-    <meta property="og:image" content="https://unbound3d.com/logo.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <link rel="stylesheet" href="/src/style.css" />
+    <title>Careers | Unbound3D</title>
     <script type="module" src="/src/main.js"></script>
-
     <style>
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .role-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 2.25rem;
+        .careers-section {
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .role-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .role-card h3 {
-            font-size: 1.35rem;
-            color: #fff;
-            margin-bottom: 0.75rem;
-        }
-
-        .role-card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .role-link {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.85rem;
-            color: rgba(240, 238, 230, 0.6);
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            padding: 0.6rem 0.9rem;
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        @media (max-width: 768px) {
-            .roles-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+            justify-content: center;
+            padding: 4rem 0;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <!-- Shared Site Navigation -->
-    <div id="site-header">
-        <nav class="site-nav">
-            <a href="/" class="nav-logo" aria-label="Unbound3D Homepage">
-                <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="32" height="32" />
-                <div class="nav-brand-text">
-                    <span class="brand-name">Unbound3D</span>
-                </div>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-logo">
+            <a href="/" class="nav-brand-text">
+                <span class="brand-name">Unbound3D</span>
+                <span class="brand-tagline">Power To Create</span>
             </a>
-            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links">
-                <a href="/manufacturing.html">Manufacturing</a>
-                <a href="/lynx-350.html">Lynx-350</a>
-                <a href="/how-we-work.html">How we work</a>
-                <a href="/team.html">Team</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/contact.html#quote" class="cta-button">Get a quote</a>
-            </div>
-        </nav>
-    </div>
+        </div>
+        <div class="nav-links">
+            <a href="/platform.html">Platform</a>
+            <a href="/hanzof.html">Hanzof</a>
+            <a href="/lynx350.html">Lynx 350</a>
+            <a href="/lynx-320.html">Lynx 320</a>
+            <a href="/team.html">Team</a>
+            <a href="/contact.html" class="cta-button">Contact</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero-section reveal container text-center" style="padding-bottom: 2rem;">
-            <span class="step-number" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-block; margin-bottom: 0.75rem;">Join Unbound3D</span>
-            <h1 class="hero-text text-center text-clip-reveal" style="margin: 0 auto; font-size: 3rem; max-width: 20ch;">
-                Build physical hardware that matters.
-            </h1>
-            <p class="hero-sub text-center" style="margin: 1rem auto 0; opacity: 0.8; max-width: 52ch; line-height: 1.7;">
-                We are a Bengaluru-based hardware and manufacturing company building industrial machines and delivering critical parts for aerospace, defence, robotics, and EV engineering teams across India.
-            </p>
-        </section>
-
-        <!-- What We Do / Philosophy -->
-        <section class="reveal container" style="padding: 2rem 0;">
-            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 2.5rem; max-width: 900px; margin: 0 auto;">
-                <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 1rem;">Why engineers join Unbound3D</h2>
-                <p style="font-size: 1rem; line-height: 1.7; opacity: 0.85; margin-bottom: 1rem;">
-                    At Unbound3D, you do not sit in endless sprint planning meetings talking about mockups. You design mechanical systems, write motion control firmware, evaluate GD&amp;T on real CMM reports, and see parts come off CNC machines and 3D printer beds every single day.
-                </p>
-                <p style="font-size: 1rem; line-height: 1.7; opacity: 0.85; margin: 0;">
-                    We value first-principles reasoning, high ownership, direct communication, and a genuine respect for manufacturing craftsmanship.
-                </p>
-            </div>
-        </section>
-
-        <!-- Open Disciplines -->
-        <section class="reveal container" style="padding: 3rem 0;">
-            <div class="hp-section-header">
-                <span class="hp-section-tag">Open Positions</span>
-                <h2 class="hp-section-title">Current engineering disciplines</h2>
-                <p class="hp-section-desc">Based at our office and engineering facility in Indiranagar, Bengaluru.</p>
-            </div>
-
-            <div class="roles-grid">
-                <!-- 1. Mechanical Design -->
-                <div class="role-card">
-                    <h3>Mechanical Design Engineer</h3>
-                    <p>
-                        Design mechanical structures, kinematic assemblies, thermal enclosures, and sheet metal parts for our Lynx series industrial printers and custom automation tooling. Solid CAD skills (SolidWorks/Fusion 360), DFM familiarity, and tolerance stack-up analysis required.
-                    </p>
-                    <div class="role-link">
-                        [[TODO: link to JD / email info@unbound3d.com with portfolio]]
-                    </div>
-                </div>
-
-                <!-- 2. Embedded / Firmware -->
-                <div class="role-card">
-                    <h3>Embedded &amp; Firmware Engineer</h3>
-                    <p>
-                        Develop and optimize motion control firmware (Klipper/Marlin/custom RTOS), multi-zone closed-loop thermal PID controls, sensor interfaces (eddy current, load cells), and peripheral communication on STM32 and ARM Cortex microcontrollers.
-                    </p>
-                    <div class="role-link">
-                        [[TODO: link to JD / email info@unbound3d.com with portfolio]]
-                    </div>
-                </div>
-
-                <!-- 3. Manufacturing Operations -->
-                <div class="role-card">
-                    <h3>Manufacturing Operations &amp; Quality</h3>
-                    <p>
-                        Lead supplier coordination, CNC machining job routing, and incoming/outgoing quality inspection. Experience reading engineering drawings with GD&amp;T, operating metrology equipment, and maintaining ISO 9001:2015 process documentation.
-                    </p>
-                    <div class="role-link">
-                        [[TODO: link to JD / email info@unbound3d.com with portfolio]]
-                    </div>
-                </div>
-
-                <!-- 4. Sales & Technical Procurement -->
-                <div class="role-card">
-                    <h3>Technical Sales &amp; Applications</h3>
-                    <p>
-                        Interface with procurement managers and lead mechanical engineers at drone, robotics, and defence companies. Review RFQ packages, conduct technical feasibility assessments, and structure production proposals.
-                    </p>
-                    <div class="role-link">
-                        [[TODO: link to JD / email info@unbound3d.com with portfolio]]
-                    </div>
-                </div>
-            </div>
-
-            <!-- Internships Note -->
-            <div style="background: rgba(0, 122, 255, 0.05); border: 1px solid rgba(0, 122, 255, 0.2); border-radius: 12px; padding: 2rem; max-width: 900px; margin: 2rem auto 0;">
-                <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.75rem;">Engineering Internships</h3>
-                <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin: 0;">
-                    We offer 3-to-6 month project internships in Bengaluru to final-year undergraduate and graduate engineering students with demonstrable project experience (e.g. Formula Student, collegiate robotics, custom 3D printer builds, or independent hardware fabrication). Interns work directly alongside our core engineering leads on production hardware.
-                </p>
-            </div>
-        </section>
-
-        <!-- Application CTA -->
-        <section class="final-cta reveal" style="padding: 5rem 0;">
-            <div class="container text-center">
-                <h2>Interested in working together?</h2>
-                <p class="final-cta-desc">
-                    Send your resume and a link to your engineering portfolio or project photos to our team.
-                </p>
-                <div class="final-cta-buttons">
-                    <a href="mailto:info@unbound3d.com?subject=Career%20Application%20at%20Unbound3D" class="final-btn final-btn-primary">Email your portfolio to info@unbound3d.com</a>
+        <section class="careers-section reveal">
+            <div class="container">
+                <h1 class="hero-text" style="margin-bottom: 2rem;">Build the future with us.</h1>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">We are always looking for visionary engineers, designers,
+                    and
+                    thinkers. Send us your portfolio.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="mailto:info@unbound3d.com" class="btn-primary">Email your resume</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Shared Site Footer -->
-    <div id="site-footer">
-        <footer class="site-footer">
-            <div class="footer-grid container">
-                <div class="footer-column">
-                    <a href="/" class="nav-logo" style="margin-bottom: 0.5rem;" aria-label="Unbound3D Homepage">
-                        <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="28" height="28">
-                        <div class="nav-brand-text">
-                            <span class="brand-name">Unbound3D</span>
-                        </div>
-                    </a>
-                    <p style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-bottom: 1rem;">
-                        From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner.
-                    </p>
-                    <div style="opacity: 0.7; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
-                        <strong>Unbound3D Industries Pvt Ltd</strong><br>
-                        Indiranagar, Bengaluru, Karnataka, India<br>
-                        Phone / WhatsApp: <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+91 75581 50570</a><br>
-                        Email: <a href="mailto:info@unbound3d.com" style="color: inherit; text-decoration: underline;">info@unbound3d.com</a><br>
-                        GST: 29AAECU0620P1Z1<br>
-                        <span style="display: inline-block; margin-top: 0.4rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.08); border-radius: 4px; font-weight: 500;">ISO 9001:2015 certified</span>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Offerings</h4>
-                    <div class="footer-links">
-                        <a href="/manufacturing.html">Manufacturing</a>
-                        <a href="/lynx-350.html">Lynx-350</a>
-                        <a href="/how-we-work.html">How we work</a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <div class="footer-links">
-                        <a href="/team.html">Team</a>
-                        <a href="/careers.html">Careers</a>
-                        <a href="/contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Get Started</h4>
-                    <div class="footer-links">
-                        <a href="/contact.html#quote" style="font-weight: 600; color: #fff;">Get a quote &rarr;</a>
-                        <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-                        <a href="mailto:info@unbound3d.com">Email Drawings</a>
-                    </div>
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>Unbound3D</h4>
+                <div class="footer-links">
+                    <p>Building the digital infrastructure for physical production.</p>
                 </div>
             </div>
-            <div class="container footer-bottom">
-                <div>&copy; 2026 Unbound3D Industries Pvt Ltd. All rights reserved.</div>
-                <div class="footer-legal-links">
-                    <span>ISO 9001:2015 certified</span>
-                    <a href="/contact.html">Terms &amp; Enquiries</a>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <div class="footer-links">
+                    <a href="/platform.html">Technology</a>
+                    <a href="/lynx350.html">Lynx 350</a>
+            <a href="/lynx350.html">Lynx-350</a>
+                    <a href="/lynx-320.html">Lynx-320</a>
                 </div>
             </div>
-        </footer>
-    </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <div class="footer-links">
+                    <a href="/hanzof.html">Hanzof Managed Service</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="/team.html">Team</a>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

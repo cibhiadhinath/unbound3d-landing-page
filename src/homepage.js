@@ -73,7 +73,12 @@ let pointerPrevY = 0;
 let dragVelocityX = 0;
 let dragVelocityY = 0;
 
+// Globe navigation state
+let isNavigating = false;
+let navTransitionRaf = null;
 let originalCameraZ = 12;
+let originalGlobeOpacity = 0.1;
+let activeNavSection = null;
 
 // ─── Shuffle helper ───
 function shuffleArray(arr) {
@@ -236,14 +241,33 @@ function onPointerMove(e) {
     pointerPrevY = e.clientY;
 }
 
-function onPointerUp() {
+function onPointerUp(e) {
+    if (pointerDown && e && e.clientX !== undefined) {
+        // Check if it was a click (not a drag)
+        const totalDrag = Math.abs(e.clientX - pointerStartX) + Math.abs(e.clientY - pointerStartY);
+        if (totalDrag < 8 && !isNavigating) {
+            // It's a click — check if a 3D node was hit
+            const clickMouse = new THREE.Vector2();
+            clickMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            clickMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            const clickRaycaster = new THREE.Raycaster();
+            clickRaycaster.setFromCamera(clickMouse, camera);
+            const intersects = clickRaycaster.intersectObjects(stars);
+            if (intersects.length > 0) {
+                const idx = intersects[0].object.userData.index;
+                if (idx !== undefined) {
+                    navigateToSection(idx);
+                }
+            }
+        }
+    }
     pointerDown = false;
     isUserInteracting = false;
     lastInteractionTime = performance.now();
 }
 
 function onVisibilityChange() {
-    const animationActive = !document.hidden;
+    animationActive = !document.hidden;
     if (animationActive) {
         lastFrameTime = performance.now();
         animate(lastFrameTime);
@@ -258,7 +282,9 @@ function onResize() {
     camera.updateProjectionMatrix();
 
     originalCameraZ = isMobile ? 14 : 12;
-    camera.position.set(0, 0, originalCameraZ);
+    if (!isNavigating) {
+        camera.position.set(0, 0, originalCameraZ);
+    }
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
@@ -284,7 +310,218 @@ function onScroll() {
     scrollProgress = Math.max(0, Math.min(1, -rect.top / (hero.offsetHeight * 0.6)));
 }
 
+// ─── Mobile Services Ticker (horizontal scrolling marquee) ───
+function buildMobileTicker() {
+    const heroSection = document.getElementById('hero-section');
+    if (!heroSection) return;
 
+    const ticker = document.createElement('div');
+    ticker.className = 'services-ticker';
+
+    const track = document.createElement('div');
+    track.className = 'services-ticker-track';
+
+    // Filter to just individual services (not headers) for the ticker
+    const tickerServices = SERVICE_TILES.filter(s => !s.isHeader);
+
+    // Create items twice for seamless loop
+    for (let loop = 0; loop < 2; loop++) {
+        tickerServices.forEach(cap => {
+            const item = document.createElement('div');
+            item.className = 'services-ticker-item';
+            // Simple text label since we removed icons
+            item.innerHTML = `
+                <span class="ticker-label">${cap.text}</span>
+            `;
+            // Ticker items can just scroll, navigation removed for simplicity as there are 80+ items
+            track.appendChild(item);
+        });
+    }
+
+    ticker.appendChild(track);
+    heroSection.appendChild(ticker);
+}
+
+// ═════════════════════════════════════════════════════
+//  GLOBE NAVIGATION SYSTEM
+// ═════════════════════════════════════════════════════
+
+function navigateToSection(sectionId, globeNodeIndex = -1) {
+    if (isNavigating) return;
+    isNavigating = true;
+
+    const targetSection = document.getElementById(sectionId);
+    if (!targetSection) { isNavigating = false; return; }
+
+    activeNavSection = sectionId;
+
+    // 1. Pause rotation
+    autoRotationEnabled = false;
+    currentRotationSpeed = 0;
+
+    // 2. Hide or isolate globe dots and labels
+    starLabels.forEach((l, idx) => {
+        if (l) {
+            l.style.opacity = (idx === globeNodeIndex) ? '1' : '0';
+            l.style.pointerEvents = 'none';
+        }
+    });
+
+    starDots.forEach((dot, idx) => {
+        if (dot) {
+            dot.style.opacity = '0'; // Hide dots when navigating
+            dot.style.pointerEvents = 'none';
+        }
+    });
+
+    // 3. Add body classes for hero fade + scroll lock
+    document.body.classList.add('globe-nav-active', 'globe-section-open');
+
+    // 4. Camera zoom + globe dissolve (600ms)
+    const startTime = performance.now();
+    const duration = 600;
+    const startZ = camera.position.z;
+    const targetZ = 2.5; // Deep zoom inside the globe
+
+    function animateTransition(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const ease = 1 - Math.pow(1 - t, 3);
+
+        camera.position.z = startZ + (targetZ - startZ) * ease;
+
+        // Dissolve globe
+        if (globeGroup) {
+            globeGroup.traverse((child) => {
+                if (child.material && child.material.transparent) {
+                    child.material.opacity *= (1 - ease * 0.9);
+                }
+            });
+        }
+
+        // Fade canvas
+        if (canvas) {
+            canvas.style.opacity = 1 - ease;
+        }
+
+        if (t < 1) {
+            navTransitionRaf = requestAnimationFrame(animateTransition);
+        } else {
+            // 5. Transition complete — show section as full-screen overlay
+            if (canvas) canvas.style.opacity = '0';
+
+            // Inject close button if not already present
+            if (!targetSection.querySelector('.section-close-btn')) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'section-close-btn';
+                closeBtn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+                closeBtn.addEventListener('click', returnToGlobe);
+                targetSection.prepend(closeBtn);
+            }
+
+            // Show section as fixed overlay
+            targetSection.classList.add('section-overlay-active');
+
+            // Show back button
+            const backBtn = document.getElementById('globe-back-btn');
+            if (backBtn) backBtn.classList.add('visible');
+        }
+    }
+
+    navTransitionRaf = requestAnimationFrame(animateTransition);
+}
+
+function returnToGlobe() {
+    if (!isNavigating) return;
+
+    // 1. Hide back button
+    const backBtn = document.getElementById('globe-back-btn');
+    if (backBtn) backBtn.classList.remove('visible');
+
+    // 2. Fade out the active section
+    if (activeNavSection) {
+        const section = document.getElementById(activeNavSection);
+        if (section) {
+            section.style.animation = 'sectionFadeOut 0.4s ease-in forwards';
+            setTimeout(() => {
+                section.classList.remove('section-overlay-active');
+                section.style.animation = '';
+            }, 400);
+        }
+    }
+
+    // 3. Restore globe (start after section begins fading)
+    setTimeout(() => {
+        // Show canvas
+        if (canvas) canvas.style.opacity = '1';
+
+        const startTime = performance.now();
+        const duration = 600;
+        const startZ = camera.position.z;
+
+        function animateReturn(now) {
+            const elapsed = now - startTime;
+            const t = Math.min(1, elapsed / duration);
+            const ease = 1 - Math.pow(1 - t, 3);
+
+            // Restore camera
+            camera.position.z = startZ + (originalCameraZ - startZ) * ease;
+
+            // Restore globe materials
+            if (globeGroup) {
+                globeGroup.traverse((child) => {
+                    if (child.material && child.material.transparent) {
+                        if (child.geometry && child.geometry.type === 'SphereGeometry' &&
+                            child.geometry.parameters.radius === CONFIG.globeRadius) {
+                            child.material.opacity = originalGlobeOpacity * ease;
+                        } else {
+                            child.material.opacity = 0.8 * ease;
+                        }
+                    }
+                });
+            }
+
+            // Restore star colors (if we were using them)
+            stars.forEach(s => {
+                s.material.color.setHex(0xf0eee6);
+            });
+
+            if (t < 1) {
+                navTransitionRaf = requestAnimationFrame(animateReturn);
+            } else {
+                // Fully restored
+                isNavigating = false;
+                activeNavSection = null;
+                autoRotationEnabled = true;
+                lastInteractionTime = performance.now();
+                document.body.classList.remove('globe-nav-active', 'globe-section-open');
+
+                starLabels.forEach((l, idx) => {
+                    if (l) l.style.pointerEvents = '';
+                });
+
+                starDots.forEach((dot, idx) => {
+                    if (dot) {
+                        dot.style.pointerEvents = 'auto';
+                        dot.style.opacity = '1';
+                    }
+                });
+            }
+        }
+
+        navTransitionRaf = requestAnimationFrame(animateReturn);
+    }, 200); // Start globe restore 200ms into section fade
+}
+
+// Export for external use (back button + Escape key)
+window.returnToGlobe = returnToGlobe;
+
+// Escape key to close section
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isNavigating) {
+        returnToGlobe();
+    }
+});
 
 
 function show2DFallback() {
