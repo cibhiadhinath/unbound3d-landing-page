@@ -5,49 +5,83 @@
     <meta charset="UTF-8" />
     <meta name="color-scheme" content="dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Unbound3D — Precision CNC Machining & Metal Additive Manufacturing</title>
+    <title>Unbound3D — Managed Manufacturing &amp; Industrial 3D Printing</title>
     <meta name="description"
-        content="Precision CNC machining, metal additive manufacturing, and engineering services. Production-ready parts with dimensional inspection, material certificates, and batch traceability. Request a manufacturing quote." />
-    <script>
-        // Redirect procure subdomain to procurement page
-        if (window.location.hostname === 'procure.unbound3d.com' && window.location.pathname === '/') {
-            window.location.replace('/procure.html');
-        }
+        content="From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner. ISO 9001:2015 certified." />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://unbound3d.com/" />
+    <meta property="og:title" content="Unbound3D — Manufacturing, executed." />
+    <meta property="og:description" content="Managed manufacturing for engineering teams: CNC machining, industrial 3D printing, composites, and sheet metal. One accountable partner." />
+    <meta property="og:image" content="https://unbound3d.com/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Unbound3D — Manufacturing, executed." />
+    <meta name="twitter:description" content="Managed manufacturing for engineering teams. ISO 9001:2015 certified. Quotes in 6 business hours." />
+    <meta name="twitter:image" content="https://unbound3d.com/logo.png" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Unbound3D Industries Pvt Ltd",
+      "url": "https://unbound3d.com",
+      "logo": "https://unbound3d.com/logo.png",
+      "description": "Managed manufacturing partner for precision CNC machining, industrial 3D printing, composites, and sheet metal fabrication.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Indiranagar",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-75581-50570",
+        "contactType": "customer service",
+        "email": "info@unbound3d.com"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/unbound3d/"
+      ]
+    }
     </script>
+
     <script type="module" src="/src/main.js"></script>
 </head>
 
 <body>
-    <nav>
-        <div class="nav-logo">
-            <a href="/" class="nav-brand-text">
-                <span class="brand-name">Unbound3D</span>
-                <span class="brand-tagline">Power to Create</span>
+    <!-- Shared Site Navigation (hydrated by main.js, static fallback for SEO) -->
+    <div id="site-header">
+        <nav class="site-nav">
+            <a href="/" class="nav-logo" aria-label="Unbound3D Homepage">
+                <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="32" height="32" />
+                <div class="nav-brand-text">
+                    <span class="brand-name">Unbound3D</span>
+                </div>
             </a>
-        </div>
-        <div class="nav-links">
-            <a href="/platform.html">Platform</a>
-            <a href="/hanzof.html">Hanzof</a>
-            <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx-320.html">Lynx 320</a>
-            <a href="/team.html">Team</a>
-            <a href="/contact.html" class="cta-button">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="/manufacturing.html">Manufacturing</a>
+                <a href="/lynx-350.html">Lynx-350</a>
+                <a href="/how-we-work.html">How we work</a>
+                <a href="/team.html">Team</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/contact.html#quote" class="cta-button">Get a quote</a>
+            </div>
+        </nav>
+    </div>
 
     <main>
-        <!-- Globe Navigation: Back Button -->
-        <button id="globe-back-btn" onclick="returnToGlobe()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Back to Globe
-        </button>
-
         <!-- ═══ HERO SECTION ═══ -->
         <section id="hero-section">
             <div id="hero-canvas-container"></div>
@@ -55,18 +89,35 @@
             <div id="capability-nodes"></div>
 
             <div class="hero-content">
-                <a href="/contact.html" id="hero-logo-link">
-                    <h1 id="hero-title">UNBOUND3D</h1>
-                </a>
-                <p id="hero-subtitle">From concept to reliable production.</p>
-                <p id="hero-trust">Your outsourced manufacturing team.</p>
+                <h1 id="hero-title">Manufacturing, executed.</h1>
+                <p id="hero-subtitle">From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner.</p>
+                
+                <div class="hero-cta-buttons" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 2rem; flex-wrap: wrap; z-index: 20;">
+                    <a href="/contact.html#quote" class="final-btn final-btn-primary">Get a quote</a>
+                    <a href="/manufacturing.html" class="final-btn final-btn-secondary">See what we make</a>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(240, 238, 230, 0.7); letter-spacing: 0.02em;">
+                    Engineer-reviewed quotes within 6 business hours.
+                </p>
+            </div>
+        </section>
 
-                <div id="hero-cta">
-                    <!-- Button removed, logo is the CTA -->
+        <!-- ═══ TRUST STRIP ═══ -->
+        <section class="hp-section" id="trust-strip-section" style="padding: 2.5rem 0; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 15, 18, 0.6);">
+            <div class="container text-center">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1rem 1.75rem; flex-wrap: wrap; font-size: 0.95rem; color: rgba(240, 238, 230, 0.85); font-weight: 500;">
+                    <span>ISO 9001:2015 certified</span>
+                    <span style="opacity: 0.3;">&bull;</span>
+                    <span>Engineer-reviewed quotes in 6 business hours</span>
+                    <span style="opacity: 0.3;">&bull;</span>
+                    <span>CNC, 3D printing, composites, sheet metal</span>
+                    <span style="opacity: 0.3;">&bull;</span>
+                    <span>Bengaluru, shipping across India</span>
+                </div>
+                <div style="margin-top: 1.25rem; font-size: 0.8rem; color: rgba(240, 238, 230, 0.45); font-family: 'Space Grotesk', monospace;">
+                    [[TODO: customer/partner logos with permission]]
                 </div>
             </div>
-
-
         </section>
 
         <!-- ═══ HOW IT WORKS ═══ -->
@@ -74,37 +125,94 @@
             <div class="container">
                 <div class="hp-section-header">
                     <span class="hp-section-tag">How It Works</span>
-                    <h2 class="hp-section-title">A streamlined path to production</h2>
+                    <h2 class="hp-section-title">A disciplined path to finished parts</h2>
+                    <p class="hp-section-desc">We eliminate the coordination overhead of working across multiple machine shops and suppliers.</p>
                 </div>
-                <div class="steps-grid">
+                <div class="steps-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                        </div>
+                        <h3>1. Requirement &amp; DFM Review</h3>
+                        <p>We review your CAD files (STEP, IGES, STL, DXF) and 2D PDF drawings for manufacturability, tolerances, and material feasibility before quoting.</p>
+                    </div>
                     <div class="step-card">
                         <div class="step-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
                             </svg>
                         </div>
-                        <h3>1. Design & Review</h3>
-                        <p>We analyze CAD, improve manufacturability, and reduce risk.</p>
+                        <h3>2. Process Selection &amp; Quote</h3>
+                        <p>Receive an engineer-reviewed quote with transparent lead times, process recommendations, and commercial terms within 6 business hours.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
                             </svg>
                         </div>
-                        <h3>2. Prototype & Iterate</h3>
-                        <p>Rapid prototypes and engineering feedback.</p>
+                        <h3>3. Manufacturing &amp; QC</h3>
+                        <p>Parts are manufactured in-house or through qualified partner facilities under strict process control and intermediate quality checkpoints.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M5 13l4 4L19 7" />
+                                <path d="M9 11l3 3L22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                             </svg>
                         </div>
-                        <h3>3. Reliable Production</h3>
-                        <p>Managed suppliers, QA verification, predictable delivery.</p>
+                        <h3>4. Delivery with Inspection Report</h3>
+                        <p>Finished components arrive at your facility with dimensional inspection reports, secure packaging, and full batch traceability.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SERVICES GRID ═══ -->
+        <section class="hp-section reveal" id="services-grid-section">
+            <div class="container">
+                <div class="hp-section-header">
+                    <span class="hp-section-tag">Manufacturing Capabilities</span>
+                    <h2 class="hp-section-title">One accountable partner across core processes</h2>
+                    <p class="hp-section-desc">From one-off functional prototypes to recurring low-volume production batches.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                    <!-- Prototyping -->
+                    <a href="/manufacturing.html#prototyping" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">Prototyping &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">Rapid validation models, functional fit checks, and engineering iterations delivered in days.</p>
+                    </a>
+                    <!-- CNC Machining -->
+                    <a href="/manufacturing.html#cnc" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">CNC Machining &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">3-axis and 5-axis milling and turning in aluminium (6061, 7075), stainless steel 304, brass, POM, and PC.</p>
+                    </a>
+                    <!-- Industrial 3D Printing -->
+                    <a href="/manufacturing.html#3d-printing" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">Industrial 3D Printing &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">High-temperature FDM for PA-CF, PA-GF, ASA, and engineering thermoplastics; precision SLA via qualified partners.</p>
+                    </a>
+                    <!-- Carbon Fibre & Composites -->
+                    <a href="/manufacturing.html#composites" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">Carbon Fibre &amp; Composites &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">CNC-machined carbon fibre sheet, structural plates, and custom lightweight composite assemblies for drones and robotics.</p>
+                    </a>
+                    <!-- Sheet Metal & Fabrication -->
+                    <a href="/manufacturing.html#sheet-metal" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">Sheet Metal &amp; Fabrication &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">Laser cutting, precision CNC bending, welding, and hardware insertion in aluminium 5052, stainless, and mild steel.</p>
+                    </a>
+                    <!-- Tooling & Low-Volume Production -->
+                    <a href="/manufacturing.html#tooling" class="step-card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, border-color 0.2s ease;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #fff;">Tooling &amp; Low-Volume Production &rarr;</h3>
+                        <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">Jigs, assembly fixtures, soft tooling, bridge production runs, and low-to-mid volume injection moulds.</p>
+                    </a>
                 </div>
             </div>
         </section>
@@ -115,14 +223,17 @@
                 <div class="hp-section-header">
                     <span class="hp-section-tag">Industries</span>
                     <h2 class="hp-section-title">Engineered for critical applications</h2>
+                    <p class="hp-section-desc">Supplying hardware teams where dimensional accuracy, material traceability, and delivery discipline matter.</p>
                 </div>
                 <div class="industries-minimal-grid">
                     <div class="industry-tile">Robotics</div>
-                    <div class="industry-tile">Drones & Aerospace</div>
+                    <div class="industry-tile">Drones &amp; UAVs / Aerospace</div>
+                    <div class="industry-tile">Defence</div>
                     <div class="industry-tile">Industrial Equipment</div>
-                    <div class="industry-tile">EV & Mobility</div>
+                    <div class="industry-tile">EV &amp; Mobility</div>
+                    <div class="industry-tile">University &amp; R&amp;D Labs</div>
                     <div class="industry-tile">Consumer Hardware</div>
-                    <div class="industry-tile">Research Labs</div>
+                    <div class="industry-tile">Automation &amp; Fixtures</div>
                 </div>
             </div>
         </section>
@@ -134,18 +245,41 @@
                     <span class="hp-section-tag">Why Choose Us</span>
                     <h2 class="hp-section-title">Built on execution and trust</h2>
                 </div>
-                <div class="trust-grid">
-                    <div class="trust-point">
-                        <h4>Engineering feedback before manufacturing</h4>
+                <div class="trust-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                    <div class="trust-point" style="background: rgba(240, 238, 230, 0.02); padding: 1.75rem; border: 1px solid rgba(240, 238, 230, 0.08); border-radius: 8px;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 1.15rem; color: #fff;">Engineering feedback before manufacturing</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.6; margin: 0;">Every job gets a DFM review by an engineer before it is quoted, so problems are fixed on screen, not on the machine.</p>
                     </div>
-                    <div class="trust-point">
-                        <h4>Verified quality & documentation</h4>
+                    <div class="trust-point" style="background: rgba(240, 238, 230, 0.02); padding: 1.75rem; border: 1px solid rgba(240, 238, 230, 0.08); border-radius: 8px;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 1.15rem; color: #fff;">Verified quality &amp; documentation</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.6; margin: 0;">Parts are inspected to drawing specifications before dispatch, complete with dimensional inspection reports and material traceability.</p>
                     </div>
-                    <div class="trust-point">
-                        <h4>Managed supplier network</h4>
+                    <div class="trust-point" style="background: rgba(240, 238, 230, 0.02); padding: 1.75rem; border: 1px solid rgba(240, 238, 230, 0.08); border-radius: 8px;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 1.15rem; color: #fff;">Managed supplier network</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.6; margin: 0;">We combine in-house production with qualified partner facilities, giving you capacity across multiple processes with a single accountable point of contact.</p>
                     </div>
-                    <div class="trust-point">
-                        <h4>Predictable timelines</h4>
+                    <div class="trust-point" style="background: rgba(240, 238, 230, 0.02); padding: 1.75rem; border: 1px solid rgba(240, 238, 230, 0.08); border-radius: 8px;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 1.15rem; color: #fff;">Predictable timelines</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.6; margin: 0;">Clear milestone updates and committed delivery dates ensure your engineering team stays on schedule from first sample to volume dispatch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ LYNX-350 TEASER BLOCK ═══ -->
+        <section class="hp-section reveal" id="machine-teaser" style="background: linear-gradient(180deg, rgba(20,20,24,0.4) 0%, rgba(10,10,12,0.8) 100%);">
+            <div class="container">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; background: rgba(240, 238, 230, 0.02); border: 1px solid rgba(240, 238, 230, 0.08); border-radius: 12px; padding: 3rem;">
+                    <div style="flex: 1 1 400px;">
+                        <span class="hp-section-tag" style="margin-bottom: 0.5rem; display: inline-block;">Hardware Built by Unbound3D</span>
+                        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); color: #fff; margin-bottom: 1rem;">We build our own machines too.</h2>
+                        <p style="font-size: 1.05rem; opacity: 0.8; line-height: 1.7; margin-bottom: 2rem;">
+                            Designed and built in Bengaluru, the <strong>Lynx-350</strong> is our high-temperature industrial 3D printer engineered for carbon fibre reinforced polymers and production tooling.
+                        </p>
+                        <a href="/lynx-350.html" class="final-btn final-btn-secondary">Explore the Lynx-350 &rarr;</a>
+                    </div>
+                    <div style="flex: 1 1 350px; text-align: center;">
+                        <img src="/lynx-350.png" alt="Lynx-350 Industrial 3D Printer" style="max-height: 320px; width: auto; margin: 0 auto; filter: drop-shadow(0 0 30px rgba(0, 122, 255, 0.2));">
                     </div>
                 </div>
             </div>
@@ -158,35 +292,45 @@
                     <span class="hp-section-tag">Case Studies</span>
                     <h2 class="hp-section-title">Proven in the field</h2>
                 </div>
-                <div class="case-study-card">
+                
+                <!-- Case Study 1 -->
+                <div class="case-study-card" style="margin-bottom: 2rem;">
                     <div class="cs-image">
-                        <!-- Placeholder graphic, can be replaced with real image later -->
-                        <div
-                            style="width: 100%; height: 100%; background: linear-gradient(45deg, #111, #222); display: flex; align-items: center; justify-content: center; opacity: 0.8;">
-                            <svg viewBox="0 0 24 24" stroke="rgba(255,255,255,0.1)" fill="none" width="48" height="48"
-                                stroke-width="1">
-                                <path
-                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                </path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
+                        <div style="width: 100%; height: 100%; min-height: 280px; background: linear-gradient(45deg, #111, #1a1a1f); display: flex; align-items: center; justify-content: center;">
+                            <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; letter-spacing: 0.1em; color: rgba(240, 238, 230, 0.4); text-transform: uppercase;">Robotics Chassis</span>
                         </div>
                     </div>
                     <div class="cs-content">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #fff; opacity: 0.9; margin-bottom: 0.5rem;">Robotics startup, Bengaluru</div>
                         <div class="cs-block">
                             <span class="cs-label">Problem</span>
-                            <p>A robotics startup needed a lightweight, high-strength chassis designed for 5-axis CNC
-                                within 2 weeks.</p>
+                            <p>A robotics startup needed a lightweight, high-strength chassis designed for 5-axis CNC production, delivered within 2 weeks.</p>
                         </div>
                         <div class="cs-block">
                             <span class="cs-label">Solution</span>
-                            <p>We ran a DFM analysis, optimized the topology to reduce weight by 15%, and managed the
-                                CNC production and anodizing.</p>
+                            <p>We ran a DFM analysis, optimised the topology to reduce weight by 15%, and managed the CNC production and anodising.</p>
                         </div>
                         <div class="cs-block">
                             <span class="cs-label">Result</span>
                             <p>Delivered fully inspected, ready-to-assemble chassis 3 days ahead of schedule.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2 Placeholder -->
+                <div class="case-study-card" style="margin-bottom: 2rem; border-style: dashed;">
+                    <div class="cs-content" style="padding: 2.5rem; text-align: center; width: 100%;">
+                        <div style="font-family: 'Space Grotesk', monospace; font-size: 0.95rem; color: rgba(240, 238, 230, 0.5);">
+                            [[TODO: case study — problem / solution / result]]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 3 Placeholder -->
+                <div class="case-study-card" style="border-style: dashed;">
+                    <div class="cs-content" style="padding: 2.5rem; text-align: center; width: 100%;">
+                        <div style="font-family: 'Space Grotesk', monospace; font-size: 0.95rem; color: rgba(240, 238, 230, 0.5);">
+                            [[TODO: case study — problem / solution / result]]
                         </div>
                     </div>
                 </div>
@@ -197,50 +341,76 @@
         <section class="final-cta reveal" id="final-cta-section">
             <div class="container">
                 <h2>Ready to build your product?</h2>
+                <p class="final-cta-desc">Upload your drawings or 3D CAD files for a comprehensive DFM review and quotation within 6 business hours.</p>
                 <div class="final-cta-buttons">
-                    <a href="/contact.html" class="final-btn final-btn-primary">Upload CAD File</a>
-                    <a href="/contact.html" class="final-btn final-btn-secondary">Talk to an Engineer</a>
+                    <a href="/contact.html#quote" class="final-btn final-btn-primary">Upload your CAD</a>
+                    <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" class="final-btn final-btn-secondary">Chat on WhatsApp</a>
+                </div>
+                <div class="final-cta-note" style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.6;">
+                    Accepted formats: STEP, IGES, STL, DXF, PDF. NDAs supported upon request.
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-column">
-                <h4>Unbound3D</h4>
-                <div class="footer-links">
-                    <p>Building the digital infrastructure for physical production.</p>
+    <!-- Shared Site Footer (hydrated by main.js, static fallback for SEO) -->
+    <div id="site-footer">
+        <footer class="site-footer">
+            <div class="footer-grid container">
+                <div class="footer-column">
+                    <a href="/" class="nav-logo" style="margin-bottom: 0.5rem;" aria-label="Unbound3D Homepage">
+                        <img src="/logo.png" alt="Unbound3D Logo" class="logo-img" width="28" height="28">
+                        <div class="nav-brand-text">
+                            <span class="brand-name">Unbound3D</span>
+                        </div>
+                    </a>
+                    <p style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-bottom: 1rem;">
+                        From process selection and production to quality inspection and delivery, Unbound3D manages manufacturing through one accountable partner.
+                    </p>
+                    <div style="opacity: 0.7; font-size: 0.85rem; line-height: 1.6; max-width: 300px;">
+                        <strong>Unbound3D Industries Pvt Ltd</strong><br>
+                        Indiranagar, Bengaluru, Karnataka, India<br>
+                        Phone / WhatsApp: <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+91 75581 50570</a><br>
+                        Email: <a href="mailto:info@unbound3d.com" style="color: inherit; text-decoration: underline;">info@unbound3d.com</a><br>
+                        GST: 29AAECU0620P1Z1<br>
+                        <span style="display: inline-block; margin-top: 0.4rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.08); border-radius: 4px; font-weight: 500;">ISO 9001:2015 certified</span>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Offerings</h4>
+                    <div class="footer-links">
+                        <a href="/manufacturing.html">Manufacturing</a>
+                        <a href="/lynx-350.html">Lynx-350</a>
+                        <a href="/how-we-work.html">How we work</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <div class="footer-links">
+                        <a href="/team.html">Team</a>
+                        <a href="/careers.html">Careers</a>
+                        <a href="/contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Get Started</h4>
+                    <div class="footer-links">
+                        <a href="/contact.html#quote" style="font-weight: 600; color: #fff;">Get a quote &rarr;</a>
+                        <a href="https://wa.me/917558150570" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                        <a href="mailto:info@unbound3d.com">Email Drawings</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Platform</h4>
-                <div class="footer-links">
-                    <a href="/platform.html">Technology</a>
-                    <a href="/lynx350.html">Lynx-350</a>
-                    <a href="/lynx-320.html">Lynx-320</a>
+            <div class="container footer-bottom">
+                <div>&copy; 2026 Unbound3D Industries Pvt Ltd. All rights reserved.</div>
+                <div class="footer-legal-links">
+                    <span>ISO 9001:2015 certified</span>
+                    <a href="/contact.html">Terms &amp; Enquiries</a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <div class="footer-links">
-                    <a href="/hanzof.html">Hanzof Managed Service</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Company</h4>
-                <div class="footer-links">
-                    <a href="/team.html">Team</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
-        </div>
-    </footer>
-    <!-- Footer injected by main.js -->
+        </footer>
+    </div>
 </body>
 
 </html>
