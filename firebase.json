@@ -7,6 +7,22 @@
             "**/node_modules/**"
         ],
         "cleanUrls": true,
-        "trailingSlash": false
+        "trailingSlash": false,
+        "redirects": [
+            { "source": "/hanzof.html", "destination": "/manufacturing.html", "type": 301 },
+            { "source": "/hanzof", "destination": "/manufacturing", "type": 301 },
+            { "source": "/platform.html", "destination": "/manufacturing.html", "type": 301 },
+            { "source": "/platform", "destination": "/manufacturing", "type": 301 },
+            { "source": "/lynx350.html", "destination": "/lynx-350.html", "type": 301 },
+            { "source": "/lynx350", "destination": "/lynx-350", "type": 301 },
+            { "source": "/lynx-320.html", "destination": "/lynx-350.html", "type": 301 },
+            { "source": "/lynx-320", "destination": "/lynx-350", "type": 301 },
+            { "source": "/procure.html", "destination": "/manufacturing.html", "type": 301 },
+            { "source": "/procure", "destination": "/manufacturing", "type": 301 },
+            { "source": "/story.html", "destination": "/how-we-work.html", "type": 301 },
+            { "source": "/story", "destination": "/how-we-work", "type": 301 },
+            { "source": "/makura.html", "destination": "/", "type": 301 },
+            { "source": "/makura", "destination": "/", "type": 301 }
+        ]
     }
 }
