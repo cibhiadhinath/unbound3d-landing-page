@@ -4,6 +4,12 @@ Everything here is either a **placeholder** on the live pages or a **claim remov
 
 Line references to removed claims point at the original files in commit `d8729eb` (view with `git show d8729eb:<file>`).
 
+## Keys to add
+
+| File | What's needed |
+|---|---|
+| `src/contact-form.js` | `WEB3FORMS_ACCESS_KEY`: free key from https://web3forms.com created with info@unbound3d.com. Until it is set, the form shows an error pointing people to email and WhatsApp. |
+
 ## Placeholders on the site
 
 Every placeholder appears on the page as a yellow dashed `[placeholder: …]` and has a matching `<!-- TODO -->` comment. Run `grep -rn "TODO\|placeholder:" *.html` to list them.

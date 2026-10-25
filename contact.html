@@ -2,159 +2,115 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Contact — Unbound3D</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Contact Unbound3D — Talk to an Engineer | Bengaluru</title>
+    <meta name="description" content="Talk to an Unbound3D engineer about 3D printing, CNC, composites or the Lynx 350. WhatsApp +91 75581 50570 or send a message. We reply within 1 business day.">
+    <link rel="canonical" href="https://unbound3d.com/contact">
     <!-- @include head -->
     <script type="module" src="/src/main.js"></script>
-    <style>
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            margin-top: 4rem;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-            padding: 1rem 0;
-            font-size: 1.25rem;
-            font-family: inherit;
-            color: inherit;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        @media (prefers-color-scheme: dark) {
-
-            .form-input,
-            .form-textarea {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            }
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            border-bottom-color: var(--accent-color);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-    </style>
+    <script type="module" src="/src/contact-form.js"></script>
 </head>
 
 <body>
-    <!-- Nav -->
     <!-- @include header -->
 
     <main id="main">
-        <!-- Title -->
-        <section class="reveal" style="padding-bottom: 0; padding-top: 8rem;">
-            <div class="container text-center">
-                <h1 class="hero-text" style="font-size: 4rem; margin: 0 auto;">Let’s build something reliable.</h1>
+        <section class="page-hero">
+            <div class="container">
+                <span class="eyebrow">Contact</span>
+                <h1>Let's build something reliable.</h1>
+                <p class="lead">Tell us about your part or project. We reply within 1 business day.</p>
             </div>
         </section>
 
-        <!-- Form -->
-        <section class="reveal" style="padding-top: 2rem;">
+        <section class="section section--flush-top">
             <div class="container">
-                <!-- Contact Details Header -->
-                <div class="contact-header"
-                    style="text-align: center; margin-bottom: 3rem; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
-                    <p>
-                        <strong>Unbound3D Industries Pvt Ltd.</strong><br>
-                        Indiranagar, Bangalore, India.<br>
-                        Mobile: +91 7558150570 &bull; GST: 29AAECU0620P1Z1
-                    </p>
-                </div>
+                <a href="https://hanzof.com" class="hanzof-card" rel="noopener">
+                    <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span>
+                    <span class="hanzof-card-text">
+                        <strong>Have CAD files?</strong>
+                        Upload them on Hanzof for an engineer-reviewed quote in 6 business hours.
+                    </span>
+                    <span class="btn btn-primary">Upload on Hanzof <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+                </a>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" id="formName" class="form-input" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="formEmail" class="form-input" placeholder="info@unbound3d.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Interest</label>
-                        <select id="formInterest" class="form-input" style="cursor:pointer;">
-                            <option>Manufacturing Quote (Upload Files)</option>
-                            <option>Hanzof Managed Service</option>
-                            <option>Lynx 350 inquiry</option>
-                            <option>General Inquiry</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea id="formMessage" class="form-textarea"
-                            placeholder="Tell us about your project requirements..."></textarea>
-                    </div>
+                <div class="contact-grid">
+                    <form class="contact-form" id="contact-form" novalidate data-contact-form>
+                        <h2 class="contact-form-title">Send us a message</h2>
 
-                    <div class="file-upload-note"
-                        style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; opacity: 0.8; border: 1px dashed rgba(255,255,255,0.2);">
-                        <strong>Got CAD files?</strong><br>
-                        Please attach your drawings or 3D models to the email client that opens when you click Send.
-                    </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+                                <input id="cf-name" name="name" type="text" autocomplete="name" required aria-describedby="cf-name-error">
+                                <p class="field-error" id="cf-name-error" hidden>Please enter your name.</p>
+                            </div>
+                            <div class="field">
+                                <label for="cf-email">Email <span aria-hidden="true">*</span></label>
+                                <input id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="cf-email-error">
+                                <p class="field-error" id="cf-email-error" hidden>Please enter a valid email address.</p>
+                            </div>
+                        </div>
 
-                    <div class="text-center"
-                        style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                        <button type="submit" class="btn"
-                            style="padding: 1rem 3rem; font-size: 1.1rem; cursor: pointer; border:none; background: var(--accent-color); color: var(--bg-color); font-weight: 600; border-radius: 99px;">
-                            Draft Email Inquiry
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="cf-phone">Phone</label>
+                                <input id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+()\-\s]{7,20}" aria-describedby="cf-phone-error">
+                                <p class="field-error" id="cf-phone-error" hidden>Please enter a valid phone number.</p>
+                            </div>
+                            <div class="field">
+                                <label for="cf-company">Company</label>
+                                <input id="cf-company" name="company" type="text" autocomplete="organization">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="cf-interest">I'm interested in</label>
+                            <select id="cf-interest" name="interest">
+                                <option value="manufacturing">Manufacturing quote</option>
+                                <option value="lynx350">Lynx 350</option>
+                                <option value="procurement">Procurement</option>
+                                <option value="general">General inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="cf-message">Message <span aria-hidden="true">*</span></label>
+                            <textarea id="cf-message" name="message" rows="5" required minlength="10" aria-describedby="cf-message-error"></textarea>
+                            <p class="field-error" id="cf-message-error" hidden>Please tell us a little about your project (at least 10 characters).</p>
+                        </div>
+
+                        <!-- Honeypot: hidden from people, bots fill it in -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="cf-website">Leave this empty</label>
+                            <input id="cf-website" name="botcheck" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg contact-submit">
+                            <span class="contact-submit-label">Send message</span>
+                            <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
                         </button>
 
-                        <div style="opacity: 0.6; font-size: 0.9rem;">or</div>
+                        <div class="form-status" role="status" aria-live="polite" data-form-status hidden></div>
+                    </form>
 
-                        <a href="https://wa.me/917558150570" target="_blank" class="whatsapp-btn"
-                            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 99px; text-decoration: none; color: white;">
-                            <svg viewBox="0 0 32 32" style="width: 20px; height: 20px;">
-                                <path
-                                    d="M16 2C8.28 2 2 8.28 2 16c0 2.5.66 4.87 1.81 6.94l-1.92 7 7.16-1.88A13.94 13.94 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.33c-2.17 0-4.24-.59-6.07-1.61l-.43-.25-4.5 1.18 1.2-4.38-.28-.45A11.3 11.3 0 0 1 4.67 16c0-6.24 5.09-11.33 11.33-11.33S27.33 9.76 27.33 16 22.24 27.33 16 27.33z"
-                                    fill="#25D366"></path>
-                            </svg>
-                            Chat on WhatsApp
+                    <aside class="contact-aside" aria-label="Other ways to reach us">
+                        <a href="https://wa.me/917558150570?text=Hi%2C%20I%20have%20an%20inquiry" class="btn btn-whatsapp btn-lg contact-whatsapp" rel="noopener">
+                            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> Chat on WhatsApp
                         </a>
-                    </div>
-                </form>
+                        <p class="contact-reply">We reply within 1 business day.</p>
+                        <ul class="contact-details">
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> <a href="tel:+917558150570">+91 75581 50570</a></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> <a href="mailto:info@unbound3d.com">info@unbound3d.com</a></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> <span>No. 17, 2nd Floor, 7th Main Road, II Stage, Indiranagar, Bengaluru 560038</span></li>
+                        </ul>
+                    </aside>
+                </div>
             </div>
         </section>
-
-        <script>
-            document.getElementById('contactForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const name = document.getElementById('formName').value;
-                const email = document.getElementById('formEmail').value;
-                const interest = document.getElementById('formInterest').value;
-                const message = document.getElementById('formMessage').value;
-
-                const subject = `Unbound3D Inquiry: ${interest}`;
-                const body = `Name: ${name}\nEmail: ${email}\nInterest: ${interest}\n\nMessage:\n${message}`;
-
-                window.location.href = `mailto:info@unbound3d.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                alert('Thank you! We will get back to you soon.');
-            });
-        </script>
     </main>
 
-    <!-- @include footer --></body>
+    <!-- @include footer -->
+</body>
 
 </html>
