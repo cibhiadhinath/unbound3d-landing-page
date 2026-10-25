@@ -965,7 +965,7 @@ html:not(.js) .hero-stage { display: none; }
   width: min(110%, 560px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 113, 227, 0.1), transparent 62%);
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.06), transparent 60%);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -1018,7 +1018,12 @@ html:not(.js) .hero-stage { display: none; }
 }
 
 @media (max-width: 1023px) {
-  .slicer-canvas { max-width: 380px; }
+  .slicer-canvas { max-width: 340px; }
+}
+
+@media (max-width: 479px) {
+  .slicer-canvas { max-width: 300px; }
+  .hero-grid { gap: var(--space-5); }
 }
 
 /* Credentials fine print */
@@ -1188,7 +1193,7 @@ html:not(.js) .hero-stage { display: none; }
 }
 
 .callout strong { color: var(--text); font-size: var(--step-1); font-weight: 600; }
-.callout-line { display: none; }
+.callout-leaders { display: none; }
 
 /* ==========================================================================
    Product page (Lynx 350)
@@ -1519,33 +1524,14 @@ html:not(.js) .hero-stage { display: none; }
   .lynx-show.is-pinned .callout--2 { top: 44%; }
   .lynx-show.is-pinned .callout--3 { top: 70%; }
 
-  .lynx-show.is-pinned .callout-line {
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    display: block;
-    width: 88px;
-    height: 1px;
-    background: var(--blue);
-    transform: scaleX(0);
-    transform-origin: right center;
-    transition: transform 500ms var(--ease-out) 150ms;
-  }
-
-  .lynx-show.is-pinned .callout-line::before {
-    content: "";
-    position: absolute;
-    left: -4px;
-    top: -3.5px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--blue);
-    box-shadow: 0 0 10px rgba(41, 151, 255, 0.6);
-  }
-
   .lynx-show.is-pinned .callout.is-on { opacity: 1; transform: none; }
-  .lynx-show.is-pinned .callout.is-on .callout-line { transform: scaleX(1); }
+
+  /* Leader lines (SVG, positioned by motion.js from real anchor points on the image) */
+  .lynx-show.is-pinned .callout-leaders { display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .callout-leaders line { stroke: var(--blue); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 500ms var(--ease-out) 120ms; }
+  .callout-leaders circle { fill: var(--blue); opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.4); transition: opacity 300ms var(--ease-out) 450ms, transform 300ms var(--ease-out) 450ms; filter: drop-shadow(0 0 4px rgba(41, 151, 255, 0.8)); }
+  .callout-leaders .is-on line { stroke-dashoffset: 0; }
+  .callout-leaders .is-on circle { opacity: 1; transform: scale(1); }
 }
 
 /* Page transitions (progressive enhancement) */

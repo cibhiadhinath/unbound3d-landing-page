@@ -7,59 +7,5 @@
     "lcp": "1.7 s",
     "cls": "0",
     "tbt": "0 ms"
-  },
-  "/hanzof": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.6 s",
-    "cls": "0",
-    "tbt": "0 ms"
-  },
-  "/lynx350": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.7 s",
-    "cls": "0",
-    "tbt": "0 ms"
-  },
-  "/about": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.6 s",
-    "cls": "0",
-    "tbt": "0 ms"
-  },
-  "/contact": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.7 s",
-    "cls": "0",
-    "tbt": "0 ms"
-  },
-  "/careers": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.6 s",
-    "cls": "0",
-    "tbt": "0 ms"
-  },
-  "/procure": {
-    "performance": 100,
-    "accessibility": 100,
-    "bestPractices": 100,
-    "seo": 100,
-    "lcp": "1.6 s",
-    "cls": "0",
-    "tbt": "0 ms"
   }
 }

@@ -11,7 +11,7 @@ if (stage) {
   const chips = [...stage.querySelectorAll('[data-shape]')]
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const LAYERS = 46
+  const LAYERS = 40
   const POINTS = 120
   const PRINT_MS = 2400
   const TAU = Math.PI * 2
@@ -89,7 +89,7 @@ if (stage) {
     const cp = Math.cos(pitch), sp = Math.sin(pitch)
     const xr = x * cy - y * sy
     const yr = x * sy + y * cy
-    const S = Math.min(width, height) * 0.74
+    const S = Math.min(width, height) * 0.7
     const h = 0.9 // object height in model units
     out[0] = width / 2 + xr * S
     out[1] = height * 0.76 - (z * h * cp) * S - yr * sp * S
@@ -118,29 +118,29 @@ if (stage) {
     ctx.stroke()
   }
 
-  const CHUNK = 12 // points per stroke segment, so depth shading varies around each ring
-
-  const drawRing = (ring, z, upTo, color, lw) => {
-    const n = Math.max(2, Math.floor(upTo))
-    for (let start = 0; start < n; start += CHUNK) {
-      const end = Math.min(n, start + CHUNK)
-      ctx.beginPath()
-      let depth = 0
-      for (let j = start; j <= end; j++) {
-        const k = j % POINTS
-        project(ring[k * 2], ring[k * 2 + 1], z, p)
-        depth += p[2]
-        j === start ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1])
-      }
-      depth /= end - start + 1
-      // Front of the part reads darker, back lighter
-      const t = Math.min(1, Math.max(0, (depth + 0.5) / 1.0))
-      ctx.globalAlpha = color ? 1 : 0.62 - t * 0.5
-      ctx.strokeStyle = color || '#1d1d1f'
-      ctx.lineWidth = lw
-      ctx.stroke()
+  // Trace a layer outline as a closed path (first `upTo` points)
+  const tracePath = (ring, z, upTo, close) => {
+    ctx.beginPath()
+    const n = Math.min(POINTS, Math.max(2, Math.floor(upTo)))
+    for (let j = 0; j <= n; j++) {
+      const k = j % POINTS
+      project(ring[k * 2], ring[k * 2 + 1], z, p)
+      j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])
     }
-    ctx.globalAlpha = 1
+    if (close) ctx.closePath()
+  }
+
+  // Each slice is filled, then outlined. Drawn bottom→top, the fill of every slice hides the back
+  // half of the one below, so the part reads as a solid print with fine layer lines on its sides.
+  const drawSlice = (layer, i) => {
+    const t = i / (LAYERS - 1)
+    tracePath(layer.ring, layer.z, POINTS, true)
+    const shade = Math.round(236 + t * 14) // slightly darker near the bed
+    ctx.fillStyle = `rgb(${shade}, ${shade}, ${shade + 3})`
+    ctx.fill()
+    ctx.strokeStyle = i === LAYERS - 1 ? 'rgba(29, 29, 31, 0.55)' : 'rgba(29, 29, 31, 0.28)'
+    ctx.lineWidth = 0.9
+    ctx.stroke()
   }
 
   const draw = () => {
@@ -152,15 +152,16 @@ if (stage) {
     const done = Math.floor(exact)
     const partial = exact - done
 
-    for (let i = 0; i < Math.min(done, LAYERS); i++) {
-      drawRing(geometry[i].ring, geometry[i].z, POINTS, null, 1)
-    }
+    for (let i = 0; i < Math.min(done, LAYERS); i++) drawSlice(geometry[i], i)
 
     // Layer being printed: blue trail plus the nozzle
     if (done < LAYERS && progress < 1) {
       const layer = geometry[done]
       const upTo = partial * POINTS
-      drawRing(layer.ring, layer.z, upTo, '#0071e3', 1.6)
+      tracePath(layer.ring, layer.z, upTo, false)
+      ctx.strokeStyle = '#0071e3'
+      ctx.lineWidth = 1.8
+      ctx.stroke()
       const k = Math.floor(upTo) % POINTS
       project(layer.ring[k * 2], layer.ring[k * 2 + 1], layer.z, p)
       // hotend
@@ -188,7 +189,7 @@ if (stage) {
     let moving = false
 
     if (printing) {
-      progress = Math.min(1, (now - printStart) / PRINT_MS)
+      progress = Math.min(1, Math.max(0, (now - printStart) / PRINT_MS))
       if (progress >= 1) printing = false
       moving = true
     }

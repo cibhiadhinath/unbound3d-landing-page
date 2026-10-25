@@ -61,13 +61,57 @@ if (motionOn && 'IntersectionObserver' in window) {
     const desktop = window.matchMedia('(min-width: 1024px)')
     let ticking = false
 
+    const stage = show.querySelector('.lynx-show-stage')
+    const img = stage.querySelector('img')
+    const svg = stage.querySelector('.callout-leaders')
+    const NS = 'http://www.w3.org/2000/svg'
+
+    // One leader per callout: from the callout's left edge to its anchor point on the printer image
+    const leaders = callouts.map(() => {
+      const g = document.createElementNS(NS, 'g')
+      const line = document.createElementNS(NS, 'line')
+      line.setAttribute('pathLength', '1')
+      const dot = document.createElementNS(NS, 'circle')
+      dot.setAttribute('r', '4')
+      g.append(line, dot)
+      svg.append(g)
+      return { g, line, dot }
+    })
+
+    const layoutLeaders = () => {
+      if (!show.classList.contains('is-pinned')) return
+      const s = stage.getBoundingClientRect()
+      const im = img.getBoundingClientRect()
+      callouts.forEach((c, i) => {
+        const [fx, fy] = c.dataset.anchor.split(',').map(Number)
+        const ax = im.left - s.left + fx * im.width
+        const ay = im.top - s.top + fy * im.height
+        const r = c.getBoundingClientRect()
+        const { line, dot } = leaders[i]
+        line.setAttribute('x1', r.left - s.left)
+        line.setAttribute('y1', r.top - s.top + r.height / 2)
+        line.setAttribute('x2', ax)
+        line.setAttribute('y2', ay)
+        dot.setAttribute('cx', ax)
+        dot.setAttribute('cy', ay)
+      })
+    }
+
     const step = () => {
       ticking = false
       const rect = show.getBoundingClientRect()
       const distance = show.offsetHeight - window.innerHeight
       const progress = Math.min(1, Math.max(0, -rect.top / distance))
-      callouts.forEach((c, i) => c.classList.toggle('is-on', progress > (i + 0.5) / (callouts.length + 0.5)))
+      callouts.forEach((c, i) => {
+        const on = progress > (i + 0.5) / (callouts.length + 0.5)
+        c.classList.toggle('is-on', on)
+        leaders[i].g.classList.toggle('is-on', on)
+      })
     }
+
+    new ResizeObserver(layoutLeaders).observe(stage)
+    if (!img.complete) img.addEventListener('load', layoutLeaders, { once: true })
+
     const onScroll = () => {
       if (!ticking) { ticking = true; requestAnimationFrame(step) }
     }
@@ -78,6 +122,7 @@ if (motionOn && 'IntersectionObserver' in window) {
       if (pin) {
         callouts.forEach((c) => c.classList.add('is-in'))
         window.addEventListener('scroll', onScroll, { passive: true })
+        layoutLeaders()
         step()
       } else {
         window.removeEventListener('scroll', onScroll)
