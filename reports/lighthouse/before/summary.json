@@ -1,0 +1,83 @@
+{
+  "/": {
+    "performance": 92,
+    "accessibility": 97,
+    "bestPractices": 96,
+    "seo": 100,
+    "lcp": "2.1 s",
+    "cls": "0.14",
+    "tbt": "10 ms"
+  },
+  "/platform": {
+    "performance": 99,
+    "accessibility": 97,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "1.7 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/hanzof": {
+    "performance": 99,
+    "accessibility": 98,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "1.7 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/lynx350": {
+    "performance": 94,
+    "accessibility": 92,
+    "bestPractices": 96,
+    "seo": 91,
+    "lcp": "3.0 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/lynx-320": {
+    "performance": 84,
+    "accessibility": 98,
+    "bestPractices": 96,
+    "seo": 91,
+    "lcp": "4.5 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/team": {
+    "performance": 99,
+    "accessibility": 91,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "1.8 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/contact": {
+    "performance": 99,
+    "accessibility": 92,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "1.7 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/careers": {
+    "performance": 99,
+    "accessibility": 97,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "1.7 s",
+    "cls": "0",
+    "tbt": "0 ms"
+  },
+  "/procure": {
+    "performance": 95,
+    "accessibility": 92,
+    "bestPractices": 96,
+    "seo": 90,
+    "lcp": "2.8 s",
+    "cls": "0.01",
+    "tbt": "0 ms"
+  }
+}

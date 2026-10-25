@@ -7,3 +7,7 @@ dist
 .idea
 .vscode
 *.log
+
+# Verification output (regenerate with scripts/*.mjs)
+screenshots/
+reports/lighthouse/**/*.html
