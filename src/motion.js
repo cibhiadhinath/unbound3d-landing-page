@@ -6,15 +6,21 @@ const root = document.documentElement
 const motionOn = root.classList.contains('js-motion')
 window.__motionReady = true
 
-// ---------- Header: solid background after the homepage hero ----------
+// ---------- Header: transparent only at the very top of the homepage ----------
+// Goes solid as soon as the page scrolls, so the hero never slides under a see-through header.
 const header = document.querySelector('[data-header]')
 const hero = document.querySelector('[data-hero]')
 
-if (header && hero && 'IntersectionObserver' in window) {
-  header.setAttribute('data-transparent', '')
-  new IntersectionObserver(([entry]) => {
-    header.toggleAttribute('data-transparent', entry.isIntersecting)
-  }, { rootMargin: `-${header.offsetHeight}px 0px 0px 0px` }).observe(hero)
+if (header && hero) {
+  let ticking = false
+  const sync = () => {
+    ticking = false
+    header.toggleAttribute('data-transparent', window.scrollY < 4)
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(sync) }
+  }, { passive: true })
+  sync()
 }
 
 if (motionOn && 'IntersectionObserver' in window) {

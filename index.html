@@ -99,36 +99,38 @@
                 </div>
 
                 <!-- TODO: replace placeholder bracket with a line drawing of a real Unbound3D part -->
-                <div class="hero-print" data-print aria-hidden="true">
-                    <svg class="print-part" viewBox="0 0 400 320" fill="none">
-                        <defs>
-                            <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                                <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <g class="print-infill" fill="url(#hatch)">
-                            <path d="M40 250h320v40H40zM70 90h70v160H70zM260 90h70v160h-70z"/>
-                        </g>
-                        <g class="print-lines" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-                            <!-- base plate -->
-                            <path d="M40 250h320v40H40z"/>
-                            <circle cx="75" cy="270" r="9"/>
-                            <circle cx="325" cy="270" r="9"/>
-                            <circle cx="200" cy="270" r="9"/>
-                            <!-- uprights -->
-                            <path d="M70 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
-                            <path d="M260 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
-                            <circle cx="105" cy="130" r="18"/>
-                            <circle cx="295" cy="130" r="18"/>
-                            <!-- gussets -->
-                            <path d="M140 250l60-70 60 70"/>
-                            <path d="M140 210l40-46M260 210l-40-46"/>
-                            <!-- cross beam -->
-                            <path d="M140 150h120v30H140z"/>
-                            <path d="M160 165h80" stroke-dasharray="6 6" opacity=".5"/>
-                        </g>
-                    </svg>
-                    <span class="print-nozzle-track"><span class="print-nozzle"></span></span>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-print" data-print>
+                        <svg class="print-part" viewBox="0 0 400 320" fill="none">
+                            <defs>
+                                <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                    <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <g class="print-infill" fill="url(#hatch)">
+                                <path d="M40 250h320v40H40zM70 90h70v160H70zM260 90h70v160h-70z"/>
+                            </g>
+                            <g class="print-lines" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                                <!-- base plate -->
+                                <path d="M40 250h320v40H40z"/>
+                                <circle cx="75" cy="270" r="9"/>
+                                <circle cx="325" cy="270" r="9"/>
+                                <circle cx="200" cy="270" r="9"/>
+                                <!-- uprights -->
+                                <path d="M70 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
+                                <path d="M260 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
+                                <circle cx="105" cy="130" r="18"/>
+                                <circle cx="295" cy="130" r="18"/>
+                                <!-- gussets -->
+                                <path d="M140 250l60-70 60 70"/>
+                                <path d="M140 210l40-46M260 210l-40-46"/>
+                                <!-- cross beam -->
+                                <path d="M140 150h120v30H140z"/>
+                                <path d="M160 165h80" stroke-dasharray="6 6" opacity=".5"/>
+                            </g>
+                        </svg>
+                        <span class="print-nozzle-track"><span class="print-nozzle"></span></span>
+                    </div>
                 </div>
             </div>
         </section>

@@ -23,7 +23,7 @@ for (const width of [360, 375]) {
         .filter((el) => { const b = el.getBoundingClientRect(); return b.width < 44 || b.height < 44 })
         .map((el) => `${el.tagName.toLowerCase()} "${(el.textContent || el.name || '').trim().slice(0, 30)}" ${Math.round(el.getBoundingClientRect().width)}×${Math.round(el.getBoundingClientRect().height)}`)
       const tiny = [...document.querySelectorAll('main p, main li, main dd, footer p, footer li, footer address')]
-        .filter((el) => visible(el) && el.textContent.trim().length > 20 && parseFloat(getComputedStyle(el).fontSize) < 16 && !el.closest('.part-label, .case-meta'))
+        .filter((el) => visible(el) && el.textContent.trim().length > 20 && parseFloat(getComputedStyle(el).fontSize) < 16 && !el.closest('.case-meta, .trust-list') /* short badge labels */)
         .map((el) => `${el.tagName.toLowerCase()}.${el.className} ${getComputedStyle(el).fontSize} "${el.textContent.trim().slice(0, 30)}"`)
       return { overflow, wide, small, tiny }
     })
