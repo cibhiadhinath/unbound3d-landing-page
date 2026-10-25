@@ -1,7 +1,8 @@
 // Homepage hero: an interactive "slicer preview". A parametric part is drawn as stacked
 // layer outlines, printed layer by layer by a glowing nozzle, then left to rotate.
 // Drag/swipe rotates it; the shape chips print a different object.
-// Plain canvas, no dependencies. Reduced motion: final state, no auto-rotation or print run.
+// Plain canvas, no dependencies. The print runs when the preview first scrolls into view (every
+// visit). Reduced motion: final state, no auto-rotation or print run.
 
 const stage = document.querySelector('[data-slicer]')
 
@@ -65,7 +66,6 @@ if (stage) {
   let height = 0
   let dpr = 1
   let progress = reduced ? 1 : 0 // printed fraction 0…1
-  let printStart = 0
   let printing = false
   let lastInteraction = 0
   let visible = true
@@ -188,8 +188,9 @@ if (stage) {
     lastFrame = now
     let moving = false
 
+    // Advance by elapsed frame time, so a print paused off-screen resumes where it left off
     if (printing) {
-      progress = Math.min(1, Math.max(0, (now - printStart) / PRINT_MS))
+      progress = Math.min(1, progress + dt / PRINT_MS)
       if (progress >= 1) printing = false
       moving = true
     }
@@ -208,12 +209,13 @@ if (stage) {
   const kick = () => { if (!raf && visible) raf = requestAnimationFrame(tick) }
 
   const print = (name) => {
+    started = true
     build(name)
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.shape === name)))
     if (reduced) { progress = 1; draw(); return }
     progress = 0
     printing = true
-    printStart = performance.now()
+    lastFrame = 0
     kick()
   }
 
@@ -255,23 +257,28 @@ if (stage) {
 
   chips.forEach((chip) => chip.addEventListener('click', () => { lastInteraction = 0; print(chip.dataset.shape) }))
 
-  // Pause when off screen or tab hidden
-  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) kick() }).observe(stage)
+  const initial = chips.find((c) => c.getAttribute('aria-pressed') === 'true')?.dataset.shape || 'gear'
+
+  // Pause when off screen or tab hidden. The first print starts only once the preview is
+  // properly in view, so on phones (where it sits below the fold) it isn't over before it's seen.
+  let started = false
+  const io = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting
+    if (!started && entry.intersectionRatio >= 0.6) {
+      started = true
+      print(initial)
+      return
+    }
+    if (visible) kick()
+  }, { threshold: [0, 0.6] })
+  // Wait for web fonts: before they load, shorter fallback text puts the canvas higher on the page
+  const observe = () => io.observe(canvas)
+  document.fonts && document.fonts.status !== 'loaded' ? document.fonts.ready.then(observe) : observe()
   document.addEventListener('visibilitychange', () => { if (!document.hidden) kick() })
   new ResizeObserver(resize).observe(canvas)
 
-  // First run: print once per session, then show the finished part
-  let played = false
-  try { played = sessionStorage.getItem('u3d-slicer-played') === '1' } catch { /* storage blocked */ }
-  const initial = chips.find((c) => c.getAttribute('aria-pressed') === 'true')?.dataset.shape || 'gear'
+  // Until the first print starts, show the empty build plate (or the finished part for reduced motion)
   build(initial)
   resize()
-  if (played || reduced) {
-    progress = 1
-    draw()
-    kick()
-  } else {
-    try { sessionStorage.setItem('u3d-slicer-played', '1') } catch { /* storage blocked */ }
-    setTimeout(() => print(initial), 250)
-  }
+  if (reduced) { started = true; progress = 1; draw() }
 }
