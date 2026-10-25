@@ -29,3 +29,36 @@ if (toggle && nav) {
     if (mq.matches) setOpen(false)
   })
 }
+
+// ---------- Sticky mobile CTA bar ----------
+// Shows once the hero has scrolled away; hides over the footer and while the on-screen keyboard is open.
+const cta = document.querySelector('[data-mobile-cta]')
+const hero = document.querySelector('.hero, .page-hero')
+const footer = document.querySelector('[data-footer]')
+
+if (cta && hero && footer && 'IntersectionObserver' in window) {
+  const state = { pastHero: false, footerVisible: false, keyboard: false }
+  const update = () => cta.classList.toggle('is-visible', state.pastHero && !state.footerVisible && !state.keyboard)
+
+  new IntersectionObserver(([entry]) => {
+    state.pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0
+    update()
+  }).observe(hero)
+
+  new IntersectionObserver(([entry]) => {
+    state.footerVisible = entry.isIntersecting
+    update()
+  }).observe(footer)
+
+  const isField = (el) => el && el.matches && el.matches('input, textarea, select')
+  document.addEventListener('focusin', (e) => { if (isField(e.target)) { state.keyboard = true; update() } })
+  document.addEventListener('focusout', (e) => { if (isField(e.target)) { state.keyboard = false; update() } })
+
+  // Fallback for keyboards that don't move focus (e.g. some Android IMEs)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      const open = window.visualViewport.height < window.innerHeight * 0.75
+      if (open !== state.keyboard && !isField(document.activeElement)) { state.keyboard = open; update() }
+    })
+  }
+}

@@ -604,8 +604,8 @@ p { text-wrap: pretty; }
 }
 
 .person h3 { font-size: var(--step-1); font-weight: 700; }
-.person-role { color: var(--blue); font-size: var(--step--1); font-weight: 600; }
-.person-bio { color: var(--text-muted); font-size: var(--step--1); }
+.person-role { color: var(--blue); font-weight: 600; }
+.person-bio { color: var(--text-muted); }
 
 .person-link {
   display: inline-flex;
@@ -653,7 +653,6 @@ p { text-wrap: pretty; }
   padding-block: var(--space-8) var(--space-6);
   border-top: 1px solid var(--line);
   background: var(--surface);
-  font-size: var(--step--1);
 }
 
 .footer-grid {
@@ -889,7 +888,6 @@ p { text-wrap: pretty; }
   grid-template-columns: 1fr;
   gap: var(--space-3) var(--space-6);
   padding-block: var(--space-5);
-  font-size: var(--step--1);
   font-weight: 600;
 }
 
@@ -1250,7 +1248,6 @@ p { text-wrap: pretty; }
 .form-status {
   padding: var(--space-4);
   border-radius: var(--radius-sm);
-  font-size: var(--step--1);
 }
 
 .form-status a { text-decoration: underline; }
@@ -1276,3 +1273,37 @@ p { text-wrap: pretty; }
 .contact-details li { display: flex; gap: var(--space-3); }
 .contact-details .icon { margin-top: 0.2em; color: var(--blue); }
 .contact-details a { display: inline-flex; align-items: center; min-height: var(--tap); margin-top: -0.6rem; color: var(--text); }
+
+/* ==========================================================================
+   Sticky mobile CTA bar
+   ========================================================================== */
+.mobile-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--gutter) calc(var(--space-2) + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.85);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition: transform 300ms var(--ease-out), visibility 0s linear 300ms;
+}
+
+.mobile-cta.is-visible {
+  transform: none;
+  visibility: visible;
+  transition: transform 300ms var(--ease-out), visibility 0s;
+}
+
+.mobile-cta .btn { min-height: 48px; padding-inline: var(--space-3); }
+
+@media (min-width: 768px) {
+  .mobile-cta { display: none; }
+}
