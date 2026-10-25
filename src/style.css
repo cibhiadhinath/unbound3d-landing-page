@@ -578,7 +578,8 @@ p { text-wrap: pretty; }
 }
 
 @media (min-width: 480px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .team-grid { grid-template-columns: repeat(5, 1fr); gap: var(--space-4); } }
 
 .person {
   display: flex;
@@ -600,6 +601,23 @@ p { text-wrap: pretty; }
 }
 
 .person h3 { font-size: var(--step-1); font-weight: 700; }
+
+/* Monogram for team members without a photo */
+.person-initials {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  margin-bottom: var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--blue);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
 .person-role { color: var(--blue); font-weight: 600; }
 .person-bio { color: var(--text-muted); }
 
@@ -1524,8 +1542,10 @@ p { text-wrap: pretty; }
     padding: var(--space-4);
   }
 
-  .person picture { grid-row: span 2; }
-  .person img { width: 64px; height: 64px; margin: 0; }
+  .person picture,
+  .person-initials { grid-row: span 2; }
+  .person img,
+  .person-initials { width: 64px; height: 64px; margin: 0; font-size: 1.25rem; }
   .person h3 { align-self: end; }
   .person-role { align-self: start; }
   .person-bio { grid-column: 1 / -1; margin-top: var(--space-2); }
