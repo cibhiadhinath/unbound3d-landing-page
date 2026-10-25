@@ -1,4 +1,4 @@
-// Motion: reveals, hero print, process connector, header state, Lynx showpiece.
+// Motion: reveals, process connector, header state, Lynx showpiece. (Hero: hero-slicer.js)
 // Every effect is skipped when the visitor prefers reduced motion (no .js-motion class),
 // leaving content in its final state.
 
@@ -40,29 +40,6 @@ if (motionOn && 'IntersectionObserver' in window) {
   }, { threshold: 0.15 })
 
   document.querySelectorAll('[data-reveal]').forEach((el) => revealer.observe(el))
-
-  // ---------- Hero: layer-by-layer print, once per session ----------
-  const print = document.querySelector('[data-print]')
-  if (hero && print) {
-    let played = false
-    try { played = sessionStorage.getItem('u3d-print-played') === '1' } catch { /* storage blocked */ }
-
-    const finish = () => {
-      print.classList.add('print-done')
-      hero.classList.add('is-ready')
-      try { sessionStorage.setItem('u3d-print-played', '1') } catch { /* storage blocked */ }
-    }
-
-    if (played) {
-      print.classList.add('print-done')
-      hero.classList.add('is-ready')
-    } else {
-      print.classList.add('print-play')
-      setTimeout(() => hero.classList.add('is-ready'), 1300) // CTAs arrive mid-print, not after
-      print.querySelector('.print-real').addEventListener('animationend', finish, { once: true })
-      setTimeout(finish, 3200) // safety net if animationend never fires
-    }
-  }
 
   // ---------- How it works: connector draws, steps light in sequence ----------
   const process = document.querySelector('[data-process]')

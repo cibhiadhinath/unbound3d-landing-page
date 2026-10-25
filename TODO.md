@@ -18,7 +18,6 @@ The site no longer shows any visible placeholders. Anything missing is simply le
 
 | Where | What to send | What shows now |
 |---|---|---|
-| Homepage, What we make | Material and process for each of the 5 part photos | Photos without captions |
 | Homepage, Case study | 1–2 more case studies (e.g. drone-team carbon-fibre frame, defence part): problem, what we did, result, material, lead time, photo | Only the robotics chassis case |
 | Homepage, Case study | Robotics chassis: part photo and material | Text-only card |
 | Homepage + About, Team | LinkedIn URLs for the team (optional) | No LinkedIn links |
@@ -33,6 +32,10 @@ Notes left in the source as HTML comments:
 | [hanzof.html:119](hanzof.html#L119) | confirm CNC materials and tolerances to list here |
 | [lynx350.html:198](lynx350.html#L198) | confirm whether PA-GF and PPA-CF should be listed (removed pending confirmation) |
 | [lynx350.html:261](lynx350.html#L261) | confirm Lynx 320 specs (previously listed: 320×320×300 mm, 60 °C chamber, 150 °C bed, CoreXY) |
+
+### Removed at your request
+- Homepage part-photo gallery and the hero part photo: no part photos on the homepage now. The originals are still in `images/`.
+- "Get a quote in 6 business hours" buttons now read "Get a quote". The 6-business-hour detail remains in descriptive text and meta descriptions.
 
 ## Removed claims awaiting confirmation
 

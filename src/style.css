@@ -651,22 +651,35 @@ body.nav-open .site-header::before { opacity: 1; background: var(--bg); -webkit-
 
 .tile-icon .icon { width: 44px; height: 44px; }
 
-@media (min-width: 1024px) {
-  .tile--wide {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 0;
-    text-align: left;
-  }
+.tile--wide { padding-bottom: var(--space-7); }
 
-  .tile--wide .tile-copy { padding: var(--space-8) var(--space-7); }
-  .tile--wide .link-row,
-  .tile--wide .tag-list { justify-content: flex-start; }
-  .tile--wide .tile-media { height: 100%; margin: 0; padding: 0; }
-  .tile--wide .tile-media picture { height: 100%; width: 100%; }
-  .tile--wide .tile-media img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.tile-procs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-5) var(--space-7);
+  margin: var(--space-6) 0 var(--space-2);
 }
+
+.tile-procs li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+
+.tile-proc-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(0, 113, 227, 0.1);
+  color: var(--blue-fill);
+}
+
+.tile-proc-icon .icon { width: 30px; height: 30px; }
 
 /* ---------- Spec table (stacked rows on small screens) ---------- */
 .spec-table {
@@ -933,99 +946,79 @@ body.nav-open .site-header::before { opacity: 1; background: var(--bg); -webkit-
   .hero h1 { font-size: clamp(2.5rem, 1.5rem + 5vw, 3.5rem); }
 }
 
-/* ---------- Hero print: a real part built layer by layer on a build plate ---------- */
+/* ---------- Hero: interactive slicer preview (canvas) ---------- */
 .hero-stage {
-  --obj-w: 210px;
   position: relative;
   display: grid;
   justify-items: center;
-  padding-top: var(--space-5);
+  gap: var(--space-3);
 }
 
-@media (min-width: 768px) { .hero-stage { --obj-w: 260px; } }
-@media (min-width: 1024px) { .hero-stage { --obj-w: 300px; } }
+html:not(.js) .hero-stage { display: none; }
 
 /* Soft glow behind the part */
 .hero-stage::before {
   content: "";
   position: absolute;
   left: 50%;
-  top: 46%;
-  width: calc(var(--obj-w) * 2.2);
+  top: 42%;
+  width: min(110%, 560px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 113, 227, 0.12), transparent 62%);
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.1), transparent 62%);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-.print-object {
+.slicer-canvas {
   position: relative;
-  width: var(--obj-w);
-  aspect-ratio: 332 / 505;
-}
-
-.print-object picture,
-.print-object img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1.02;
+  cursor: grab;
+  touch-action: pan-y; /* vertical swipes still scroll the page on phones */
+  border-radius: var(--radius);
 }
 
-.print-real img { filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.16)); }
+.hero-stage.is-dragging .slicer-canvas { cursor: grabbing; }
 
-/* The ghost (slicer preview) and nozzle only exist while the animation runs */
-.print-ghost { opacity: 0; }
-.print-nozzle-track { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
-
-/* Current-layer line */
-.print-nozzle-track::before {
-  content: "";
-  position: absolute;
-  left: -12%;
-  right: -12%;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 113, 227, 0.7), transparent);
-}
-
-/* Full-width carrier that sweeps left↔right; the hotend sits at its centre */
-.print-head { position: absolute; left: 0; right: 0; top: 0; height: 0; }
-
-.print-head::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 3px;
-  width: 30px;
-  height: 18px;
-  margin-left: -15px;
-  border-radius: 6px 6px 3px 3px;
-  background: linear-gradient(180deg, #3a3a3c, #1d1d1f);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-.print-tip {
-  position: absolute;
-  left: 50%;
-  top: -4px;
-  width: 8px;
-  height: 8px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: #4da3ff;
-  box-shadow: 0 0 8px 2px rgba(0, 113, 227, 0.7), 0 0 22px 6px rgba(0, 113, 227, 0.35);
-}
-
-.print-bed {
+.slicer-controls {
   position: relative;
-  width: calc(var(--obj-w) * 1.45);
-  height: 12px;
-  margin-top: -2px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #e8e8ed, #d2d2d7);
-  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 980px;
+  background: var(--surface);
+}
+
+.slicer-chip {
+  min-width: 72px;
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: 980px;
+  background: transparent;
+  color: var(--text-muted);
+  font: 500 var(--step--1) / 1 var(--font-body);
+  cursor: pointer;
+  transition: background-color var(--dur-ui) var(--ease-out), color var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out);
+}
+
+.slicer-chip:hover { color: var(--text); }
+
+.slicer-chip[aria-pressed="true"] {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.slicer-hint {
+  position: relative;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1023px) {
+  .slicer-canvas { max-width: 380px; }
 }
 
 /* Credentials fine print */
@@ -1063,59 +1056,6 @@ body.nav-open .site-header::before { opacity: 1; background: var(--bg); -webkit-
     text-align: left;
   }
 }
-
-/* Part gallery */
-.parts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-3);
-}
-
-@media (min-width: 768px) { .parts-grid { gap: var(--space-4); } }
-
-@media (min-width: 1024px) {
-  .parts-grid { grid-template-columns: repeat(3, 1fr); }
-  .part--wide { grid-column: span 2; }
-}
-
-@media (max-width: 1023px) { .part--wide { grid-column: 1 / -1; } }
-
-.part {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: #eceff1;
-}
-
-/* Tiles are pre-framed (scripts/build-images.py): square, wide tile 2:1 */
-.part-media { aspect-ratio: 1 / 1; overflow: hidden; }
-.part--wide .part-media { aspect-ratio: 2 / 1; }
-
-@media (min-width: 1024px) {
-  .part--wide .part-media { position: absolute; inset: 0; aspect-ratio: auto; }
-}
-
-.part-media picture { display: block; height: 100%; }
-
-.part-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 600ms var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .part:hover .part-media img { transform: scale(1.04); }
-}
-
-.industries {
-  margin-top: var(--space-6);
-  color: var(--text-muted);
-  font-size: var(--step-1);
-  text-align: center;
-}
-
-.industries strong { color: var(--text); font-weight: 600; }
 
 /* How it works */
 .process { position: relative; max-width: 960px; margin-inline: auto; }
@@ -1500,58 +1440,7 @@ body.nav-open .site-header::before { opacity: 1; background: var(--bg); -webkit-
 
 .js-motion [data-reveal].is-in { opacity: 1; transform: none; }
 
-/* Hero: layer-by-layer print (24 layers, nozzle sweeps each one) */
-@keyframes print-reveal {
-  from { clip-path: inset(100% 0 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
 
-@keyframes layer-rise {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-@keyframes nozzle-sweep {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(50%); }
-}
-
-.js-motion .hero-stage.print-play .print-ghost {
-  opacity: 0.14;
-  filter: grayscale(1);
-  transition: opacity 400ms var(--ease-out);
-}
-
-.js-motion .hero-stage.print-play .print-real {
-  clip-path: inset(100% 0 0 0);
-  animation: print-reveal 2.4s steps(24, end) 300ms forwards;
-}
-
-.js-motion .hero-stage.print-play .print-nozzle-track {
-  opacity: 1;
-  transform: translateY(100%);
-  animation: layer-rise 2.4s steps(24, end) 300ms forwards;
-  transition: opacity 400ms var(--ease-out);
-}
-
-.js-motion .hero-stage.print-play .print-head {
-  animation: nozzle-sweep 100ms linear 300ms 24 alternate both;
-}
-
-/* Done: nozzle and preview fade away, part stays */
-.js-motion .hero-stage.print-done .print-ghost { opacity: 0; }
-.js-motion .hero-stage.print-done .print-nozzle-track { opacity: 0; transform: translateY(-12px); transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out); }
-.js-motion .hero-stage.print-done .print-real { clip-path: none; }
-
-.js-motion .hero-ctas > .btn {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out), background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out), color var(--dur-ui) var(--ease-out);
-}
-
-.js-motion .hero-ctas > .btn:nth-child(2) { transition-delay: 80ms, 80ms, 0ms, 0ms, 0ms; }
-
-.js-motion .hero.is-ready .hero-ctas > .btn { opacity: 1; transform: none; }
 
 /* How it works connector */
 .js-motion .process[data-animate] .process-line line {

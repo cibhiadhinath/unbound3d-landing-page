@@ -79,6 +79,7 @@
     </script>
     <!-- @include head -->
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/hero-slicer.js"></script>
 </head>
 
 <body class="home">
@@ -93,26 +94,19 @@
                     <p class="lead">Engineering-led manufacturing of high-performance parts for hardware R&amp;D teams —
                         drones, defence, robotics, EV.</p>
                     <div class="btn-row hero-ctas">
-                        <a href="https://hanzof.com" class="btn btn-primary btn-lg" rel="noopener">Get a quote in 6 business hours</a>
+                        <a href="https://hanzof.com" class="btn btn-primary btn-lg" rel="noopener">Get a quote</a>
                         <a href="https://wa.me/917558150570" class="btn btn-secondary btn-lg" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> Talk to an engineer</a>
                     </div>
                 </div>
 
-                <div class="hero-stage" data-print aria-hidden="true">
-                    <div class="print-object">
-                        <picture class="print-ghost">
-                            <source type="image/avif" srcset="/img/hero-part-240.avif 240w, /img/hero-part-332.avif 332w" sizes="(min-width: 1024px) 300px, 220px">
-                            <source type="image/webp" srcset="/img/hero-part-240.webp 240w, /img/hero-part-332.webp 332w" sizes="(min-width: 1024px) 300px, 220px">
-                            <img src="/img/hero-part-332.png" srcset="/img/hero-part-240.png 240w, /img/hero-part-332.png 332w" sizes="(min-width: 1024px) 300px, 220px" alt="" width="332" height="505" fetchpriority="high">
-                        </picture>
-                        <picture class="print-real">
-                            <source type="image/avif" srcset="/img/hero-part-240.avif 240w, /img/hero-part-332.avif 332w" sizes="(min-width: 1024px) 300px, 220px">
-                            <source type="image/webp" srcset="/img/hero-part-240.webp 240w, /img/hero-part-332.webp 332w" sizes="(min-width: 1024px) 300px, 220px">
-                            <img src="/img/hero-part-332.png" srcset="/img/hero-part-240.png 240w, /img/hero-part-332.png 332w" sizes="(min-width: 1024px) 300px, 220px" alt="" width="332" height="505">
-                        </picture>
-                        <span class="print-nozzle-track"><span class="print-head"><span class="print-tip"></span></span></span>
+                <div class="hero-stage" data-slicer>
+                    <canvas class="slicer-canvas" tabindex="0" role="img" aria-label="Interactive 3D preview of a part being printed layer by layer. Use the arrow keys to rotate."></canvas>
+                    <div class="slicer-controls" role="group" aria-label="Choose a shape to print">
+                        <button type="button" class="slicer-chip" data-shape="gear" aria-pressed="true">Gear</button>
+                        <button type="button" class="slicer-chip" data-shape="vase" aria-pressed="false">Vase</button>
+                        <button type="button" class="slicer-chip" data-shape="hex" aria-pressed="false">Hex</button>
                     </div>
-                    <div class="print-bed"></div>
+                    <p class="slicer-hint">Drag to rotate · tap a shape to print it</p>
                 </div>
             </div>
         </section>
@@ -137,26 +131,22 @@
                 </div>
                 <div class="tiles" data-reveal-group>
                     <article class="tile tile--wide" data-reveal>
-                        <div class="tile-copy">
-                            <span class="eyebrow">Manufacturing</span>
-                            <h3>3D printing, CNC and composites.</h3>
-                            <p class="tile-sub">Functional parts in high-performance polymers, from prototype to production.</p>
-                            <ul class="tag-list" aria-label="Materials">
-                                <li class="tag">PA-CF</li>
-                                <li class="tag">PPS-CF</li>
-                                <li class="tag">ASA</li>
-                            </ul>
-                            <div class="link-row">
-                                <a href="/hanzof" class="text-link">Learn more<span class="visually-hidden"> about manufacturing</span></a>
-                                <a href="https://hanzof.com" class="text-link" rel="noopener">Get a quote</a>
-                            </div>
-                        </div>
-                        <div class="tile-media">
-                            <picture>
-                                <source type="image/avif" srcset="/img/work-4-tile-480.avif 480w, /img/work-4-tile-800.avif 800w" sizes="(min-width: 1024px) 560px, 340px">
-                                <source type="image/webp" srcset="/img/work-4-tile-480.webp 480w, /img/work-4-tile-800.webp 800w" sizes="(min-width: 1024px) 560px, 340px">
-                                <img src="/img/work-4-tile-800.jpg" srcset="/img/work-4-tile-480.jpg 480w, /img/work-4-tile-800.jpg 800w" sizes="(min-width: 1024px) 560px, 340px" alt="Metallic lattice-style bracket with four arms" width="480" height="480" loading="lazy">
-                            </picture>
+                        <span class="eyebrow">Manufacturing</span>
+                        <h3>3D printing, CNC and composites.</h3>
+                        <p class="tile-sub">Functional parts in high-performance polymers, from prototype to production.</p>
+                        <ul class="tile-procs" aria-label="Processes">
+                            <li><span class="tile-proc-icon"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>3D printing</li>
+                            <li><span class="tile-proc-icon"><svg class="icon" aria-hidden="true"><use href="#i-mill"/></svg></span>CNC machining</li>
+                            <li><span class="tile-proc-icon"><svg class="icon" aria-hidden="true"><use href="#i-weave"/></svg></span>Composites</li>
+                        </ul>
+                        <ul class="tag-list" aria-label="Materials">
+                            <li class="tag">PA-CF</li>
+                            <li class="tag">PPS-CF</li>
+                            <li class="tag">ASA</li>
+                        </ul>
+                        <div class="link-row">
+                            <a href="/hanzof" class="text-link">Learn more<span class="visually-hidden"> about manufacturing</span></a>
+                            <a href="https://hanzof.com" class="text-link" rel="noopener">Get a quote</a>
                         </div>
                     </article>
                     <article class="tile" data-reveal>
@@ -178,53 +168,6 @@
                         <span class="tile-icon"><svg class="icon" aria-hidden="true"><use href="#i-stack"/></svg></span>
                     </article>
                 </div>
-            </div>
-        </section>
-
-        <!-- ═══ What we make ═══ -->
-        <section class="section" aria-labelledby="make-title">
-            <div class="container">
-                <div class="section-head">
-                    <h2 id="make-title" data-reveal>Parts that do real work.</h2>
-                    <p class="lead">Built for teams in <strong>drones</strong>, <strong>defence</strong>, <strong>robotics</strong> and <strong>EV</strong>.</p>
-                </div>
-                <ul class="parts-grid" data-reveal-group>
-                    <li class="part" data-reveal>
-                        <div class="part-media"><picture>
-                <source type="image/avif" srcset="/img/work-1-tile-480.avif 480w, /img/work-1-tile-800.avif 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <source type="image/webp" srcset="/img/work-1-tile-480.webp 480w, /img/work-1-tile-800.webp 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <img src="/img/work-1-tile-800.jpg" srcset="/img/work-1-tile-480.jpg 480w, /img/work-1-tile-800.jpg 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw" alt="Black 3D-printed housing with ribbed gear covers" width="480" height="480" loading="lazy">
-                </picture></div>
-                    </li>
-                    <li class="part" data-reveal>
-                        <div class="part-media"><picture>
-                <source type="image/avif" srcset="/img/work-2-tile-480.avif 480w, /img/work-2-tile-800.avif 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <source type="image/webp" srcset="/img/work-2-tile-480.webp 480w, /img/work-2-tile-800.webp 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <img src="/img/work-2-tile-800.jpg" srcset="/img/work-2-tile-480.jpg 480w, /img/work-2-tile-800.jpg 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw" alt="Dark grey printed cellular block with cylindrical cavities" width="480" height="480" loading="lazy">
-                </picture></div>
-                    </li>
-                    <li class="part" data-reveal>
-                        <div class="part-media"><picture>
-                <source type="image/avif" srcset="/img/work-3-tile-480.avif 480w, /img/work-3-tile-800.avif 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <source type="image/webp" srcset="/img/work-3-tile-480.webp 480w, /img/work-3-tile-800.webp 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <img src="/img/work-3-tile-800.jpg" srcset="/img/work-3-tile-480.jpg 480w, /img/work-3-tile-800.jpg 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw" alt="Flat black enclosure panel with mounting holes and a slot" width="480" height="480" loading="lazy">
-                </picture></div>
-                    </li>
-                    <li class="part" data-reveal>
-                        <div class="part-media"><picture>
-                <source type="image/avif" srcset="/img/work-4-tile-480.avif 480w, /img/work-4-tile-800.avif 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <source type="image/webp" srcset="/img/work-4-tile-480.webp 480w, /img/work-4-tile-800.webp 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw">
-                <img src="/img/work-4-tile-800.jpg" srcset="/img/work-4-tile-480.jpg 480w, /img/work-4-tile-800.jpg 800w" sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 50vw" alt="Metallic lattice-style bracket with four arms" width="480" height="480" loading="lazy">
-                </picture></div>
-                    </li>
-                    <li class="part part--wide" data-reveal>
-                        <div class="part-media"><picture>
-                <source type="image/avif" srcset="/img/work-5-tile-480.avif 480w, /img/work-5-tile-800.avif 800w" sizes="(min-width: 1024px) 784px, 100vw">
-                <source type="image/webp" srcset="/img/work-5-tile-480.webp 480w, /img/work-5-tile-800.webp 800w" sizes="(min-width: 1024px) 784px, 100vw">
-                <img src="/img/work-5-tile-800.jpg" srcset="/img/work-5-tile-480.jpg 480w, /img/work-5-tile-800.jpg 800w" sizes="(min-width: 1024px) 784px, 100vw" alt="Skateboard with a black 3D-printed perforated deck" width="480" height="240" loading="lazy">
-                </picture></div>
-                    </li>
-                </ul>
             </div>
         </section>
 

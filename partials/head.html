@@ -6,6 +6,7 @@
     <script>
         // Enable animation start states only when JS runs and the visitor hasn't asked for reduced motion.
         // If motion.js never initialises (blocked or failed), drop the class so nothing stays hidden.
+        document.documentElement.classList.add('js');
         if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.documentElement.classList.add('js-motion');
             setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('js-motion'); }, 3000);
