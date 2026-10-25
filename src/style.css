@@ -328,7 +328,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(0, 0, 0, 0.92);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid var(--line);
@@ -531,29 +531,6 @@ p { text-wrap: pretty; }
 
 .check-list .icon { margin-top: 0.2em; color: var(--blue); }
 
-/* ---------- Placeholders (content awaiting the owner) ---------- */
-.placeholder {
-  display: inline-block;
-  padding: 0 0.35em;
-  border: 1px dashed rgba(255, 214, 10, 0.6);
-  border-radius: 4px;
-  color: #ffd60a;
-  font-size: 0.92em;
-}
-
-.media-placeholder {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  min-height: 160px;
-  padding: var(--space-4);
-  background: repeating-linear-gradient(135deg, #111 0 12px, #161618 12px 24px);
-  color: #ffd60a;
-  font-size: var(--step--1);
-  text-align: center;
-}
-
 /* ---------- Spec table (stacked label/value rows on small screens) ---------- */
 .spec-table {
   width: 100%;
@@ -625,16 +602,6 @@ p { text-wrap: pretty; }
 .person h3 { font-size: var(--step-1); font-weight: 700; }
 .person-role { color: var(--blue); font-weight: 600; }
 .person-bio { color: var(--text-muted); }
-
-.person-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: var(--tap);
-  margin-top: auto;
-  color: var(--text-muted);
-  font-size: var(--step--1);
-}
 
 /* ---------- Trust facts ---------- */
 .fact-list {
@@ -968,27 +935,9 @@ p { text-wrap: pretty; }
   transition: transform 500ms var(--ease-out);
 }
 
-.part-label {
-  position: absolute;
-  left: var(--space-2);
-  right: var(--space-2);
-  bottom: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.78);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  font-size: var(--step--1);
-  font-weight: 600;
-  transition: transform 300ms var(--ease-out), opacity 300ms var(--ease-out);
-}
-
-/* Desktop hover: image zooms inside its frame, label slides up. Touch: labels always visible. */
+/* Desktop hover: image zooms inside its frame */
 @media (hover: hover) and (pointer: fine) {
   .part:hover .part-media img { transform: scale(1.04); }
-  .part .part-label { opacity: 0; transform: translateY(8px); }
-  .part:hover .part-label,
-  .part:focus-within .part-label { opacity: 1; transform: none; }
 }
 
 /* ---------- How it works ---------- */
@@ -1074,8 +1023,24 @@ p { text-wrap: pretty; }
   background: var(--surface);
 }
 
-.case-media { aspect-ratio: 16 / 10; }
-.case-body { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5); }
+/* Single featured case study: meta row, then Problem / What we did / Result */
+.case--feature { gap: var(--space-6); padding: var(--space-6); }
+
+.case--feature .case-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--space-4) var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--step-0);
+}
+
+.case--feature .case-story { display: grid; gap: var(--space-5); }
+
+@media (min-width: 768px) {
+  .case--feature { padding: var(--space-7); }
+  .case--feature .case-story { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+}
 
 .case-meta {
   display: flex;
@@ -1088,7 +1053,6 @@ p { text-wrap: pretty; }
 .case-meta dd { margin: 0; font-weight: 600; }
 
 .case-story dt {
-  margin-top: var(--space-3);
   color: var(--blue);
   font-size: var(--step--1);
   font-weight: 600;
@@ -1096,7 +1060,6 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
 }
 
-.case-story dt:first-child { margin-top: 0; }
 .case-story dd { margin: var(--space-1) 0 0; color: var(--text-muted); }
 
 /* ---------- Lynx showpiece ---------- */
@@ -1531,8 +1494,41 @@ p { text-wrap: pretty; }
 }
 
 /* <picture> wrappers fill their media frames */
-.part-media picture,
-.case-media picture { display: block; height: 100%; }
+.part-media picture { display: block; height: 100%; }
 
 .product-media picture,
 .lynx-show-stage picture { display: grid; place-items: center; width: 100%; }
+
+/* ==========================================================================
+   Mobile refinements
+   ========================================================================== */
+@media (max-width: 1023px) {
+  /* Compact hero: content-height instead of full screen, smaller drawing */
+  .hero {
+    min-height: 0;
+    padding-block: calc(var(--header-h) + var(--space-7)) var(--space-7);
+  }
+
+  .hero-grid { gap: var(--space-6); }
+  .hero-print { width: min(64%, 300px); }
+}
+
+@media (max-width: 479px) {
+  /* Team: photo beside name and role instead of a tall stacked card */
+  .person {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: center;
+    padding: var(--space-4);
+  }
+
+  .person picture { grid-row: span 2; }
+  .person img { width: 64px; height: 64px; margin: 0; }
+  .person h3 { align-self: end; }
+  .person-role { align-self: start; }
+  .person-bio { grid-column: 1 / -1; margin-top: var(--space-2); }
+
+  .team-grid { gap: var(--space-3); }
+}

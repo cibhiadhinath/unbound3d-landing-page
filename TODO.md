@@ -12,86 +12,31 @@ Line references to removed claims point at the original files in commit `d8729eb
 |---|---|
 | `src/contact-form.js` | `WEB3FORMS_ACCESS_KEY`: free key from https://web3forms.com created with info@unbound3d.com. Until it is set, the form shows an error pointing people to email and WhatsApp. |
 
-## Placeholders on the site
+## Content to add (nothing is shown on the site until you supply it)
 
-Each visible placeholder appears on the page as a yellow dashed `[…]` label; most also have a matching `<!-- TODO -->` comment. Content still needed:
+The site no longer shows any visible placeholders. Anything missing is simply left out; send the content and it goes back in.
 
-| Page | What's needed |
-|---|---|
-| Homepage hero | Line drawing (SVG) of a real Unbound3D part; the current bracket is a placeholder |
-| Homepage, What we make | Material and process for each of the 5 part photos (`images/work-1…5`) |
-| Homepage, Case studies | Robotics chassis: part photo and material |
-| Homepage, Case studies | Drone-team carbon-fibre frame: problem, what we did, result, photo, material, lead time |
-| Homepage, Case studies | Defence part: problem, what we did, result, photo, material, lead time |
-| Homepage + About, Team | One-line background for Cibhi Adhinath, Mahima Swetha and Vijay Raj; LinkedIn URLs for all four |
-| Homepage + About, Team | Higher-resolution headshots (current photos are ~210 px crops of `images/team-composite.png`) |
-| Lynx 350 `#fleet` | Lynx 320 specifications |
-| Manufacturing | CNC materials and tolerances to list (comment only) |
-| Lynx 350 | Whether PA-GF and PPA-CF belong in the materials list (comment only) |
-
-Every occurrence, generated from the source (`grep -n "TODO\|placeholder:\|\[material\]" *.html`):
-
-| File:line | Type | Text |
+| Where | What to send | What shows now |
 |---|---|---|
-| [index.html:101](index.html#L101) | Comment | replace placeholder bracket with a line drawing of a real Unbound3D part |
-| [index.html:157](index.html#L157) | Comment | confirm material and process for each part photo |
-| [index.html:164](index.html#L164) | Visible | material |
-| [index.html:164](index.html#L164) | Visible | process |
-| [index.html:172](index.html#L172) | Visible | material |
-| [index.html:172](index.html#L172) | Visible | process |
-| [index.html:180](index.html#L180) | Visible | material |
-| [index.html:180](index.html#L180) | Visible | process |
-| [index.html:188](index.html#L188) | Visible | material |
-| [index.html:188](index.html#L188) | Visible | process |
-| [index.html:196](index.html#L196) | Visible | material |
-| [index.html:196](index.html#L196) | Visible | process |
-| [index.html:245](index.html#L245) | Visible | placeholder: chassis part photo |
-| [index.html:246](index.html#L246) | Comment | robotics chassis part photo |
-| [index.html:250](index.html#L250) | Visible | material |
-| [index.html:253](index.html#L253) | Comment | confirm chassis material |
-| [index.html:267](index.html#L267) | Visible | placeholder: drone frame photo |
-| [index.html:268](index.html#L268) | Comment | drone-team carbon-fibre frame case study (problem, what we did, result, photo, material, lead time) |
-| [index.html:272](index.html#L272) | Visible | material |
-| [index.html:273](index.html#L273) | Visible | lead time |
-| [index.html:277](index.html#L277) | Visible | placeholder: problem |
-| [index.html:279](index.html#L279) | Visible | placeholder: what we did |
-| [index.html:281](index.html#L281) | Visible | placeholder: result |
-| [index.html:286](index.html#L286) | Visible | placeholder: defence part photo |
-| [index.html:287](index.html#L287) | Comment | defence part case study (problem, what we did, result, photo, material, lead time) |
-| [index.html:291](index.html#L291) | Visible | material |
-| [index.html:292](index.html#L292) | Visible | lead time |
-| [index.html:296](index.html#L296) | Visible | placeholder: problem |
-| [index.html:298](index.html#L298) | Visible | placeholder: what we did |
-| [index.html:300](index.html#L300) | Visible | placeholder: result |
-| [index.html:350](index.html#L350) | Visible | placeholder: LinkedIn URL |
-| [index.html:351](index.html#L351) | Comment | Jeeva Ramasamy LinkedIn URL |
-| [index.html:360](index.html#L360) | Visible | placeholder: one-line background |
-| [index.html:361](index.html#L361) | Comment | Cibhi Adhinath one-line background and LinkedIn URL |
-| [index.html:362](index.html#L362) | Visible | placeholder: LinkedIn URL |
-| [index.html:371](index.html#L371) | Visible | placeholder: one-line background |
-| [index.html:372](index.html#L372) | Comment | Mahima Swetha one-line background and LinkedIn URL |
-| [index.html:373](index.html#L373) | Visible | placeholder: LinkedIn URL |
-| [index.html:382](index.html#L382) | Visible | placeholder: one-line background |
-| [index.html:383](index.html#L383) | Comment | Vijay Raj one-line background and LinkedIn URL |
-| [index.html:384](index.html#L384) | Visible | placeholder: LinkedIn URL |
-| [hanzof.html:119](hanzof.html#L119) | Comment | confirm CNC materials and tolerances to list here |
-| [lynx350.html:198](lynx350.html#L198) | Comment | confirm whether PA-GF and PPA-CF should be listed (removed pending confirmation) |
-| [lynx350.html:261](lynx350.html#L261) | Visible | placeholder: Lynx 320 specifications |
-| [lynx350.html:262](lynx350.html#L262) | Comment | confirm Lynx 320 specs (previously listed: 320×320×300 mm, 60 °C chamber, 150 °C bed, CoreXY) |
-| [about.html:69](about.html#L69) | Visible | placeholder: LinkedIn URL |
-| [about.html:70](about.html#L70) | Comment | Jeeva Ramasamy LinkedIn URL |
-| [about.html:79](about.html#L79) | Visible | placeholder: one-line background |
-| [about.html:80](about.html#L80) | Comment | Cibhi Adhinath one-line background |
-| [about.html:81](about.html#L81) | Visible | placeholder: LinkedIn URL |
-| [about.html:82](about.html#L82) | Comment | Cibhi Adhinath LinkedIn URL |
-| [about.html:91](about.html#L91) | Visible | placeholder: one-line background |
-| [about.html:92](about.html#L92) | Comment | Mahima Swetha one-line background |
-| [about.html:93](about.html#L93) | Visible | placeholder: LinkedIn URL |
-| [about.html:94](about.html#L94) | Comment | Mahima Swetha LinkedIn URL |
-| [about.html:103](about.html#L103) | Visible | placeholder: one-line background |
-| [about.html:104](about.html#L104) | Comment | Vijay Raj one-line background |
-| [about.html:105](about.html#L105) | Visible | placeholder: LinkedIn URL |
-| [about.html:106](about.html#L106) | Comment | Vijay Raj LinkedIn URL |
+| Homepage, What we make | Material and process for each of the 5 part photos | Photos without captions |
+| Homepage, Case study | 1–2 more case studies (e.g. drone-team carbon-fibre frame, defence part): problem, what we did, result, material, lead time, photo | Only the robotics chassis case |
+| Homepage, Case study | Robotics chassis: part photo and material | Text-only card |
+| Homepage + About, Team | One-line background for Cibhi Adhinath, Mahima Swetha and Vijay Raj | Name and role only |
+| Homepage + About, Team | LinkedIn URLs for the team | No LinkedIn links |
+| Homepage + About, Team | Higher-resolution headshots | ~210 px crops of `images/team-composite.png` |
+| Lynx 350 `#fleet` | Lynx 320 specifications | Short description only |
+| Homepage hero | Line drawing (SVG) of a real Unbound3D part | Generic bracket illustration |
+| Manufacturing | CNC materials and tolerances | Generic CNC description |
+| Lynx 350 | Whether PA-GF and PPA-CF belong in the materials list | PA-CF, PPS-CF, ASA |
+
+Notes left in the source as HTML comments:
+
+| File:line | Note |
+|---|---|
+| [index.html:101](index.html#L101) | replace placeholder bracket with a line drawing of a real Unbound3D part |
+| [hanzof.html:119](hanzof.html#L119) | confirm CNC materials and tolerances to list here |
+| [lynx350.html:198](lynx350.html#L198) | confirm whether PA-GF and PPA-CF should be listed (removed pending confirmation) |
+| [lynx350.html:261](lynx350.html#L261) | confirm Lynx 320 specs (previously listed: 320×320×300 mm, 60 °C chamber, 150 °C bed, CoreXY) |
 
 ## Removed claims awaiting confirmation
 
