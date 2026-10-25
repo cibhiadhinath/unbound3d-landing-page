@@ -134,3 +134,26 @@ Until then, the form validates input and then shows a message pointing people to
 
 - `scripts/screenshots.mjs`, `audit-mobile.mjs`, `test-nav.mjs`, `test-form.mjs`, `check-links.mjs`, `check-seo.mjs`, `check-fps.mjs`, `lighthouse.mjs` (Playwright and Lighthouse dev dependencies).
 - `scripts/build-images.py` (responsive AVIF/WebP from `images/`) and `scripts/og-images.py` (Open Graph images; Pillow required).
+
+## Update: Apple-style redesign (2026-10-25)
+
+The whole site was reworked into a classic, Apple-inspired style:
+- **Light and airy:** white and #f5f5f7 sections, with black reserved for product moments (Lynx 350 hero, showpiece, Twin Dry).
+- **Type:** Inter for all text, tight tracking, centred headlines and short copy. Space Grotesk is kept for the wordmark only.
+- **Buttons and links:** blue pill buttons and "Learn more ›" text links.
+- **Homepage, in order:**
+  - Hero with the print animation on a soft stage, then a credentials line.
+  - **"Everything you need to make hardware" tiles:** Manufacturing, Hanzof 6-hour quotes and **Procurement** (previously not linked anywhere).
+  - Part gallery with the industries line, then the 3-step process.
+  - Black Lynx 350 showpiece, then the case study and team.
+  - Final CTA.
+- **Lynx 350:** centred black product hero with key specs, an Apple-style tech specs table, and a dark Twin Dry section.
+- **Procurement** is now in the footer and on the Manufacturing page.
+
+Lighthouse mobile after the redesign (Firebase emulator, Playwright Chromium):
+
+| Page | Perf / A11y / BP / SEO | LCP | CLS |
+|---|---|---|---|
+| / | 100 / 100 / 100 / 100 | 1.8 s | 0 |
+
+Note: run `scripts/lighthouse.mjs` with `CHROME_PATH` pointing at Playwright's Chromium. The Chrome-for-Testing build returned NO_FCP intermittently.
