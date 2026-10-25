@@ -21,9 +21,7 @@ The site no longer shows any visible placeholders. Anything missing is simply le
 | Homepage, What we make | Material and process for each of the 5 part photos | Photos without captions |
 | Homepage, Case study | 1–2 more case studies (e.g. drone-team carbon-fibre frame, defence part): problem, what we did, result, material, lead time, photo | Only the robotics chassis case |
 | Homepage, Case study | Robotics chassis: part photo and material | Text-only card |
-| Homepage + About, Team | Photo of Sahil Manhas | "SM" initials avatar |
 | Homepage + About, Team | LinkedIn URLs for the team (optional) | No LinkedIn links |
-| Homepage + About, Team | Higher-resolution headshots | ~210 px crops of `images/team-composite.png` |
 | Lynx 350 `#fleet` | Lynx 320 specifications | Short description only |
 | Homepage hero | Line drawing (SVG) of a real Unbound3D part | Generic bracket illustration |
 | Manufacturing | CNC materials and tolerances | Generic CNC description |

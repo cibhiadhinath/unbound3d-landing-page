@@ -591,18 +591,9 @@ p { text-wrap: pretty; }
   background: var(--surface);
 }
 
-.person img {
-  width: 96px;
-  height: 96px;
-  margin-bottom: var(--space-3);
-  border-radius: 50%;
-  object-fit: cover;
-  background: #d0d0d0;
-}
-
 .person h3 { font-size: var(--step-1); font-weight: 700; }
 
-/* Monogram for team members without a photo */
+/* Team monogram avatar */
 .person-initials {
   display: grid;
   place-items: center;
@@ -1542,10 +1533,7 @@ p { text-wrap: pretty; }
     padding: var(--space-4);
   }
 
-  .person picture,
-  .person-initials { grid-row: span 2; }
-  .person img,
-  .person-initials { width: 64px; height: 64px; margin: 0; font-size: 1.25rem; }
+  .person-initials { grid-row: span 2; width: 64px; height: 64px; margin: 0; font-size: 1.25rem; }
   .person h3 { align-self: end; }
   .person-role { align-self: start; }
   .person-bio { grid-column: 1 / -1; margin-top: var(--space-2); }
