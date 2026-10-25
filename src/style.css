@@ -925,16 +925,17 @@ p { text-wrap: pretty; }
 .part {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #f4f4f4;
+  background: #eceff1;
 }
 
-.part-media { aspect-ratio: 3 / 4; overflow: hidden; }
-.part--wide .part-media { aspect-ratio: auto; height: 100%; }
+/* Tiles are pre-framed (scripts/build-images.py): square, wide tile 2:1 */
+.part-media { aspect-ratio: 1 / 1; overflow: hidden; }
+.part--wide .part-media { aspect-ratio: 2 / 1; }
 
-@media (max-width: 767px) {
-  .part--wide .part-media { aspect-ratio: 16 / 9; }
+@media (min-width: 1024px) {
+  /* Wide tile matches the row height of the square tiles beside it */
+  .part--wide .part-media { position: absolute; inset: 0; aspect-ratio: auto; }
 }
 
 .part-media img {
