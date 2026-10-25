@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Contact — Unbound3D</title>
+    <!-- @include head -->
     <script type="module" src="/src/main.js"></script>
     <style>
         .contact-form {
@@ -60,28 +61,9 @@
 
 <body>
     <!-- Nav -->
-    <nav>
-        <div class="nav-logo">
-            <a href="/" class="nav-brand-text">
-                <span class="brand-name">Unbound3D</span>
-                <span class="brand-tagline">Power To Create</span>
-            </a>
-        </div>
-        <div class="nav-links">
-            <a href="/platform.html">Platform</a>
-            <a href="/hanzof.html">Hanzof</a>
-            <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx-320.html">Lynx 320</a>
-            <a href="/team.html">Team</a>
-            <a href="/contact.html" class="cta-button active">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    <!-- @include header -->
 
-    <main>
+    <main id="main">
         <!-- Title -->
         <section class="reveal" style="padding-bottom: 0; padding-top: 8rem;">
             <div class="container text-center">
@@ -116,7 +98,7 @@
                         <select id="formInterest" class="form-input" style="cursor:pointer;">
                             <option>Manufacturing Quote (Upload Files)</option>
                             <option>Hanzof Managed Service</option>
-                            <option>Lynx-320 Inquiry</option>
+                            <option>Lynx 350 inquiry</option>
                             <option>General Inquiry</option>
                         </select>
                     </div>
@@ -173,41 +155,6 @@
         </script>
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-column">
-                <h4>Unbound3D</h4>
-                <div class="footer-links">
-                    <p>Building the digital infrastructure for physical production.</p>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Platform</h4>
-                <div class="footer-links">
-                    <a href="/platform.html">Technology</a>
-                    <a href="/lynx350.html">Lynx 350</a>
-            <a href="/lynx350.html">Lynx-350</a>
-                    <a href="/lynx-320.html">Lynx-320</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <div class="footer-links">
-                    <a href="/hanzof.html">Hanzof Managed Service</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Company</h4>
-                <div class="footer-links">
-                    <a href="/team.html">Team</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
+    <!-- @include footer --></body>
 
 </html>

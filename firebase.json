@@ -7,6 +7,28 @@
             "**/node_modules/**"
         ],
         "cleanUrls": true,
-        "trailingSlash": false
+        "trailingSlash": false,
+        "redirects": [
+            { "source": "/platform", "destination": "/hanzof", "type": 301 },
+            { "source": "/platform.html", "destination": "/hanzof", "type": 301 },
+            { "source": "/lynx-320", "destination": "/lynx350#fleet", "type": 301 },
+            { "source": "/lynx-320.html", "destination": "/lynx350#fleet", "type": 301 },
+            { "source": "/team", "destination": "/about", "type": 301 },
+            { "source": "/team.html", "destination": "/about", "type": 301 },
+            { "source": "/story", "destination": "/about", "type": 301 },
+            { "source": "/story.html", "destination": "/about", "type": 301 },
+            { "source": "/makura", "destination": "/", "type": 301 },
+            { "source": "/makura.html", "destination": "/", "type": 301 }
+        ],
+        "headers": [
+            {
+                "source": "/assets/**",
+                "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+            },
+            {
+                "source": "**/*.@(png|jpg|jpeg|webp|avif|svg|ico|woff2)",
+                "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+            }
+        ]
     }
 }

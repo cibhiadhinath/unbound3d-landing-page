@@ -6,7 +6,16 @@ Line references to removed claims point at the original files in commit `d8729eb
 
 ## Placeholders on the site
 
-_(Added as phases land.)_
+Every placeholder appears on the page as a yellow dashed `[placeholder: …]` and has a matching `<!-- TODO -->` comment. Run `grep -rn "TODO\|placeholder:" *.html` to list them.
+
+| File | What's needed |
+|---|---|
+| `about.html` | One-line background: Cibhi Adhinath, Mahima Swetha, Vijay Raj |
+| `about.html` | LinkedIn URLs for all four team members |
+| `about.html` | Higher-resolution headshots (current crops from `public/work/part-2.png` are ~210 px) |
+| `lynx350.html` (`#fleet`) | Lynx 320 specifications |
+| `hanzof.html` | CNC materials and tolerances to list (HTML comment only) |
+| `lynx350.html` | Whether PA-GF and PPA-CF belong in the materials list (HTML comment only) |
 
 ## Removed claims awaiting confirmation
 
@@ -65,3 +74,16 @@ _(Added as phases land.)_
 | Line | Removed | Note |
 |---|---|---|
 | 119 | "Makura.world Partnership" interest option | |
+
+### Removed in phase 2 (page merges)
+| Source | Removed | Note |
+|---|---|---|
+| `hanzof.html` (old) | "If something fails, Hanzof fixes it." | Unverifiable promise |
+| `hanzof.html` (old) | "We manage feasibility, vetted partners, and QA/QC"; "Managed supplier network" (homepage) | No confirmed supplier-network claim |
+| `lynx-320.html` | Specs: 320×320×300 mm, chamber up to 60 °C, bed up to 150 °C, CoreXY; "warp-free PA-CF/PA-GF"; "days, not weeks" | Fleet section now shows a placeholder |
+| `lynx-320.html` | "Lynx-Dry" dryer section and `public/lynx-dry.png` | Only "Twin Dry" is confirmed; is Lynx-Dry a separate product? |
+| `lynx350.html` | Materials PA-GF and PPA-CF; use case "Aerospace components" | Kept PA-CF, PPS-CF, ASA |
+| `procure.html` | "vetted manufacturing network", "Network-Driven Intelligence", "rigorous inspection protocols", "single point of liability", "review within 24–48 hours" | Procure now uses the contact form ("reply within 1 business day") |
+| `story.html` | Whole page (Makura reference, "precision, automation, and accountability") | 301 → `/about` |
+| `makura.html` | Whole page ("India's First Creator-Manufacturing Platform", royalties, eco claims) | 301 → `/` |
+| `team.html` | "Engineers, designers, and strategists building the future of manufacturing" | Replaced by `about.html` |

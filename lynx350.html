@@ -1,644 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Lynx-350 — Industrial 3D Printer | Unbound3D</title>
-    <link rel="stylesheet" href="/src/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Lynx 350 — Industrial 3D Printer for Engineering Thermoplastics | Unbound3D</title>
+    <meta name="description" content="Lynx 350: 450 °C nozzle, 80 °C active chamber, 650 mm/s, 350×350×350 mm CoreXY with triple independent Z and Twin Dry heated dual-spool dryer. Built in Bengaluru by Unbound3D.">
+    <link rel="canonical" href="https://unbound3d.com/lynx350">
+    <!-- @include head -->
     <script type="module" src="/src/main.js"></script>
-    <style>
-        /* Specific Lynx-350 Styles */
-        :root {
-            --blue-accent: #007aff;
-            --blue-glow: rgba(0, 122, 255, 0.4);
-            --dark-surface: #0a0a0c;
-        }
-
-        .hero-350 {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-            padding-top: var(--nav-height);
-        }
-
-        .hero-content {
-            flex: 1;
-            z-index: 2;
-            padding-right: 2rem;
-        }
-
-        .hero-render {
-            flex: 1.2;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        .hero-img {
-            max-width: 100%;
-            margin-right: -5%;
-            filter: drop-shadow(0 0 40px var(--blue-glow));
-            animation: floatSlow 8s ease-in-out infinite;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--blue-accent);
-            color: var(--blue-accent);
-            border-radius: 99px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 1.5rem;
-            background: rgba(0, 122, 255, 0.1);
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 1rem;
-            background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.03em;
-        }
-
-        .hero-subtitle {
-            font-size: 1.75rem;
-            color: #fff;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
-
-        .hero-desc {
-            font-size: 1.15rem;
-            opacity: 0.7;
-            max-width: 500px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .btn-blue {
-            background-color: var(--blue-accent);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 99px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 1rem;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-blue:hover {
-            background-color: #005fcc;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
-        }
-
-        .hero-highlights {
-            display: flex;
-            gap: 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-        }
-
-        .highlight-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .highlight-val {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--blue-accent);
-        }
-
-        .highlight-label {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .positioning-section {
-            padding: 8rem 0;
-            text-align: center;
-            background: linear-gradient(180deg, #000 0%, #050505 100%);
-        }
-
-        .positioning-title {
-            font-size: 3.5rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        /* Feature Sections */
-        .feature-showcase {
-            padding: 6rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .feature-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .feature-visual img {
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.5s ease;
-        }
-        
-        .feature-visual:hover img {
-            transform: scale(1.02);
-        }
-
-        .feature-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .feature-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 6px;
-            height: 6px;
-            background: var(--blue-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--blue-glow);
-        }
-        
-        /* Text only features grid */
-        .text-features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-        
-        .text-feature-card {
-            background: var(--dark-surface);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .text-feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0,122,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        .text-feature-card h3 {
-            color: var(--blue-accent);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .text-feature-card p {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .material-pill {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            font-weight: 600;
-            background: var(--dark-surface);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            font-size: 1.2rem;
-            letter-spacing: 0.05em;
-        }
-
-        .material-pill::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, rgba(0, 122, 255, 0.15) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .material-pill:hover::before {
-            opacity: 1;
-        }
-
-        .material-pill:hover {
-            border-color: var(--blue-accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .use-cases-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .use-case-card {
-            background: var(--dark-surface);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .use-case-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-        
-        .use-case-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--blue-accent);
-        }
-        
-        .use-case-card p {
-            margin: 0;
-            opacity: 0.8;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Specs Table */
-        .specs-container {
-            background: var(--dark-surface);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 3rem;
-            margin-top: 3rem;
-        }
-
-        .specs-category {
-            margin-bottom: 3rem;
-        }
-        
-        .specs-category:last-child {
-            margin-bottom: 0;
-        }
-        
-        .specs-category h3 {
-            font-size: 1.5rem;
-            color: var(--blue-accent);
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 0.5rem;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 1rem 2rem;
-        }
-
-        .spec-name {
-            font-weight: 500;
-            opacity: 0.7;
-        }
-
-        .spec-val {
-            font-weight: 600;
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @media (max-width: 900px) {
-            .hero-350 {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 8rem;
-                padding-bottom: 4rem;
-            }
-            .hero-content {
-                padding-right: 0;
-            }
-            .hero-cta-group {
-                justify-content: center;
-            }
-            .hero-highlights {
-                justify-content: center;
-            }
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            .text-features-grid {
-                grid-template-columns: 1fr;
-            }
-            .materials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .use-cases-grid {
-                grid-template-columns: 1fr;
-            }
-            .specs-grid {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-            .spec-name {
-                margin-top: 1rem;
-            }
-        }
-    </style>
 </head>
+
 <body>
-    <!-- Nav -->
-    <nav>
-        <div class="nav-logo">
-            <a href="/" class="nav-brand-text">
-                <span class="brand-name">Unbound3D</span>
-                <span class="brand-tagline">Power To Create</span>
-            </a>
-        </div>
-        <div class="nav-links">
-            <a href="/platform.html">Platform</a>
-            <a href="/hanzof.html">Hanzof</a>
-            <a href="/lynx350.html" class="active" style="color: var(--blue-accent);">Lynx 350</a>
-            <a href="/lynx-320.html">Lynx 320</a>
-            <a href="/team.html">Team</a>
-            <a href="/contact.html" class="cta-button btn-secondary btn" style="padding: 0.5rem 1.5rem;">Contact</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    <!-- @include header -->
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero-350 container reveal">
-            <div class="hero-content">
-                <span class="hero-badge">ENGINEERING SERIES</span>
-                <h1 class="hero-title">Lynx-350</h1>
-                <div class="hero-subtitle">Purpose-built for engineering thermoplastics.</div>
-                <p class="hero-desc">
-                    Reliable thermal control, structural rigidity, and repeatable precision for engineering-grade production workflows. Not a gadget. A manufacturing platform.
-                </p>
-                <div class="hero-cta-group">
-                    <a href="/contact.html" class="btn-blue">Request Quote</a>
-                    <a href="#specs" class="btn-secondary btn">View Specs</a>
+    <main id="main">
+        <section class="page-hero product-hero">
+            <div class="container split">
+                <div>
+                    <span class="eyebrow">Industrial 3D printer</span>
+                    <h1>Lynx 350</h1>
+                    <p class="product-sub">Purpose-built for engineering thermoplastics.</p>
+                    <p class="lead">Thermal control, structural rigidity and repeatable precision for engineering-grade
+                        production. Designed and built by Unbound3D in Bengaluru.</p>
+                    <div class="btn-row">
+                        <a href="/contact?interest=lynx350" class="btn btn-primary btn-lg">Request a quote <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <a href="#specs" class="btn btn-secondary btn-lg">View specs</a>
+                    </div>
+                    <dl class="key-specs">
+                        <div><dt>Nozzle</dt><dd>450 °C</dd></div>
+                        <div><dt>Active chamber</dt><dd>80 °C</dd></div>
+                        <div><dt>Speed</dt><dd>650 mm/s</dd></div>
+                    </dl>
                 </div>
-                
-                <div class="hero-highlights">
-                    <div class="highlight-item">
-                        <span class="highlight-val">450 °C</span>
-                        <span class="highlight-label">Nozzle</span>
-                    </div>
-                    <div class="highlight-item">
-                        <span class="highlight-val">80 °C</span>
-                        <span class="highlight-label">Active chamber</span>
-                    </div>
-                    <div class="highlight-item">
-                        <span class="highlight-val">350 mm³</span>
-                        <span class="highlight-label">Volume</span>
-                    </div>
+                <div class="product-media">
+                    <img src="/lynx-350.png" alt="Lynx 350 industrial 3D printer with its door closed and a part on the build plate" width="492" height="580" fetchpriority="high">
                 </div>
-            </div>
-            <div class="hero-render">
-                <img src="/lynx-350.png" alt="Lynx-350 Industrial 3D Printer" class="hero-img">
             </div>
         </section>
 
-        <!-- Positioning Section -->
-        <section class="positioning-section reveal">
+        <section class="section" aria-labelledby="features-title">
             <div class="container">
-                <h2 class="positioning-title">A Production Platform, Not Just a Printer</h2>
-                <p class="section-sub" style="margin: 0 auto; font-size: 1.25rem;">
-                    The Lynx-350 is a production-grade system engineered for high-performance thermoplastics and reinforced composites. It pairs an 80 °C active chamber with integrated Twin Dry material conditioning for consistent results from batch to batch.
-                </p>
+                <div class="section-head">
+                    <span class="eyebrow">Engineering</span>
+                    <h2 id="features-title">A production platform, not just a printer</h2>
+                    <p class="lead">An 80 °C active chamber and integrated Twin Dry material conditioning deliver
+                        consistent results from batch to batch.</p>
+                </div>
+                <div class="grid grid--3" data-reveal-group>
+                    <article class="card" data-reveal>
+                        <h3>Thermal control</h3>
+                        <p><strong>450 °C nozzle, 150 °C bed, 80 °C active chamber.</strong> Thermal stability is critical
+                            for engineering polymers. The heated chamber reduces warping and improves layer adhesion for
+                            materials like PA-CF and PPS-CF.</p>
+                    </article>
+                    <article class="card" data-reveal>
+                        <h3>Rigidity &amp; motion</h3>
+                        <p><strong>650 mm/s, 40,000 mm/s².</strong> A rigid CoreXY frame with triple independent Z keeps
+                            the bed trammed.</p>
+                    </article>
+                    <article class="card" data-reveal>
+                        <h3>Calibration</h3>
+                        <p><strong>Eddy-current scanning probe.</strong> Non-contact bed scanning for repeatable calibration
+                            without manual tuning.</p>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <!-- Core Features (Text Grid) -->
-        <section class="feature-showcase reveal">
+        <section class="section section--surface" aria-labelledby="twindry-title">
+            <div class="container split">
+                <div>
+                    <span class="eyebrow">Material conditioning</span>
+                    <h2 id="twindry-title">Twin Dry</h2>
+                    <p class="lead">A heated dual-spool dryer, up to 110 °C.</p>
+                    <div class="prose" style="margin-top: var(--space-4);">
+                        <p>Moisture degrades engineering-grade filaments. Twin Dry conditions the material while you
+                            print, for reliable mechanical properties and a better surface finish.</p>
+                    </div>
+                </div>
+                <div class="product-media product-media--small">
+                    <img src="/twin-dry.png" alt="Twin Dry heated dual-spool filament dryer" width="276" height="379" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="materials-title">
+            <div class="container split split--top">
+                <div>
+                    <span class="eyebrow">Materials</span>
+                    <h2 id="materials-title">Engineered for advanced materials</h2>
+                    <p class="lead">Exploring PEEK/ULTEM capability — HT variant in development.</p>
+                </div>
+                <div>
+                    <ul class="tag-list tag-list--lg" aria-label="Supported materials">
+                        <li class="tag">PA-CF</li>
+                        <li class="tag">PPS-CF</li>
+                        <li class="tag">ASA</li>
+                    </ul>
+                    <!-- TODO: confirm whether PA-GF and PPA-CF should be listed (removed pending confirmation) -->
+                    <h3 class="subhead">Where it fits</h3>
+                    <ul class="check-list">
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Functional prototyping with end-use materials</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Jigs and fixtures for the shop floor</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Low-volume production runs</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Lightweight PA-CF parts for drones and robotics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--surface" id="specs" aria-labelledby="specs-title">
             <div class="container">
-                <div class="text-features-grid">
-                    <div class="text-feature-card">
-                        <h3>Thermal Control System</h3>
-                        <p><strong>450 °C nozzle &amp; 150 °C bed</strong><br><br>Thermal stability is critical for engineering polymers. The 80 °C active chamber reduces warping and improves layer adhesion for materials like PA-CF and PPS-CF.</p>
-                    </div>
-                    <div class="text-feature-card">
-                        <h3>Structural Rigidity &amp; Motion</h3>
-                        <p><strong>40,000 mm/s² Acceleration</strong><br><br>A rigid CoreXY frame reaches 650 mm/s. Triple independent Z keeps the bed trammed.</p>
-                    </div>
-                    <div class="text-feature-card">
-                        <h3>Precision Calibration</h3>
-                        <p><strong>Eddy-current scanning probe</strong><br><br>Non-contact bed scanning for repeatable calibration without manual tuning.</p>
-                    </div>
+                <div class="section-head">
+                    <span class="eyebrow">Specifications</span>
+                    <h2 id="specs-title">Technical specifications</h2>
+                </div>
+                <div class="spec-tables">
+                    <table class="spec-table">
+                        <caption>Thermal</caption>
+                        <tbody>
+                            <tr><th scope="row">Max nozzle temperature</th><td>450 °C</td></tr>
+                            <tr><th scope="row">Bed temperature</th><td>150 °C</td></tr>
+                            <tr><th scope="row">Chamber</th><td>80 °C, active</td></tr>
+                        </tbody>
+                    </table>
+                    <table class="spec-table">
+                        <caption>Build</caption>
+                        <tbody>
+                            <tr><th scope="row">Build volume</th><td>350 × 350 × 350 mm</td></tr>
+                            <tr><th scope="row">Architecture</th><td>CoreXY</td></tr>
+                            <tr><th scope="row">Z system</th><td>Triple independent Z</td></tr>
+                        </tbody>
+                    </table>
+                    <table class="spec-table">
+                        <caption>Motion &amp; calibration</caption>
+                        <tbody>
+                            <tr><th scope="row">Max speed</th><td>650 mm/s</td></tr>
+                            <tr><th scope="row">Max acceleration</th><td>40,000 mm/s²</td></tr>
+                            <tr><th scope="row">Bed probe</th><td>Eddy-current scanning probe</td></tr>
+                        </tbody>
+                    </table>
+                    <table class="spec-table">
+                        <caption>Material system</caption>
+                        <tbody>
+                            <tr><th scope="row">Dryer</th><td>Twin Dry heated dual-spool dryer</td></tr>
+                            <tr><th scope="row">Drying temperature</th><td>Up to 110 °C</td></tr>
+                            <tr><th scope="row">High-temperature variant</th><td>HT variant for PEEK/ULTEM in development</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- Material Conditioning with Twin Dry Image -->
-        <section class="feature-showcase reveal">
-            <div class="container feature-grid">
-                <div class="feature-text">
-                    <h2 class="feature-title">Twin Dry Material Conditioning</h2>
-                    <p style="opacity: 0.8; font-size: 1.15rem; line-height: 1.7; margin-bottom: 2rem;">
-                        <strong>Dual spool system with active heated drying (up to 110 °C).</strong><br><br>
-                        Moisture is the enemy of engineering-grade materials. The Twin Dry system actively conditions your filament during printing, ensuring valid mechanical properties, seamless workflow integration, and the best possible surface finish.
-                    </p>
+        <section class="section" id="fleet" aria-labelledby="fleet-title">
+            <div class="container split split--reverse">
+                <div>
+                    <span class="eyebrow">In-house production</span>
+                    <h2 id="fleet-title">Our production fleet</h2>
+                    <div class="prose" style="margin-top: var(--space-4);">
+                        <p>We make customer parts on our own printers. Alongside the Lynx 350, our fleet includes the
+                            <strong>Lynx 320</strong>, the machine we use for day-to-day production of functional parts.</p>
+                        <p><span class="placeholder">[placeholder: Lynx 320 specifications]</span></p>
+                        <!-- TODO: confirm Lynx 320 specs (previously listed: 320×320×300 mm, 60 °C chamber, 150 °C bed, CoreXY) -->
+                    </div>
                 </div>
-                <div class="feature-visual">
-                    <img src="/twin-dry.png" alt="Twin Dry System" style="max-height: 500px; display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));">
+                <div class="product-media">
+                    <img src="/lynx-1.png" alt="Lynx 320 3D printer with its door open, beside a filament dryer" width="1024" height="682" loading="lazy">
                 </div>
             </div>
         </section>
 
-        <!-- Materials Section -->
-        <section class="reveal" style="padding: 6rem 0; background: var(--dark-surface);">
+        <section class="cta-band">
             <div class="container">
-                <h2 class="section-title text-center">Engineered for Advanced Materials</h2>
-                <p class="text-center" style="opacity: 0.7; max-width: 600px; margin: 0 auto;">
-                    Exploring PEEK/ULTEM capability — HT variant in development.
-                </p>
-                
-                <div class="materials-grid">
-                    <div class="material-pill">ASA</div>
-                    <div class="material-pill">PA-CF</div>
-                    <div class="material-pill">PA-GF</div>
-                    <div class="material-pill">PPS-CF</div>
-                    <div class="material-pill">PPA-CF</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Cases Section (Text Only) -->
-        <section class="feature-showcase reveal">
-            <div class="container">
-                <h2 class="section-title text-center">A Unified Production Workflow</h2>
-                <p class="text-center section-sub" style="margin: 0 auto 4rem;">
-                    Printer + Twin Dry material conditioning system = single ecosystem. Reduced variability. Increased repeatability.
-                </p>
-
-                <div class="use-cases-grid">
-                    <div class="use-case-card">
-                        <h3>Aerospace Components</h3>
-                        <p>High-strength, low-weight PA-CF parts for critical structural applications.</p>
-                    </div>
-                    <div class="use-case-card">
-                        <h3>Functional Prototyping</h3>
-                        <p>Test form, fit, and mechanical function with end-use materials before tooling.</p>
-                    </div>
-                    <div class="use-case-card">
-                        <h3>Jigs & Fixtures</h3>
-                        <p>Rapidly deploy custom manufacturing aids directly to the factory floor.</p>
-                    </div>
-                    <div class="use-case-card">
-                        <h3>Low-volume Production</h3>
-                        <p>Bridge the gap to injection molding with dimensionally accurate batch runs.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Specs Table -->
-        <section id="specs" class="reveal" style="padding: 6rem 0;">
-            <div class="container">
-                <h2 class="section-title text-center">Technical Specifications</h2>
-                
-                <div class="specs-container">
-                    <div class="specs-category">
-                        <h3>Thermal System</h3>
-                        <div class="specs-grid">
-                            <div class="spec-name">Max Nozzle Temp</div><div class="spec-val">450 °C</div>
-                            <div class="spec-name">Bed Temp</div><div class="spec-val">150 °C</div>
-                            <div class="spec-name">Chamber Temp</div><div class="spec-val">80 °C (active)</div>
-                        </div>
-                    </div>
-
-                    <div class="specs-category">
-                        <h3>Build</h3>
-                        <div class="specs-grid">
-                            <div class="spec-name">Volume</div><div class="spec-val">350 × 350 × 350 mm</div>
-                            <div class="spec-name">Architecture</div><div class="spec-val">CoreXY</div>
-                            <div class="spec-name">Z System</div><div class="spec-val">Triple independent Z</div>
-                        </div>
-                    </div>
-
-                    <div class="specs-category">
-                        <h3>Motion & Calibration</h3>
-                        <div class="specs-grid">
-                            <div class="spec-name">Speed</div><div class="spec-val">650 mm/s</div>
-                            <div class="spec-name">Acceleration</div><div class="spec-val">40,000 mm/s²</div>
-                            <div class="spec-name">Calibration</div><div class="spec-val">Eddy-current scanning probe</div>
-                        </div>
-                    </div>
-
-                    <div class="specs-category">
-                        <h3>Ecosystem & Interface</h3>
-                        <div class="specs-grid">
-                                                        <div class="spec-name">Material System</div><div class="spec-val">Twin Dry dual spool with heated drying up to 110 °C</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="reveal" style="text-align: center; padding: 8rem 0; background: linear-gradient(0deg, #000 0%, #050505 100%);">
-            <div class="container">
-                <h2 class="section-title" style="font-size: 3.5rem; letter-spacing: -0.02em;">Built for engineers. <br><span style="color: var(--blue-accent);">Ready for production.</span></h2>
-                <div class="hero-cta-group" style="justify-content: center; margin-top: 3rem;">
-                    <a href="/contact.html" class="btn-blue" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Request Quote</a>
-                    <a href="/contact.html" class="btn-secondary btn" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Talk to an Engineer</a>
+                <h2>Built for engineers. Ready for production.</h2>
+                <p class="lead">Ask us about pricing and lead times for the Lynx 350.</p>
+                <div class="btn-row">
+                    <a href="/contact?interest=lynx350" class="btn btn-primary btn-lg">Request a quote <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    <a href="https://wa.me/917558150570" class="btn btn-secondary btn-lg" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> Talk to an engineer</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-column">
-                <h4>Unbound3D</h4>
-                <div class="footer-links">
-                    <p>Building the digital infrastructure for physical production.</p>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Platform</h4>
-                <div class="footer-links">
-                    <a href="/platform.html">Technology</a>
-                    <a href="/lynx350.html">Lynx-350</a>
-                    <a href="/lynx-320.html">Lynx-320</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <div class="footer-links">
-                    <a href="/hanzof.html">Hanzof Managed Service</a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h4>Company</h4>
-                <div class="footer-links">
-                    <a href="/team.html">Team</a>
-                    <a href="/contact.html">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Unbound3D. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- @include footer -->
 </body>
+
 </html>
