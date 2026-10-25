@@ -1,4 +1,12 @@
 <meta name="theme-color" content="#000000">
+    <script>
+        // Enable animation start states only when JS runs and the visitor hasn't asked for reduced motion.
+        // If motion.js never initialises (blocked or failed), drop the class so nothing stays hidden.
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-motion');
+            setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('js-motion'); }, 3000);
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Space+Grotesk:wght@500..700&display=swap">

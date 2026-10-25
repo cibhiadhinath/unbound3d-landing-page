@@ -1,4 +1,5 @@
 import './style.css'
+import './motion.js'
 
 // ---------- Mobile navigation ----------
 const toggle = document.querySelector('[data-nav-toggle]')

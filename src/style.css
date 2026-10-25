@@ -859,11 +859,17 @@ p { text-wrap: pretty; }
 .print-part { width: 100%; height: auto; overflow: visible; }
 .print-infill { opacity: 0.18; color: var(--blue); }
 
+.print-nozzle-track {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 .print-nozzle {
   position: absolute;
   left: -4%;
   right: -4%;
-  top: 0;
+  top: -1px;
   height: 2px;
   background: var(--blue);
   box-shadow: 0 0 12px 2px var(--blue-glow), 0 0 32px 4px var(--blue-glow);
@@ -873,7 +879,7 @@ p { text-wrap: pretty; }
 }
 
 @media (min-width: 1024px) {
-  .hero-grid { grid-template-columns: 1.3fr 0.7fr; gap: var(--space-7); }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: var(--space-7); }
   .hero-print { width: 100%; }
 }
 
@@ -1306,4 +1312,201 @@ p { text-wrap: pretty; }
 
 @media (min-width: 768px) {
   .mobile-cta { display: none; }
+}
+
+/* ==========================================================================
+   Motion
+   One easing token; transform/opacity/clip-path/filter only.
+   Start states apply only under .js-motion (set in <head> when JS runs and
+   reduced motion is off), so content is always visible without JS.
+   ========================================================================== */
+
+/* ---------- Site-wide reveals ---------- */
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-reveal) var(--ease-out) var(--delay, 0ms), transform var(--dur-reveal) var(--ease-out) var(--delay, 0ms);
+}
+
+.js-motion [data-reveal="fade"] { transform: none; }
+
+.js-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero: layer-by-layer print ---------- */
+@keyframes print-reveal {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes nozzle-travel {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.js-motion .hero-print.print-play .print-part {
+  clip-path: inset(100% 0 0 0);
+  animation: print-reveal 1.6s steps(24, end) 200ms forwards;
+}
+
+.js-motion .hero-print.print-play .print-nozzle-track {
+  transform: translateY(100%);
+  animation: nozzle-travel 1.6s steps(24, end) 200ms forwards;
+}
+
+.js-motion .hero-print.print-play .print-nozzle {
+  opacity: 1;
+  transition: opacity 300ms var(--ease-out);
+}
+
+/* After the print: nozzle fades, part settles, infill recedes */
+.hero-print .print-part {
+  transform-origin: 50% 100%;
+  transition: transform 600ms var(--ease-out);
+}
+
+.print-infill { transition: opacity 600ms var(--ease-out); }
+
+.js-motion .hero-print.print-done .print-nozzle { opacity: 0; }
+.js-motion .hero-print.print-done .print-part { clip-path: none; transform: scale(0.98); }
+.js-motion .hero-print.print-done .print-infill { opacity: 0.1; }
+
+/* CTAs fade up once the print completes (headline never waits) */
+.js-motion .hero-ctas > .btn {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out), background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out);
+}
+
+.js-motion .hero-ctas > .btn:nth-child(2) { transition-delay: 80ms, 80ms, 0ms, 0ms; }
+
+.js-motion .hero.is-ready .hero-ctas > .btn {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- How it works connector ---------- */
+.js-motion .process[data-animate] .process-line line {
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 900ms var(--ease-out);
+}
+
+.js-motion .process[data-animate].is-drawn .process-line line { stroke-dashoffset: 0; }
+
+/* ---------- Header: solid background fades in after the hero ---------- */
+/* (opacity transition on .site-header::before is defined with the header) */
+
+/* ---------- Mobile menu: links stagger in ---------- */
+@media (max-width: 767px) {
+  .site-nav li {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
+  }
+
+  .site-nav.is-open li { opacity: 1; transform: none; }
+  .site-nav.is-open li:nth-child(2) { transition-delay: 40ms; }
+  .site-nav.is-open li:nth-child(3) { transition-delay: 80ms; }
+  .site-nav.is-open li:nth-child(4) { transition-delay: 120ms; }
+}
+
+/* ---------- Lynx 350 showpiece: pinned, callouts one at a time (≥1024px) ---------- */
+@media (min-width: 1024px) {
+  .lynx-show.is-pinned {
+    height: 250vh; /* 100vh of sticky viewport + ~150vh of scroll */
+    padding: 0;
+  }
+
+  .lynx-show.is-pinned .lynx-show-sticky {
+    position: sticky;
+    top: 0;
+    display: grid;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .lynx-show.is-pinned .lynx-show-stage {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    align-items: center;
+    min-height: 520px;
+  }
+
+  .lynx-show.is-pinned .lynx-show-stage img { width: 100%; max-width: 380px; }
+
+  .lynx-show.is-pinned .lynx-callouts {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 520px;
+    margin: 0;
+  }
+
+  .lynx-show.is-pinned .callout {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+  }
+
+  .lynx-show.is-pinned .callout--1 { top: 18%; }
+  .lynx-show.is-pinned .callout--2 { top: 44%; }
+  .lynx-show.is-pinned .callout--3 { top: 70%; }
+
+  .lynx-show.is-pinned .callout-line {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    display: block;
+    width: 96px;
+    height: 1px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 500ms var(--ease-out) 150ms;
+  }
+
+  .lynx-show.is-pinned .callout-line::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: -3.5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 10px var(--blue-glow);
+  }
+
+  .lynx-show.is-pinned .callout.is-on { opacity: 1; transform: none; }
+  .lynx-show.is-pinned .callout.is-on .callout-line { transform: scaleX(1); }
+}
+
+/* ---------- Page transitions (progressive enhancement) ---------- */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+  animation-timing-function: var(--ease-out);
+}
+
+/* ---------- Reduced motion: final states, instantly ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  @view-transition { navigation: none; }
 }
