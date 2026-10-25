@@ -58,8 +58,9 @@ if (motionOn && 'IntersectionObserver' in window) {
       hero.classList.add('is-ready')
     } else {
       print.classList.add('print-play')
-      print.querySelector('.print-part').addEventListener('animationend', finish, { once: true })
-      setTimeout(finish, 2400) // safety net if animationend never fires
+      setTimeout(() => hero.classList.add('is-ready'), 1300) // CTAs arrive mid-print, not after
+      print.querySelector('.print-real').addEventListener('animationend', finish, { once: true })
+      setTimeout(finish, 3200) // safety net if animationend never fires
     }
   }
 

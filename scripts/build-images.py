@@ -108,3 +108,26 @@ for name, ratio in TILES.items():
         r.save(OUT / f'{stem}-tile-{w}.webp', quality=78, method=6)
         r.save(OUT / f'{stem}-tile-{w}.jpg', quality=80, optimize=True, progressive=True)
     print(f'tile {name}: {tw}x{th} bg={bg}')
+
+
+# ---------------------------------------------------------------------------
+# Hero: transparent cutout of a real printed part (cellular block), used by the
+# layer-by-layer print animation on the homepage.
+def cutout(name, thresh=34):
+    im = trim_white(Image.open(SRC / name).convert('RGB'))
+    bg = border_colour(im, strip=10)
+    diff = ImageChops.difference(im, Image.new('RGB', im.size, bg)).convert('L')
+    mask = diff.point(lambda v: 255 if v > thresh else 0).filter(ImageFilter.MedianFilter(7))
+    mask = mask.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(1.2))
+    out = im.copy()
+    out.putalpha(mask)
+    return out.crop(mask.getbbox())
+
+
+hero = cutout('work-2.png')
+for w in (240, hero.width):  # source is ~332px wide; never upscale
+    r = hero.resize((w, round(w * hero.height / hero.width)), Image.LANCZOS)
+    r.save(OUT / f'hero-part-{w}.avif', quality=60)
+    r.save(OUT / f'hero-part-{w}.webp', quality=82, method=6)
+    r.save(OUT / f'hero-part-{w}.png', optimize=True)
+print(f'hero cutout: {hero.size}')

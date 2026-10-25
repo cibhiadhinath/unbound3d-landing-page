@@ -87,7 +87,7 @@
     <main id="main">
         <!-- ═══ Hero ═══ -->
         <section class="hero" data-hero>
-            <div class="container">
+            <div class="container hero-grid">
                 <div class="hero-copy">
                     <h1>Manufacturing made right.</h1>
                     <p class="lead">Engineering-led manufacturing of high-performance parts for hardware R&amp;D teams —
@@ -98,39 +98,21 @@
                     </div>
                 </div>
 
-                <!-- TODO: replace placeholder bracket with a line drawing of a real Unbound3D part -->
-                <div class="hero-visual" aria-hidden="true">
-                    <div class="hero-print" data-print>
-                        <svg class="print-part" viewBox="0 0 400 320" fill="none">
-                            <defs>
-                                <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                                    <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1"/>
-                                </pattern>
-                            </defs>
-                            <g class="print-infill" fill="url(#hatch)">
-                                <path d="M40 250h320v40H40zM70 90h70v160H70zM260 90h70v160h-70z"/>
-                            </g>
-                            <g class="print-lines" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-                                <!-- base plate -->
-                                <path d="M40 250h320v40H40z"/>
-                                <circle cx="75" cy="270" r="9"/>
-                                <circle cx="325" cy="270" r="9"/>
-                                <circle cx="200" cy="270" r="9"/>
-                                <!-- uprights -->
-                                <path d="M70 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
-                                <path d="M260 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
-                                <circle cx="105" cy="130" r="18"/>
-                                <circle cx="295" cy="130" r="18"/>
-                                <!-- gussets -->
-                                <path d="M140 250l60-70 60 70"/>
-                                <path d="M140 210l40-46M260 210l-40-46"/>
-                                <!-- cross beam -->
-                                <path d="M140 150h120v30H140z"/>
-                                <path d="M160 165h80" stroke-dasharray="6 6" opacity=".5"/>
-                            </g>
-                        </svg>
-                        <span class="print-nozzle-track"><span class="print-nozzle"></span></span>
+                <div class="hero-stage" data-print aria-hidden="true">
+                    <div class="print-object">
+                        <picture class="print-ghost">
+                            <source type="image/avif" srcset="/img/hero-part-240.avif 240w, /img/hero-part-332.avif 332w" sizes="(min-width: 1024px) 300px, 220px">
+                            <source type="image/webp" srcset="/img/hero-part-240.webp 240w, /img/hero-part-332.webp 332w" sizes="(min-width: 1024px) 300px, 220px">
+                            <img src="/img/hero-part-332.png" srcset="/img/hero-part-240.png 240w, /img/hero-part-332.png 332w" sizes="(min-width: 1024px) 300px, 220px" alt="" width="332" height="505" fetchpriority="high">
+                        </picture>
+                        <picture class="print-real">
+                            <source type="image/avif" srcset="/img/hero-part-240.avif 240w, /img/hero-part-332.avif 332w" sizes="(min-width: 1024px) 300px, 220px">
+                            <source type="image/webp" srcset="/img/hero-part-240.webp 240w, /img/hero-part-332.webp 332w" sizes="(min-width: 1024px) 300px, 220px">
+                            <img src="/img/hero-part-332.png" srcset="/img/hero-part-240.png 240w, /img/hero-part-332.png 332w" sizes="(min-width: 1024px) 300px, 220px" alt="" width="332" height="505">
+                        </picture>
+                        <span class="print-nozzle-track"><span class="print-head"><span class="print-tip"></span></span></span>
                     </div>
+                    <div class="print-bed"></div>
                 </div>
             </div>
         </section>

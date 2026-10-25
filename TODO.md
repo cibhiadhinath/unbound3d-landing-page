@@ -23,7 +23,6 @@ The site no longer shows any visible placeholders. Anything missing is simply le
 | Homepage, Case study | Robotics chassis: part photo and material | Text-only card |
 | Homepage + About, Team | LinkedIn URLs for the team (optional) | No LinkedIn links |
 | Lynx 350 `#fleet` | Lynx 320 specifications | Short description only |
-| Homepage hero | Line drawing (SVG) of a real Unbound3D part | Generic bracket illustration |
 | Manufacturing | CNC materials and tolerances | Generic CNC description |
 | Lynx 350 | Whether PA-GF and PPA-CF belong in the materials list | PA-CF, PPS-CF, ASA |
 
@@ -31,7 +30,6 @@ Notes left in the source as HTML comments:
 
 | File:line | Note |
 |---|---|
-| [index.html:101](index.html#L101) | replace placeholder bracket with a line drawing of a real Unbound3D part |
 | [hanzof.html:119](hanzof.html#L119) | confirm CNC materials and tolerances to list here |
 | [lynx350.html:198](lynx350.html#L198) | confirm whether PA-GF and PPA-CF should be listed (removed pending confirmation) |
 | [lynx350.html:261](lynx350.html#L261) | confirm Lynx 320 specs (previously listed: 320×320×300 mm, 60 °C chamber, 150 °C bed, CoreXY) |

@@ -359,7 +359,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--line);
@@ -445,18 +445,39 @@ p { text-wrap: pretty; }
   transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out), visibility 0s;
 }
 
+.site-nav { display: flex; flex-direction: column; }
+
 .site-nav ul { display: flex; flex-direction: column; list-style: none; padding: 0; }
 
-.site-nav a {
-  display: flex;
+.site-nav li { border-bottom: 1px solid var(--line); }
+
+.site-nav li > a {
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  min-height: 52px;
-  font-size: 1.75rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  column-gap: var(--space-4);
+  min-height: 72px;
+  padding-block: var(--space-3);
 }
 
-.site-nav a[aria-current="page"] { color: var(--text-muted); }
+.nav-label { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.nav-sub { grid-column: 1; color: var(--text-muted); font-size: var(--step--1); }
+.nav-chevron { grid-column: 2; grid-row: 1 / span 2; width: 20px; height: 20px; color: var(--text-muted); transition: transform var(--dur-ui) var(--ease-out); }
+.site-nav li > a:active .nav-chevron { transform: translateX(3px); }
+.site-nav a[aria-current="page"] .nav-label { color: var(--blue); }
+
+.nav-extra {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-7);
+}
+
+.nav-extra .btn { width: 100%; }
+.nav-fineprint { color: var(--text-muted); font-size: var(--step--1); text-align: center; }
+
+/* Solid header while the menu is open */
+body.nav-open .site-header::before { opacity: 1; background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 @media (min-width: 768px) {
   .nav-toggle { display: none; }
@@ -473,9 +494,14 @@ p { text-wrap: pretty; }
   }
 
   .site-nav ul { flex-direction: row; align-items: center; gap: var(--space-1); }
+  .site-nav li { border: 0; }
+  .nav-sub, .nav-chevron, .nav-extra { display: none; }
+  .nav-label { font-size: inherit; font-weight: inherit; letter-spacing: inherit; line-height: inherit; }
 
-  .site-nav a {
+  .site-nav li > a {
+    display: flex;
     min-height: var(--tap);
+    padding-block: 0;
     padding-inline: var(--space-3);
     font-size: 0.875rem;
     font-weight: 400;
@@ -885,53 +911,121 @@ p { text-wrap: pretty; }
   padding-block: calc(var(--header-h) + var(--space-8)) var(--space-7);
   background: var(--bg);
   text-align: center;
+  overflow: hidden;
 }
 
+.hero-grid { display: grid; gap: var(--space-7); align-items: center; }
 .hero-copy { max-width: 52rem; margin-inline: auto; }
 .hero h1 { max-width: 13ch; margin-inline: auto; }
 .hero .lead { max-width: 36rem; margin-inline: auto; }
 .hero-ctas { justify-content: center; margin-top: var(--space-6); }
 
-/* Product-style stage for the print animation */
-.hero-visual {
-  display: grid;
-  place-items: center;
-  max-width: 880px;
-  margin: var(--space-8) auto 0;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius-lg);
-  background: radial-gradient(ellipse 60% 55% at 50% 58%, rgba(0, 113, 227, 0.08), transparent 70%), var(--surface);
-}
-
-.hero-print {
-  position: relative;
-  width: min(58%, 420px);
-  color: var(--text);
-}
-
-.print-part { width: 100%; height: auto; overflow: visible; }
-.print-infill { opacity: 0.16; color: var(--blue-fill); }
-
-.print-nozzle-track { position: absolute; inset: 0; pointer-events: none; }
-
-.print-nozzle {
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  top: -1px;
-  height: 2px;
-  background: var(--blue-fill);
-  box-shadow: 0 0 10px 2px var(--blue-glow), 0 0 28px 4px var(--blue-glow);
-  border-radius: 2px;
-  opacity: 0;
-  pointer-events: none;
+@media (min-width: 1024px) {
+  .hero { padding-block: calc(var(--header-h) + var(--space-8)) var(--space-8); text-align: left; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) 440px; gap: var(--space-7); }
+  .hero .btn-lg { min-height: 46px; padding: 0.7rem 1.4rem; font-size: var(--step-0); }
+  .hero-copy, .hero h1, .hero .lead { margin-inline: 0; }
+  .hero-ctas { justify-content: flex-start; }
 }
 
 @media (max-width: 767px) {
   .hero { padding-block: calc(var(--header-h) + var(--space-7)) var(--space-6); }
   .hero h1 { font-size: clamp(2.5rem, 1.5rem + 5vw, 3.5rem); }
-  .hero-visual { margin-top: var(--space-7); aspect-ratio: 4 / 3; border-radius: var(--radius); }
-  .hero-print { width: 72%; }
+}
+
+/* ---------- Hero print: a real part built layer by layer on a build plate ---------- */
+.hero-stage {
+  --obj-w: 210px;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-top: var(--space-5);
+}
+
+@media (min-width: 768px) { .hero-stage { --obj-w: 260px; } }
+@media (min-width: 1024px) { .hero-stage { --obj-w: 300px; } }
+
+/* Soft glow behind the part */
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: calc(var(--obj-w) * 2.2);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.12), transparent 62%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.print-object {
+  position: relative;
+  width: var(--obj-w);
+  aspect-ratio: 332 / 505;
+}
+
+.print-object picture,
+.print-object img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.print-real img { filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.16)); }
+
+/* The ghost (slicer preview) and nozzle only exist while the animation runs */
+.print-ghost { opacity: 0; }
+.print-nozzle-track { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+
+/* Current-layer line */
+.print-nozzle-track::before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 227, 0.7), transparent);
+}
+
+/* Full-width carrier that sweeps left↔right; the hotend sits at its centre */
+.print-head { position: absolute; left: 0; right: 0; top: 0; height: 0; }
+
+.print-head::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 30px;
+  height: 18px;
+  margin-left: -15px;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #3a3a3c, #1d1d1f);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.print-tip {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #4da3ff;
+  box-shadow: 0 0 8px 2px rgba(0, 113, 227, 0.7), 0 0 22px 6px rgba(0, 113, 227, 0.35);
+}
+
+.print-bed {
+  position: relative;
+  width: calc(var(--obj-w) * 1.45);
+  height: 12px;
+  margin-top: -2px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #e8e8ed, #d2d2d7);
+  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.25);
 }
 
 /* Credentials fine print */
@@ -1406,35 +1500,48 @@ p { text-wrap: pretty; }
 
 .js-motion [data-reveal].is-in { opacity: 1; transform: none; }
 
-/* Hero: layer-by-layer print */
+/* Hero: layer-by-layer print (24 layers, nozzle sweeps each one) */
 @keyframes print-reveal {
   from { clip-path: inset(100% 0 0 0); }
   to { clip-path: inset(0 0 0 0); }
 }
 
-@keyframes nozzle-travel {
+@keyframes layer-rise {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
 }
 
-.js-motion .hero-print.print-play .print-part {
+@keyframes nozzle-sweep {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(50%); }
+}
+
+.js-motion .hero-stage.print-play .print-ghost {
+  opacity: 0.14;
+  filter: grayscale(1);
+  transition: opacity 400ms var(--ease-out);
+}
+
+.js-motion .hero-stage.print-play .print-real {
   clip-path: inset(100% 0 0 0);
-  animation: print-reveal 1.6s steps(24, end) 200ms forwards;
+  animation: print-reveal 2.4s steps(24, end) 300ms forwards;
 }
 
-.js-motion .hero-print.print-play .print-nozzle-track {
+.js-motion .hero-stage.print-play .print-nozzle-track {
+  opacity: 1;
   transform: translateY(100%);
-  animation: nozzle-travel 1.6s steps(24, end) 200ms forwards;
+  animation: layer-rise 2.4s steps(24, end) 300ms forwards;
+  transition: opacity 400ms var(--ease-out);
 }
 
-.js-motion .hero-print.print-play .print-nozzle { opacity: 1; transition: opacity 300ms var(--ease-out); }
+.js-motion .hero-stage.print-play .print-head {
+  animation: nozzle-sweep 100ms linear 300ms 24 alternate both;
+}
 
-.hero-print .print-part { transform-origin: 50% 100%; transition: transform 600ms var(--ease-out); }
-.print-infill { transition: opacity 600ms var(--ease-out); }
-
-.js-motion .hero-print.print-done .print-nozzle { opacity: 0; }
-.js-motion .hero-print.print-done .print-part { clip-path: none; transform: scale(0.98); }
-.js-motion .hero-print.print-done .print-infill { opacity: 0.08; }
+/* Done: nozzle and preview fade away, part stays */
+.js-motion .hero-stage.print-done .print-ghost { opacity: 0; }
+.js-motion .hero-stage.print-done .print-nozzle-track { opacity: 0; transform: translateY(-12px); transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out); }
+.js-motion .hero-stage.print-done .print-real { clip-path: none; }
 
 .js-motion .hero-ctas > .btn {
   opacity: 0;
@@ -1466,6 +1573,9 @@ p { text-wrap: pretty; }
   .site-nav.is-open li:nth-child(2) { transition-delay: 40ms; }
   .site-nav.is-open li:nth-child(3) { transition-delay: 80ms; }
   .site-nav.is-open li:nth-child(4) { transition-delay: 120ms; }
+
+  .nav-extra { opacity: 0; transform: translateY(8px); transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); }
+  .site-nav.is-open .nav-extra { opacity: 1; transform: none; transition-delay: 180ms; }
 }
 
 /* Lynx 350 showpiece: pinned, callouts one at a time (≥1024px) */
