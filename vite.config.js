@@ -28,6 +28,24 @@ function partials() {
   }
 }
 
+// Inline the (small) site stylesheet into every page at build time: removes the
+// render-blocking CSS request so the hero paints on the first round trip.
+function inlineCss() {
+  return {
+    name: 'inline-css',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, ctx) {
+        return html.replace(/<link rel="stylesheet"(?: crossorigin)? href="\/(assets\/[^"]+\.css)">/g, (tag, file) => {
+          const asset = ctx.bundle?.[file]
+          return asset ? `<style>${asset.source}</style>` : tag
+        })
+      },
+    },
+  }
+}
+
 // Mirror Firebase cleanUrls locally: /hanzof → hanzof.html
 function cleanUrls() {
   const rewrite = (req, _res, next) => {
@@ -46,7 +64,7 @@ function cleanUrls() {
 }
 
 export default defineConfig({
-  plugins: [partials(), cleanUrls()],
+  plugins: [partials(), inlineCss(), cleanUrls()],
   build: {
     rollupOptions: {
       input: Object.fromEntries(pages.map((p) => [p, resolve(__dirname, `${p}.html`)])),

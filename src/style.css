@@ -3,6 +3,25 @@
    Mobile-first. Breakpoints: 480 / 768 / 1024 / 1280 (min-width).
    ========================================================================== */
 
+/* ---------- Fonts (self-hosted latin subsets, variable weight) ---------- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-latin-var.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-latin-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: dark;
@@ -1510,3 +1529,10 @@ p { text-wrap: pretty; }
 
   @view-transition { navigation: none; }
 }
+
+/* <picture> wrappers fill their media frames */
+.part-media picture,
+.case-media picture { display: block; height: 100%; }
+
+.product-media picture,
+.lynx-show-stage picture { display: grid; place-items: center; width: 100%; }
