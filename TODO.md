@@ -16,6 +16,12 @@ Every placeholder appears on the page as a yellow dashed `[placeholder: …]` an
 | `lynx350.html` (`#fleet`) | Lynx 320 specifications |
 | `hanzof.html` | CNC materials and tolerances to list (HTML comment only) |
 | `lynx350.html` | Whether PA-GF and PPA-CF belong in the materials list (HTML comment only) |
+| `index.html` (hero) | Line drawing of a real Unbound3D part; current SVG is a placeholder bracket |
+| `index.html` (What we make) | Material and process label for each of the 5 part photos (`public/work/work-1…5`) |
+| `index.html` (Case studies) | Robotics chassis: part photo and material |
+| `index.html` (Case studies) | Drone-team carbon-fibre frame: problem, what we did, result, photo, material, lead time |
+| `index.html` (Case studies) | Defence part: problem, what we did, result, photo, material, lead time |
+| `index.html` (Team preview) | Same bios and LinkedIn URLs as `about.html` |
 
 ## Removed claims awaiting confirmation
 

@@ -2,170 +2,313 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Unbound3D — Engineering-grade 3D Printing &amp; Precision Parts | Bengaluru</title>
-    <meta name="description"
-        content="Engineering-led manufacturing for hardware R&amp;D teams. High-performance polymer 3D printing (PA-CF, PPS-CF, ASA), CNC and composites, with engineer-reviewed quotes in 6 business hours. ISO 9001:2015." />
+    <meta name="description" content="Engineering-led manufacturing for hardware R&amp;D teams. High-performance polymer 3D printing (PA-CF, PPS-CF, ASA), CNC and composites, with engineer-reviewed quotes in 6 business hours. ISO 9001:2015.">
+    <link rel="canonical" href="https://unbound3d.com/">
     <script>
-        // Redirect procure subdomain to procurement page
-        if (window.location.hostname === 'procure.unbound3d.com' && window.location.pathname === '/') {
-            window.location.replace('/procure');
-        }
+        // procure.unbound3d.com serves the procurement page
+        if (location.hostname === 'procure.unbound3d.com' && location.pathname === '/') location.replace('/procure');
     </script>
     <!-- @include head -->
     <script type="module" src="/src/main.js"></script>
 </head>
 
-<body>
+<body class="home">
     <!-- @include header -->
 
     <main id="main">
-
-        <!-- ═══ HERO SECTION ═══ -->
-        <section class="page-hero">
-            <div class="container">
-                <h1>Manufacturing made right.</h1>
-                <p class="lead">Engineering-led manufacturing of high-performance parts for hardware R&amp;D teams — drones, defence, robotics, EV.</p>
-            </div>
-        </section>
-
-        <!-- ═══ HOW IT WORKS ═══ -->
-        <section class="hp-section reveal" id="how-it-works-section">
-            <div class="container">
-                <div class="hp-section-header">
-                    <span class="hp-section-tag">How It Works</span>
-                    <h2 class="hp-section-title">A streamlined path to production</h2>
-                </div>
-                <div class="steps-grid">
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-                            </svg>
-                        </div>
-                        <h3>1. Design & Review</h3>
-                        <p>We analyze CAD, improve manufacturability, and reduce risk.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                        </div>
-                        <h3>2. Prototype & Iterate</h3>
-                        <p>Rapid prototypes and engineering feedback.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <h3>3. Reliable Production</h3>
-                        <p>Managed suppliers, QA verification, predictable delivery.</p>
+        <!-- ═══ Hero ═══ -->
+        <section class="hero" data-hero>
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <h1>Manufacturing made right.</h1>
+                    <p class="lead">Engineering-led manufacturing of high-performance parts for hardware R&amp;D teams —
+                        drones, defence, robotics, EV.</p>
+                    <div class="btn-row hero-ctas">
+                        <a href="https://hanzof.com" class="btn btn-primary btn-lg" rel="noopener">Get a quote in 6 business hours <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <a href="https://wa.me/917558150570" class="btn btn-secondary btn-lg" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> Talk to an engineer</a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- ═══ INDUSTRIES ═══ -->
-        <section class="hp-section reveal" id="industries-section">
-            <div class="container">
-                <div class="hp-section-header">
-                    <span class="hp-section-tag">Industries</span>
-                    <h2 class="hp-section-title">Engineered for critical applications</h2>
-                </div>
-                <div class="industries-minimal-grid">
-                    <div class="industry-tile">Robotics</div>
-                    <div class="industry-tile">Drones & Aerospace</div>
-                    <div class="industry-tile">Industrial Equipment</div>
-                    <div class="industry-tile">EV & Mobility</div>
-                    <div class="industry-tile">Consumer Hardware</div>
-                    <div class="industry-tile">Research Labs</div>
+                <!-- TODO: replace placeholder bracket with a line drawing of a real Unbound3D part -->
+                <div class="hero-print" data-print aria-hidden="true">
+                    <svg class="print-part" viewBox="0 0 400 320" fill="none">
+                        <defs>
+                            <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <g class="print-infill" fill="url(#hatch)">
+                            <path d="M40 250h320v40H40zM70 90h70v160H70zM260 90h70v160h-70z"/>
+                        </g>
+                        <g class="print-lines" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                            <!-- base plate -->
+                            <path d="M40 250h320v40H40z"/>
+                            <circle cx="75" cy="270" r="9"/>
+                            <circle cx="325" cy="270" r="9"/>
+                            <circle cx="200" cy="270" r="9"/>
+                            <!-- uprights -->
+                            <path d="M70 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
+                            <path d="M260 250V110a20 20 0 0 1 20-20h30a20 20 0 0 1 20 20v140"/>
+                            <circle cx="105" cy="130" r="18"/>
+                            <circle cx="295" cy="130" r="18"/>
+                            <!-- gussets -->
+                            <path d="M140 250l60-70 60 70"/>
+                            <path d="M140 210l40-46M260 210l-40-46"/>
+                            <!-- cross beam -->
+                            <path d="M140 150h120v30H140z"/>
+                            <path d="M160 165h80" stroke-dasharray="6 6" opacity=".5"/>
+                        </g>
+                    </svg>
+                    <span class="print-nozzle"></span>
                 </div>
             </div>
         </section>
 
-        <!-- ═══ WHY CHOOSE UNBOUND3D ═══ -->
-        <section class="hp-section reveal" id="why-us-section">
+        <!-- ═══ Trust strip ═══ -->
+        <section class="trust-strip" aria-label="Credentials">
             <div class="container">
-                <div class="hp-section-header">
-                    <span class="hp-section-tag">Why Choose Us</span>
-                    <h2 class="hp-section-title">Built on execution and trust</h2>
+                <ul class="trust-list">
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> ISO 9001:2015 certified</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> GeM-registered defence supplier</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg> Delivered to the Indian Army</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Bengaluru, India</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ═══ What we make ═══ -->
+        <section class="section" aria-labelledby="make-title">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">What we make</span>
+                    <h2 id="make-title" data-reveal>Functional parts in engineering materials</h2>
+                    <p class="lead">Polymer 3D printing in PA-CF, PPS-CF and ASA, CNC machining and composites.</p>
                 </div>
-                <div class="trust-grid">
-                    <div class="trust-point">
-                        <h4>Engineering feedback before manufacturing</h4>
+                <ul class="parts-grid" data-reveal-group>
+                    <!-- TODO: confirm material and process for each part photo -->
+                    <li class="part" data-reveal>
+                        <div class="part-media"><img src="/work/work-1.jpg" alt="Black 3D-printed housing with ribbed gear covers" width="576" height="1024" loading="lazy"></div>
+                        <div class="part-label"><span class="placeholder">[material]</span> · <span class="placeholder">[process]</span></div>
+                    </li>
+                    <li class="part" data-reveal>
+                        <div class="part-media"><img src="/work/work-2.png" alt="Dark grey printed cellular block with cylindrical cavities" width="576" height="1024" loading="lazy"></div>
+                        <div class="part-label"><span class="placeholder">[material]</span> · <span class="placeholder">[process]</span></div>
+                    </li>
+                    <li class="part" data-reveal>
+                        <div class="part-media"><img src="/work/work-3.png" alt="Flat black enclosure panel with mounting holes and a slot" width="682" height="1024" loading="lazy"></div>
+                        <div class="part-label"><span class="placeholder">[material]</span> · <span class="placeholder">[process]</span></div>
+                    </li>
+                    <li class="part" data-reveal>
+                        <div class="part-media"><img src="/work/work-4.png" alt="Metallic lattice-style bracket with four arms" width="576" height="1024" loading="lazy"></div>
+                        <div class="part-label"><span class="placeholder">[material]</span> · <span class="placeholder">[process]</span></div>
+                    </li>
+                    <li class="part part--wide" data-reveal>
+                        <div class="part-media"><img src="/work/work-5.png" alt="Skateboard with a black 3D-printed perforated deck" width="1024" height="576" loading="lazy"></div>
+                        <div class="part-label"><span class="placeholder">[material]</span> · <span class="placeholder">[process]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ═══ How it works ═══ -->
+        <section class="section section--surface" aria-labelledby="how-title">
+            <div class="container">
+                <div class="section-head section-head--center">
+                    <span class="eyebrow">How it works</span>
+                    <h2 id="how-title" data-reveal>From CAD to production parts</h2>
+                </div>
+                <div class="process" data-process>
+                    <svg class="process-line" aria-hidden="true">
+                        <line class="process-line-h" x1="0" y1="1" x2="100%" y2="1" pathLength="1"/>
+                        <line class="process-line-v" x1="1" y1="0" x2="1" y2="100%" pathLength="1"/>
+                    </svg>
+                    <ol class="process-steps">
+                        <li class="process-step">
+                            <span class="step-num">1</span>
+                            <h3>Review</h3>
+                            <p>Upload your CAD on Hanzof. An engineer checks manufacturability and quotes within 6
+                                business hours.</p>
+                        </li>
+                        <li class="process-step">
+                            <span class="step-num">2</span>
+                            <h3>Prototype</h3>
+                            <p>We make prototypes in end-use materials so you can test form, fit and function.</p>
+                        </li>
+                        <li class="process-step">
+                            <span class="step-num">3</span>
+                            <h3>Production</h3>
+                            <p>We move to repeatable production runs and deliver inspected parts.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Case studies ═══ -->
+        <section class="section" aria-labelledby="cases-title">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Case studies</span>
+                    <h2 id="cases-title" data-reveal>Problems we've solved</h2>
+                </div>
+                <div class="grid grid--3" data-reveal-group>
+                    <article class="case" data-reveal>
+                        <div class="case-media"><div class="media-placeholder">[placeholder: chassis part photo]</div></div>
+                        <!-- TODO: robotics chassis part photo -->
+                        <div class="case-body">
+                            <h3>Robotics chassis</h3>
+                            <dl class="case-meta">
+                                <div><dt>Material</dt><dd><span class="placeholder">[material]</span></dd></div>
+                                <div><dt>Lead time</dt><dd>2 weeks</dd></div>
+                            </dl>
+                            <!-- TODO: confirm chassis material -->
+                            <dl class="case-story">
+                                <dt>Problem</dt>
+                                <dd>A robotics startup needed a lightweight, high-strength chassis designed for 5-axis CNC
+                                    within 2 weeks.</dd>
+                                <dt>What we did</dt>
+                                <dd>Ran a DFM analysis, optimised the topology to cut weight by 15%, and managed CNC
+                                    production and anodising.</dd>
+                                <dt>Result</dt>
+                                <dd>Fully inspected, ready-to-assemble chassis delivered 3 days ahead of schedule.</dd>
+                            </dl>
+                        </div>
+                    </article>
+                    <article class="case" data-reveal>
+                        <div class="case-media"><div class="media-placeholder">[placeholder: drone frame photo]</div></div>
+                        <!-- TODO: drone-team carbon-fibre frame case study (problem, what we did, result, photo, material, lead time) -->
+                        <div class="case-body">
+                            <h3>Carbon-fibre drone frame</h3>
+                            <dl class="case-meta">
+                                <div><dt>Material</dt><dd><span class="placeholder">[material]</span></dd></div>
+                                <div><dt>Lead time</dt><dd><span class="placeholder">[lead time]</span></dd></div>
+                            </dl>
+                            <dl class="case-story">
+                                <dt>Problem</dt>
+                                <dd><span class="placeholder">[placeholder: problem]</span></dd>
+                                <dt>What we did</dt>
+                                <dd><span class="placeholder">[placeholder: what we did]</span></dd>
+                                <dt>Result</dt>
+                                <dd><span class="placeholder">[placeholder: result]</span></dd>
+                            </dl>
+                        </div>
+                    </article>
+                    <article class="case" data-reveal>
+                        <div class="case-media"><div class="media-placeholder">[placeholder: defence part photo]</div></div>
+                        <!-- TODO: defence part case study (problem, what we did, result, photo, material, lead time) -->
+                        <div class="case-body">
+                            <h3>Defence component</h3>
+                            <dl class="case-meta">
+                                <div><dt>Material</dt><dd><span class="placeholder">[material]</span></dd></div>
+                                <div><dt>Lead time</dt><dd><span class="placeholder">[lead time]</span></dd></div>
+                            </dl>
+                            <dl class="case-story">
+                                <dt>Problem</dt>
+                                <dd><span class="placeholder">[placeholder: problem]</span></dd>
+                                <dt>What we did</dt>
+                                <dd><span class="placeholder">[placeholder: what we did]</span></dd>
+                                <dt>Result</dt>
+                                <dd><span class="placeholder">[placeholder: result]</span></dd>
+                            </dl>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Lynx teaser (pinned showpiece on desktop) ═══ -->
+        <section class="lynx-show" data-lynx-show aria-labelledby="lynx-title">
+            <div class="lynx-show-sticky">
+                <div class="container lynx-show-grid">
+                    <div class="lynx-show-copy">
+                        <span class="eyebrow">Lynx 350</span>
+                        <h2 id="lynx-title" data-reveal>We build our own industrial printers.</h2>
+                        <p class="lead">The Lynx 350 is designed and built in-house for engineering thermoplastics.</p>
+                        <a href="/lynx350" class="btn btn-secondary">Explore the Lynx 350 <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                     </div>
-                    <div class="trust-point">
-                        <h4>Verified quality & documentation</h4>
-                    </div>
-                    <div class="trust-point">
-                        <h4>Managed supplier network</h4>
-                    </div>
-                    <div class="trust-point">
-                        <h4>Predictable timelines</h4>
+                    <div class="lynx-show-stage">
+                        <img src="/lynx-350.png" alt="Lynx 350 industrial 3D printer" width="492" height="580" loading="lazy">
+                        <ul class="lynx-callouts" data-reveal-group>
+                            <li class="callout callout--1" data-reveal data-callout="0"><span class="callout-line" aria-hidden="true"></span><strong>450 °C</strong> hotend</li>
+                            <li class="callout callout--2" data-reveal data-callout="1"><span class="callout-line" aria-hidden="true"></span><strong>80 °C</strong> active chamber</li>
+                            <li class="callout callout--3" data-reveal data-callout="2"><span class="callout-line" aria-hidden="true"></span><strong>650 mm/s</strong> · 40,000 mm/s²</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══ CASE STUDIES ═══ -->
-        <section class="hp-section reveal" id="case-studies-section">
+        <!-- ═══ Team preview ═══ -->
+        <section class="section section--surface" aria-labelledby="team-title">
             <div class="container">
-                <div class="hp-section-header">
-                    <span class="hp-section-tag">Case Studies</span>
-                    <h2 class="hp-section-title">Proven in the field</h2>
+                <div class="section-head">
+                    <span class="eyebrow">Team</span>
+                    <h2 id="team-title" data-reveal>Engineers you can talk to</h2>
                 </div>
-                <div class="case-study-card">
-                    <div class="cs-image">
-                        <!-- Placeholder graphic, can be replaced with real image later -->
-                        <div
-                            style="width: 100%; height: 100%; background: linear-gradient(45deg, #111, #222); display: flex; align-items: center; justify-content: center; opacity: 0.8;">
-                            <svg viewBox="0 0 24 24" stroke="rgba(255,255,255,0.1)" fill="none" width="48" height="48"
-                                stroke-width="1">
-                                <path
-                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                </path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="cs-content">
-                        <div class="cs-block">
-                            <span class="cs-label">Problem</span>
-                            <p>A robotics startup needed a lightweight, high-strength chassis designed for 5-axis CNC
-                                within 2 weeks.</p>
-                        </div>
-                        <div class="cs-block">
-                            <span class="cs-label">Solution</span>
-                            <p>We ran a DFM analysis, optimized the topology to reduce weight by 15%, and managed the
-                                CNC production and anodizing.</p>
-                        </div>
-                        <div class="cs-block">
-                            <span class="cs-label">Result</span>
-                            <p>Delivered fully inspected, ready-to-assemble chassis 3 days ahead of schedule.</p>
-                        </div>
-                    </div>
-                </div>
+                <ul class="team-grid" data-reveal-group>
+                    <li class="person" data-reveal>
+                        <picture>
+                            <source srcset="/team/jeeva.webp" type="image/webp">
+                            <img src="/team/jeeva.jpg" alt="Portrait of Jeeva Ramasamy" width="96" height="96" loading="lazy">
+                        </picture>
+                        <h3>Jeeva Ramasamy</h3>
+                        <p class="person-role">Co-Founder, Product</p>
+                        <p class="person-bio">B.Tech Mechatronics–Robotics; 5+ years in additive manufacturing hardware and UAV systems.</p>
+                        <span class="person-link"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> <span class="placeholder">[placeholder: LinkedIn URL]</span></span>
+                        <!-- TODO: Jeeva Ramasamy LinkedIn URL -->
+                    </li>
+                    <li class="person" data-reveal>
+                        <picture>
+                            <source srcset="/team/cibhi.webp" type="image/webp">
+                            <img src="/team/cibhi.jpg" alt="Portrait of Cibhi Adhinath" width="96" height="96" loading="lazy">
+                        </picture>
+                        <h3>Cibhi Adhinath</h3>
+                        <p class="person-role">Co-Founder, Business &amp; Strategy</p>
+                        <p class="person-bio"><span class="placeholder">[placeholder: one-line background]</span></p>
+                        <!-- TODO: Cibhi Adhinath one-line background and LinkedIn URL -->
+                        <span class="person-link"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> <span class="placeholder">[placeholder: LinkedIn URL]</span></span>
+                    </li>
+                    <li class="person" data-reveal>
+                        <picture>
+                            <source srcset="/team/mahima.webp" type="image/webp">
+                            <img src="/team/mahima.jpg" alt="Portrait of Mahima Swetha" width="96" height="96" loading="lazy">
+                        </picture>
+                        <h3>Mahima Swetha</h3>
+                        <p class="person-role">R&amp;D Lead</p>
+                        <p class="person-bio"><span class="placeholder">[placeholder: one-line background]</span></p>
+                        <!-- TODO: Mahima Swetha one-line background and LinkedIn URL -->
+                        <span class="person-link"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> <span class="placeholder">[placeholder: LinkedIn URL]</span></span>
+                    </li>
+                    <li class="person" data-reveal>
+                        <picture>
+                            <source srcset="/team/vijay.webp" type="image/webp">
+                            <img src="/team/vijay.jpg" alt="Portrait of Vijay Raj" width="96" height="96" loading="lazy">
+                        </picture>
+                        <h3>Vijay Raj</h3>
+                        <p class="person-role">Design Lead</p>
+                        <p class="person-bio"><span class="placeholder">[placeholder: one-line background]</span></p>
+                        <!-- TODO: Vijay Raj one-line background and LinkedIn URL -->
+                        <span class="person-link"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg> <span class="placeholder">[placeholder: LinkedIn URL]</span></span>
+                    </li>
+                </ul>
+                <a href="/about" class="text-link" style="margin-top: var(--space-5);">More about us <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
         </section>
 
-        <!-- ═══ FINAL CTA ═══ -->
-        <section class="final-cta reveal" id="final-cta-section">
+        <!-- ═══ Final CTA ═══ -->
+        <section class="cta-band">
             <div class="container">
-                <h2>Ready to build your product?</h2>
-                <div class="final-cta-buttons">
-                    <a href="/contact.html" class="final-btn final-btn-primary">Upload CAD File</a>
-                    <a href="/contact.html" class="final-btn final-btn-secondary">Talk to an Engineer</a>
+                <h2 data-reveal>Have a part to make?</h2>
+                <p class="lead">Upload your CAD on Hanzof for an engineer-reviewed quote in 6 business hours.</p>
+                <div class="btn-row">
+                    <a href="https://hanzof.com" class="btn btn-primary btn-lg" rel="noopener">Get a quote in 6 business hours <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    <a href="https://wa.me/917558150570" class="btn btn-secondary btn-lg" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> Talk to an engineer</a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- @include footer -->
