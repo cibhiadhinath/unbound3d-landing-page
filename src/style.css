@@ -372,20 +372,21 @@ p { text-wrap: pretty; }
 }
 
 /* Logo: traced vector artwork from the official lockup (scripts/trace-logo.py) */
-.brand-mark { width: 24px; height: auto; aspect-ratio: 534.17 / 524.53; flex: none; }
-.brand-word { width: 138px; height: auto; aspect-ratio: 403.85 / 30.54; flex: none; }
+.brand { gap: 10px; }
+.brand-mark { width: 26px; height: auto; aspect-ratio: 534.17 / 524.53; flex: none; transform: translateY(-1px); }
+.brand-word { width: 156px; height: auto; aspect-ratio: 406.85 / 33.54; flex: none; }
 
 @media (max-width: 479px) {
-  .brand-mark { width: 22px; }
-  .brand-word { width: 124px; }
+  .brand-mark { width: 24px; }
+  .brand-word { width: 142px; }
 }
 
 /* Footer: full lockup with INDUSTRIES centred under the wordmark, as in the logo */
 .brand--lockup { gap: var(--space-3); }
 .brand--lockup .brand-mark { width: 40px; }
 .brand-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.brand--lockup .brand-word { width: 164px; }
-.brand-industries { width: 98px; height: auto; aspect-ratio: 240.13 / 14.11; }
+.brand--lockup .brand-word { width: 176px; }
+.brand-industries { width: 106px; height: auto; aspect-ratio: 242.13 / 16.11; }
 
 .nav-toggle {
   display: inline-grid;
