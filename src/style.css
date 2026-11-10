@@ -14,16 +14,6 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Brand wordmark only */
-@font-face {
-  font-family: "Space Grotesk";
-  src: url("/fonts/space-grotesk-latin-var.woff2") format("woff2");
-  font-weight: 500 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: light;
@@ -44,7 +34,6 @@
 
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-body);
-  --font-brand: "Space Grotesk", var(--font-body);
 
   --step--1: 0.9375rem;
   --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
@@ -382,14 +371,21 @@ p { text-wrap: pretty; }
   min-height: var(--tap);
 }
 
-.brand-mark { width: 22px; height: 22px; }
+/* Logo: traced vector artwork from the official lockup (scripts/trace-logo.py) */
+.brand-mark { width: 24px; height: auto; aspect-ratio: 534.17 / 524.53; flex: none; }
+.brand-word { width: 138px; height: auto; aspect-ratio: 403.85 / 30.54; flex: none; }
 
-.brand-name {
-  font-family: var(--font-brand);
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+@media (max-width: 479px) {
+  .brand-mark { width: 22px; }
+  .brand-word { width: 124px; }
 }
+
+/* Footer: full lockup with INDUSTRIES centred under the wordmark, as in the logo */
+.brand--lockup { gap: var(--space-3); }
+.brand--lockup .brand-mark { width: 40px; }
+.brand-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.brand--lockup .brand-word { width: 164px; }
+.brand-industries { width: 98px; height: auto; aspect-ratio: 240.13 / 14.11; }
 
 .nav-toggle {
   display: inline-grid;
